@@ -43,7 +43,7 @@ import java.util.List;
 
 public class MeetingWhiteBoardFragment extends AbsMeetingFragment implements WBPaintPanel.OnPanelListener, WBToolBar.OnToolBarEventListener {
 
-    private static final String TAG = "MeetingWhiteBoardFragment";
+    private static final String TAG = "MeetingWhiteBoard";
 
     private final Handler mUIHandler = new Handler(Looper.getMainLooper());
     private TextView mWhiteBoardType;
