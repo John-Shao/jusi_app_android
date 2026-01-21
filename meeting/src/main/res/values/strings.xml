@@ -166,4 +166,6 @@
     <string name="revert_apply_link_mic">是否取消连麦申请</string>
     <string name="network_lost_tips">网络链接已断开，请检查设置</string>
 
+    <string name="common_cancel">取消</string>
+
 </resources>

@@ -3,6 +3,7 @@ plugins {
 }
 
 android {
+    namespace 'com.volcengine.vertcdemo.core'
     compileSdkVersion project.compileSdkVersion
 
     defaultConfig {
@@ -23,6 +24,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        buildConfig true
     }
 }
 repositories {
