@@ -42,4 +42,3 @@ google-services.json
 
 # Android Profiling
 *.hprof
-login/gradle.properties
