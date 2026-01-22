@@ -1,4 +1,4 @@
-package com.volcengine.vertcdemo.camera;
+package com.drift.camcontroldemo;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import com.drift.camcontroldemo.LinkHomeActivity;
 
 /**
  * Camera management fragment

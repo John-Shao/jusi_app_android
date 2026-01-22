@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.volcengine.vertcdemo.camera'
+    namespace 'com.drift.camcontroldemo'
     compileSdkVersion project.compileSdkVersion
 
     defaultConfig {
