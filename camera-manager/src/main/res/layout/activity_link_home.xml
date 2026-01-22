@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/link_home_bg"
     tools:context="com.drift.camcontroldemo.LinkHomeActivity">
 
 
@@ -14,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="82dp"
-        app:srcCompat="@drawable/link_drift_logo" />
+        app:srcCompat="@drawable/jusi_logo" />
 
     <ImageView
         android:id="@+id/iv_arrow_up"
