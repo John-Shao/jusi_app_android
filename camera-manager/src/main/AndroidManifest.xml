@@ -19,9 +19,6 @@
             android:name="com.drift.camcontroldemo.LinkFileListActivity"
             android:exported="false" />
         <activity
-            android:name="com.drift.camcontroldemo.LinkFileListActivity2"
-            android:exported="false" />
-        <activity
             android:name="com.drift.camcontroldemo.LinkCamDetailActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false" />

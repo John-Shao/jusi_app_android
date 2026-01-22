@@ -100,8 +100,5 @@
         <activity
             android:name="com.drift.camcontroldemo.LinkFileListActivity"
             android:exported="false" />
-        <activity
-            android:name="com.drift.camcontroldemo.LinkFileListActivity2"
-            android:exported="false" />
     </application>
 </manifest>
