@@ -71,6 +71,7 @@ dependencies {
 
     implementation project(":scene-core")
     implementation project(":login")
+    implementation project(":camera-manager")
     implementation "org.greenrobot:eventbus:$EventBusVersion"
     implementation "com.google.code.gson:gson:$GsonVersion"
     implementation "com.github.bumptech.glide:glide:$GlideVersion"

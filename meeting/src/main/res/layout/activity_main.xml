@@ -42,8 +42,23 @@
         android:textSize="12sp"
         app:drawableTopCompat="@drawable/ic_tab_scenes"
         app:layout_constraintBottom_toBottomOf="@id/tab_layout"
-        app:layout_constraintEnd_toStartOf="@id/tab_profile"
+        app:layout_constraintEnd_toStartOf="@id/tab_camera"
         app:layout_constraintStart_toStartOf="@id/tab_layout"
+        app:layout_constraintTop_toTopOf="@id/tab_layout" />
+
+    <TextView
+        android:id="@+id/tab_camera"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawablePadding="6dp"
+        android:gravity="center_horizontal"
+        android:text="@string/tab_camera"
+        android:textColor="@color/tab_text_color"
+        android:textSize="12sp"
+        app:drawableTopCompat="@drawable/ic_tab_camera"
+        app:layout_constraintBottom_toBottomOf="@id/tab_layout"
+        app:layout_constraintEnd_toStartOf="@id/tab_profile"
+        app:layout_constraintStart_toEndOf="@id/tab_scenes"
         app:layout_constraintTop_toTopOf="@id/tab_layout" />
 
     <TextView
@@ -58,7 +73,7 @@
         app:drawableTopCompat="@drawable/ic_tab_profile"
         app:layout_constraintBottom_toBottomOf="@id/tab_layout"
         app:layout_constraintEnd_toEndOf="@id/tab_layout"
-        app:layout_constraintStart_toEndOf="@id/tab_scenes"
+        app:layout_constraintStart_toEndOf="@id/tab_camera"
         app:layout_constraintTop_toTopOf="@id/tab_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

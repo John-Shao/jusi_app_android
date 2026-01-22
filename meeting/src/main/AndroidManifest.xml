@@ -8,9 +8,17 @@
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <uses-feature android:name="android.hardware.camera" android:required="false" />
 
@@ -71,5 +79,28 @@
             android:name="com.volcengine.vertcdemo.feature.participant.ParticipantActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+
+        <!-- Camera Manager Activities -->
+        <activity
+            android:name="com.drift.camcontroldemo.LinkHomeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.drift.camcontroldemo.LinkAddCameraActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name="com.drift.camcontroldemo.LinkCamDetailActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="false" />
+        <activity
+            android:name="com.drift.camcontroldemo.LinkLiveActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.drift.camcontroldemo.LinkFileListActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.drift.camcontroldemo.LinkFileListActivity2"
+            android:exported="false" />
     </application>
 </manifest>
