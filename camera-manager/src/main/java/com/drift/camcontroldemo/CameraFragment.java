@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,8 +26,11 @@ public class CameraFragment extends Fragment {
     }
 
     private void initView(View view) {
-        // Automatically navigate to LinkHomeActivity
-        Intent intent = new Intent(getActivity(), LinkHomeActivity.class);
-        startActivity(intent);
+        // Navigate to LinkHomeActivity when button is clicked
+        Button btnEnter = view.findViewById(R.id.btn_enter_camera_manager);
+        btnEnter.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), LinkHomeActivity.class);
+            startActivity(intent);
+        });
     }
 }

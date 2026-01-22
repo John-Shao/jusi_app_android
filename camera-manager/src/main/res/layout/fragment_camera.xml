@@ -3,13 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="#1D2129">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Camera Management"
-        android:textSize="18sp"
-        android:textColor="#333333" />
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="32dp" />
+
+    <Button
+        android:id="@+id/btn_enter_camera_manager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Camera Manager"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#3370FF"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp" />
 
 </LinearLayout>
