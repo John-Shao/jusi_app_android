@@ -21,7 +21,6 @@ import android.view.ViewGroup;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.collection.ArrayMap;
 
-import com.drift.app.ForeamApp;
 import com.drift.foreamlib.api.CamInfo;
 import com.drift.foreamlib.api.ForeamCamCtrl;
 import com.google.zxing.BarcodeFormat;
@@ -79,7 +78,9 @@ public class LinkAddCameraActivity extends AppCompatActivity {
         tvTips = (TextView) findViewById(R.id.tv_tips);
         tvNoteTitle = (TextView) findViewById(R.id.tv_note_title);
         tvNotes = (TextView) findViewById(R.id.tv_notes);
-        if(!ForeamApp.isInChinesEnvir())
+        // 判断是否是中文环境
+        String language = getResources().getConfiguration().locale.getLanguage();
+        if(!language.equals("zh"))
         {
             tvNotes.setVisibility(View.INVISIBLE);
             tvNoteTitle.setVisibility(View.INVISIBLE);

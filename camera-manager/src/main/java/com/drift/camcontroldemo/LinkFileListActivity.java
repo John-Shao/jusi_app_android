@@ -28,10 +28,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.drift.foreamlib.boss.model.HTMLFile;
-import com.drift.app.ForeamApp;
 import com.drift.foreamlib.local.ctrl.LocalListener;
 import com.drift.foreamlib.local.ctrl.LocalController;
-import com.drift.foreamlib.boss.model.HTMLFile;
+import com.drift.manager.CameraManager;
 
 
 public class LinkFileListActivity extends AppCompatActivity {
@@ -79,13 +78,13 @@ public class LinkFileListActivity extends AppCompatActivity {
         initRecycleViewAdapter();
 
         //获取相机文件夹内容
-        getCamFolder(ForeamApp.getInstance().getCurrentCamIP());
+        getCamFolder(CameraManager.getInstance().getCurrentCamIP());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        ForeamApp.getInstance().stopInternetTask();//
+        CameraManager.getInstance().stopInternetTask();//
     }
 
     private void getCamFolder(String ipAddr)
@@ -111,7 +110,7 @@ public class LinkFileListActivity extends AppCompatActivity {
                             mList.clear();
                             //先获取第一个文件夹的内容
                             String parentFolderName = mFolderList.get((mFolderList.size() - 1) - folderFetchingIndex);
-                            getCamFile(ForeamApp.getInstance().getCurrentCamIP(), parentFolderName);
+                            getCamFile(CameraManager.getInstance().getCurrentCamIP(), parentFolderName);
                         }
                         else
                         {
@@ -138,7 +137,7 @@ public class LinkFileListActivity extends AppCompatActivity {
         mList.clear();
         //先获取第一个文件夹的内容
         String parentFolderName = mFolderList.get((mFolderList.size() - 1) - folderFetchingIndex);
-        getCamFile(ForeamApp.getInstance().getCurrentCamIP(), parentFolderName);
+        getCamFile(CameraManager.getInstance().getCurrentCamIP(), parentFolderName);
     }
 
     private void getCamFile(String ipAddr, String folderName)
@@ -156,7 +155,7 @@ public class LinkFileListActivity extends AppCompatActivity {
                             JSONObject jsonObject = (JSONObject) jsonArray.get(i);
                             HTMLFile file = new HTMLFile();
                             String parentFolderName = mFolderList.get((mFolderList.size()-1)-folderFetchingIndex);
-                            String baseUrl = "http://"+ForeamApp.getInstance().getCurrentCamIP()+"/DCIM/"+parentFolderName;
+                            String baseUrl = "http://"+CameraManager.getInstance().getCurrentCamIP()+"/DCIM/"+parentFolderName;
                             String fileName = jsonObject.getString("Path");
                             String fileSize = jsonObject.getString("Size");
                             String createTime = jsonObject.getString("CreateTime");
@@ -196,7 +195,7 @@ public class LinkFileListActivity extends AppCompatActivity {
                         {//继续获取文件夹内容
                             folderFetchingIndex++;
                             String parentFolderName = mFolderList.get((mFolderList.size()-1)-folderFetchingIndex);
-                            getCamFile(ForeamApp.getInstance().getCurrentCamIP(), parentFolderName);
+                            getCamFile(CameraManager.getInstance().getCurrentCamIP(), parentFolderName);
                         }
                         else
                         {
@@ -212,7 +211,7 @@ public class LinkFileListActivity extends AppCompatActivity {
                     {//继续获取文件夹内容
                         folderFetchingIndex++;
                         String parentFolderName = mFolderList.get((mFolderList.size()-1)-folderFetchingIndex);
-                        getCamFile(ForeamApp.getInstance().getCurrentCamIP(), parentFolderName);
+                        getCamFile(CameraManager.getInstance().getCurrentCamIP(), parentFolderName);
                     }
                     else
                     {
@@ -229,7 +228,7 @@ public class LinkFileListActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(LinkFileListActivity.this);
         rvList.setLayoutManager(layoutManager);
 //        rvList.addItemDecoration(new LinkCamListItemDecoration(dip2px(15),dip2px(15)));
-        m_fileListRecycleAdapter = new LinkFileListAdapter(LinkFileListActivity.this, mList);
+        m_fileListRecycleAdapter = new LinkFileListAdapter(LinkFileListActivity.this, mList, CameraManager.getInstance().getImageLoader());
         m_fileListRecycleAdapter.setOnDownloadClickListener(new LinkFileListAdapter.OnDownloadClickListener() {
             @Override
             public void OnDownloadClickListener(View view, int position) {
@@ -243,7 +242,7 @@ public class LinkFileListActivity extends AppCompatActivity {
             public void OnDeleteClickListener(View view, int position) {
                 final HTMLFile file = mList.get(position);
                 String deletePath = file.getParentFolderName()+"/"+file.getName();
-                new LocalController().delFile(ForeamApp.getInstance().getCurrentCamIP(), ""+deletePath, new LocalListener.OnCommonResListener() {
+                new LocalController().delFile(CameraManager.getInstance().getCurrentCamIP(), ""+deletePath, new LocalListener.OnCommonResListener() {
                     @Override
                     public void onCommonRes(boolean success) {
                         mList.remove(position);

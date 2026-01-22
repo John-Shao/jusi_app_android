@@ -22,7 +22,6 @@ import android.widget.Toast;
 //import com.drift.camcontroldemo.R;
 //import com.foream.activity.BaseActivity;
 //import com.foream.activity.WelcomeActivity;
-//import com.drift.app.ForeamApp;
 //import com.foream.define.Actions;
 //import com.drift.foreamlib.cloud.ctrl.CloudController.OnThirdPartyCerLoginResListner;
 //import com.drift.foreamlib.cloud.ctrl.CloudController.OnUserLoginListener;

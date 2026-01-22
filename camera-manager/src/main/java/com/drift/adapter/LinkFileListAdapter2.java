@@ -13,7 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.drift.app.ForeamApp;
 import com.drift.camcontroldemo.R;
 import com.drift.foreamlib.boss.model.HTMLFile;
 import com.drift.foreamlib.util.StringUtil;
@@ -33,11 +32,11 @@ public class LinkFileListAdapter2 extends BaseAdapter {
     private OnDeleteClickListener m_onDeleteClickListener = null;
     public LinkFileListAdapter2() {}
 
-    public LinkFileListAdapter2(Context context, List<HTMLFile> fileInfoList) {
+    public LinkFileListAdapter2(Context context, List<HTMLFile> fileInfoList, ImageLoader imageLoader) {
         m_mContext = context;
         m_list = fileInfoList;
         inflater = LayoutInflater.from(context);
-        imageloader = ForeamApp.getInstance().getImageLoader();
+        imageloader = imageLoader;
     }
 
     public void setOnDownloadClickListener(OnDownloadClickListener listener) {

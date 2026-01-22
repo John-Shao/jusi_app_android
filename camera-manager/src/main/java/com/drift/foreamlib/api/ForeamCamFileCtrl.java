@@ -6,7 +6,6 @@ import android.widget.Toast;
 
 import androidx.collection.ArrayMap;
 
-import com.drift.app.ForeamApp;
 import com.drift.define.Intents;
 import com.drift.foreamlib.boss.model.HTMLFile;
 import com.drift.foreamlib.local.ctrl.LocalController;
@@ -201,7 +200,7 @@ public class ForeamCamFileCtrl {
 //                            JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 //                            HTMLFile file = new HTMLFile();
 //                            String parentFolderName = mFolderList.get((mFolderList.size() - 1) - folderFetchingIndex);
-//                            String baseUrl = "http://" + ForeamApp.getInstance().getCurrentCamIP() + "/DCIM/" + parentFolderName;
+//                            String baseUrl = "http://" + CameraManager.getInstance().getCurrentCamIP() + "/DCIM/" + parentFolderName;
 //                            String fileName = jsonObject.getString("Path");
 //                            String fileSize = jsonObject.getString("Size");
 //                            String createTime = jsonObject.getString("CreateTime");
@@ -367,7 +366,7 @@ public class ForeamCamFileCtrl {
                         path = path.replace("\\", "/");
                         String[] splitInfo = path.split("\\/");
                         String parentFolderName = splitInfo[1];
-                        String baseUrl = "http://" + ForeamApp.getInstance().getCurrentCamIP() + "/DCIM/" + parentFolderName;
+                        String baseUrl = "http://" + mCamIP + "/DCIM/" + parentFolderName;
                         String fileName = splitInfo[2];//jsonObject.getString("Path");
                         String fileSize = jsonObject.getString("size");
                         String createTime = jsonObject.getString("time");

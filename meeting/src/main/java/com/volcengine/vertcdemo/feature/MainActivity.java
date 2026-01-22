@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity {
         Fragment tabCamera = fragmentManager.findFragmentByTag(TAG_CAMERA);
         if (tabCamera == null) {
             try {
-                tabCamera = (Fragment) Class.forName("com.volcengine.vertcdemo.camera.CameraFragment").newInstance();
+                tabCamera = (Fragment) Class.forName("com.drift.camcontroldemo.CameraFragment").newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -135,14 +135,16 @@ public class MainActivity extends BaseActivity {
         FragmentManager fm = getSupportFragmentManager();
         switch (tabIndex) {
             case 0: // Scenes
-                fm.beginTransaction()
-                        .hide(mFragmentCamera)
-                        .hide(mFragmentProfile)
-                        .show(mFragmentScenes)
-                        .commit();
+                if (mFragmentCamera != null && mFragmentProfile != null) {
+                    fm.beginTransaction()
+                            .hide(mFragmentCamera)
+                            .hide(mFragmentProfile)
+                            .show(mFragmentScenes)
+                            .commit();
+                }
                 break;
             case 1: // Camera
-                if (mFragmentCamera != null) {
+                if (mFragmentCamera != null && mFragmentProfile != null) {
                     fm.beginTransaction()
                             .hide(mFragmentScenes)
                             .hide(mFragmentProfile)
@@ -151,11 +153,13 @@ public class MainActivity extends BaseActivity {
                 }
                 break;
             case 2: // Profile
-                fm.beginTransaction()
-                        .hide(mFragmentScenes)
-                        .hide(mFragmentCamera)
-                        .show(mFragmentProfile)
-                        .commit();
+                if (mFragmentCamera != null && mFragmentProfile != null) {
+                    fm.beginTransaction()
+                            .hide(mFragmentScenes)
+                            .hide(mFragmentCamera)
+                            .show(mFragmentProfile)
+                            .commit();
+                }
                 break;
         }
     }

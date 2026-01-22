@@ -42,14 +42,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.drift.util.PreferenceUtil;
+import com.drift.manager.CameraManager;
 import com.mylhyl.circledialog.CircleDialog;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import com.drift.app.ForeamApp;
 import com.drift.define.Intents;
 import com.drift.foreamlib.api.ForeamCamCtrl;
 import com.drift.foreamlib.api.ForeamCamFileCtrl;
@@ -261,9 +260,9 @@ public class LinkCamDetailActivity extends AppCompatActivity implements PlayFrag
         setTime();
 
         //设置流的分辨率和码率,只针对没有设置过的情况
-        if (!PreferenceUtil.getBoolean(PreferenceUtil.HasResetDefaultRes(camIP), false))
+        if (/*!PreferenceUtil.getBoolean(PreferenceUtil.HasResetDefaultRes(camIP), false)*/false)
         {
-            PreferenceUtil.putBoolean(PreferenceUtil.HasResetDefaultRes(camIP), true);
+            // PreferenceUtil.putBoolean(PreferenceUtil.HasResetDefaultRes(camIP), true);
             if (mCamStatus.getModelName().equals(CommonDefine.X3) || mCamStatus.getModelName().equals(CommonDefine.DriftGhostDC)) {
              /*
             enum VIDEO_RES {
@@ -446,7 +445,7 @@ public class LinkCamDetailActivity extends AppCompatActivity implements PlayFrag
             public void onClick(View view) {
 //                getCamFolder(camIP);
                 //先赋值,再进入
-                ForeamApp.getInstance().setCurrentCamIP(camIP);
+                CameraManager.getInstance().setCurrentCamIP(camIP);
                 Intent intent = new Intent(getActivity( ), LinkFileListActivity.class);
                 startActivity(intent);
             }

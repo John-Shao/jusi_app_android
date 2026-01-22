@@ -20,7 +20,6 @@ import java.util.List;
 import com.drift.foreamlib.boss.model.HTMLFile;
 import com.drift.foreamlib.util.StringUtil;
 import com.foreamlib.imageloader.ImageLoader;
-import com.drift.app.ForeamApp;
 
 
 public class LinkFileListAdapter extends RecyclerView.Adapter<LinkFileListAdapter.ViewHolder> {
@@ -32,10 +31,10 @@ public class LinkFileListAdapter extends RecyclerView.Adapter<LinkFileListAdapte
     private OnDownloadClickListener m_onDownloadClickListener = null;
     private OnDeleteClickListener m_onDeleteClickListener = null;
 
-    public LinkFileListAdapter(Context context, List<HTMLFile> fileInfoList) {
+    public LinkFileListAdapter(Context context, List<HTMLFile> fileInfoList, ImageLoader imageLoader) {
         m_mContext = context;
         m_list = fileInfoList;
-        imageloader = ForeamApp.getInstance().getImageLoader();
+        imageloader = imageLoader;
     }
 
     @NonNull

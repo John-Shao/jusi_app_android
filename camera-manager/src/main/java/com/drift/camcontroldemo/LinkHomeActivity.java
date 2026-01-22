@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.drift.adapter.LinkCamListAdapter;
-import com.drift.app.ForeamApp;
 import com.drift.define.Intents;
 import com.drift.util.ActivityUtil;
 import com.drift.foreamlib.api.CamInfo;
@@ -87,7 +86,12 @@ public class LinkHomeActivity extends AppCompatActivity {
         camInfoList = new ArrayList<CamStatus>();
         camsOnline = new ArrayList<String>();
 
-        tvVersion.setText("V"+ ForeamApp.getInstance().getVersionCode());
+        try {
+            String versionName = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+            tvVersion.setText("V" + versionName);
+        } catch (Exception e) {
+            tvVersion.setText("V1.0");
+        }
         //test code
 //        camsOnline.add("192.168.1.104");
 //        camsOnline.add("192.168.1.105");
