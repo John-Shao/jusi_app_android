@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity {
         Fragment tabCamera = fragmentManager.findFragmentByTag(TAG_CAMERA);
         if (tabCamera == null) {
             try {
-                tabCamera = (Fragment) Class.forName("com.drift.camcontroldemo.CameraFragment").newInstance();
+                tabCamera = (Fragment) Class.forName("com.drift.camcontroldemo.CameraHomeFragment").newInstance();
             } catch (Exception e) {
                 e.printStackTrace();
             }
