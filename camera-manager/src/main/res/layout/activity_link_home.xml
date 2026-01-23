@@ -9,11 +9,11 @@
 
     <ImageView
         android:id="@+id/iv_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="238dp"
+        android:layout_height="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="82dp"
-        app:srcCompat="@drawable/jusi_logo" />
+        android:layout_marginTop="80dp"
+        app:srcCompat="@drawable/jusi_device_logo" />
 
     <ImageView
         android:id="@+id/iv_arrow_up"
