@@ -12,7 +12,6 @@
     <string name="create_input_user_name_length_warn">昵称长度不能超过18位</string>
     <string name="create_join_meeting">进入房间</string>
     <string name="error_room_full">房间人数已满</string>
-    <string name="version_desc">Demo版本 v%1$s / SDK版本 v%2$s</string>
     <string name="error_user_counts_limit">房间成员数量达到上限</string>
     <string name="request_permission_tips">为了更好的体验，请授予VERTC麦克风和相机权限</string>
     <string name="request_cam_permission_tips">未获得相机权限，是否去设置中授予VERTC该权限</string>

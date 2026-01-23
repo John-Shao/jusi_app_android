@@ -166,13 +166,4 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/create_room_version"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="20dp"
-        android:text="@string/version_desc"
-        android:textColor="#86909C"
-        android:textSize="12sp" />
 </FrameLayout>

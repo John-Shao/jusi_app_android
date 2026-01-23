@@ -165,8 +165,6 @@ public class CreateMeetingActivity extends BaseActivity {
         mMicSwitch = findViewById(R.id.create_room_mic);
         mMicSwitch.setOnClickListener(v -> mUIRtcCore.openMic(!mMicSwitch.isSelected()));
 
-        TextView version = findViewById(R.id.create_room_version);
-        version.setText(getString(R.string.version_desc, getAppVersion(), RTCEngine.getSdkVersion()));
         initRTC();
     }
 
@@ -300,15 +298,6 @@ public class CreateMeetingActivity extends BaseActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTokenExpiredEvent(TokenExpiredEvent event) {
         finish();
-    }
-
-    private String getAppVersion() {
-        try {
-            return getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-            return "";
-        }
     }
 
     protected void changeUserName(String newUname) {
