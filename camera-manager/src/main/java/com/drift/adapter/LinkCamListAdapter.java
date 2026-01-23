@@ -32,7 +32,7 @@ public class LinkCamListAdapter extends RecyclerView.Adapter<LinkCamListAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(m_mContext).inflate(R.layout.layout_link_camera_model, parent, false);
+        View v = LayoutInflater.from(m_mContext).inflate(R.layout.layout_link_camera_list, parent, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
     }
