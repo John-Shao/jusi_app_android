@@ -56,12 +56,11 @@ public class ProfileFragment extends Fragment {
         TextView userAgreementTv = userAgreementLayout.findViewById(R.id.left_tv);
         userAgreementTv.setText(R.string.user_agreement);
         userAgreementLayout.setOnClickListener(v -> openBrowser(BuildConfig.URL_USER_AGREEMENT));
-
-        View disclaimerLayout = view.findViewById(R.id.profile_disclaimer);
-        TextView disclaimerTv = disclaimerLayout.findViewById(R.id.left_tv);
-        disclaimerTv.setText(R.string.disclaimer);
-        disclaimerLayout.setOnClickListener(v -> openBrowser(BuildConfig.URL_DISCLAIMER));
-        // endregion
+        
+        // View disclaimerLayout = view.findViewById(R.id.profile_disclaimer);
+        // TextView disclaimerTv = disclaimerLayout.findViewById(R.id.left_tv);
+        // disclaimerTv.setText(R.string.disclaimer);
+        // disclaimerLayout.setOnClickListener(v -> openBrowser(BuildConfig.URL_DISCLAIMER));
 
         // region App 信息、SDK 信息
         View permissionListLayout = view.findViewById(R.id.profile_permission_list);
@@ -69,23 +68,23 @@ public class ProfileFragment extends Fragment {
         permissionListTv.setText(R.string.permission_list);
         permissionListLayout.setOnClickListener(v -> openBrowser(BuildConfig.URL_PERMISSION_LIST));
 
-        View licenseListLayout = view.findViewById(R.id.profile_license_list);
-        TextView licenseListTv = licenseListLayout.findViewById(R.id.left_tv);
-        licenseListTv.setText(R.string.license_list);
-        licenseListLayout.setOnClickListener(v -> startActivity(new Intent(getActivity(), LicensesActivity.class)));
+        // View licenseListLayout = view.findViewById(R.id.profile_license_list);
+        // TextView licenseListTv = licenseListLayout.findViewById(R.id.left_tv);
+        // licenseListTv.setText(R.string.license_list);
+        // licenseListLayout.setOnClickListener(v -> startActivity(new Intent(getActivity(), LicensesActivity.class)));
 
         View demoVersionLayout = view.findViewById(R.id.profile_demo_version);
         TextView demoVersionLabel = demoVersionLayout.findViewById(R.id.left_tv);
         demoVersionLabel.setText(R.string.demo_version_label);
         TextView demoVersionTv = demoVersionLayout.findViewById(R.id.right_tv);
         demoVersionTv.setText(String.format("v%1$s", BuildConfig.VERSION_NAME));
-
+        /*
         View sdkVersionLayout = view.findViewById(R.id.profile_sdk_version);
         TextView sdkVersionLabel = sdkVersionLayout.findViewById(R.id.left_tv);
         sdkVersionLabel.setText(R.string.sdk_version_label);
         TextView sdkVersionTv = sdkVersionLayout.findViewById(R.id.right_tv);
         sdkVersionTv.setText(String.format("v%1$s", RTCEngine.getSdkVersion()));
-        // endregion
+        */
 
         view.findViewById(R.id.profile_delete_account).setOnClickListener((v) -> {
             confirmDeleteAccount();

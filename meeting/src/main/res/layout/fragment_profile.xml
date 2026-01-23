@@ -42,25 +42,25 @@
                 android:id="@+id/profile_user_agreement"
                 layout="@layout/layout_meeting_item_arrow" />
 
-            <include
+            <!--<include
                 android:id="@+id/profile_disclaimer"
-                layout="@layout/layout_meeting_item_arrow" />
+                layout="@layout/layout_meeting_item_arrow" />-->
 
             <include
                 android:id="@+id/profile_permission_list"
                 layout="@layout/layout_meeting_item_arrow" />
 
-            <include
+            <!--<include
                 android:id="@+id/profile_license_list"
-                layout="@layout/layout_meeting_item_arrow" />
+                layout="@layout/layout_meeting_item_arrow" />-->
 
             <include
                 android:id="@+id/profile_demo_version"
                 layout="@layout/layout_meeting_item_value" />
 
-            <include
+            <!--<include
                 android:id="@+id/profile_sdk_version"
-                layout="@layout/layout_meeting_item_value" />
+                layout="@layout/layout_meeting_item_value" />-->
         </LinearLayout>
     </ScrollView>
 
