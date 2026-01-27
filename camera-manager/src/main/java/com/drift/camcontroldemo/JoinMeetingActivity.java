@@ -14,6 +14,9 @@ import com.ss.video.rtc.demo.basic_module.utils.IMEUtils;
 import com.ss.video.rtc.demo.basic_module.utils.SafeToast;
 import com.drift.util.TextWatcherHelper;
 
+import com.drift.foreamlib.local.ctrl.LocalController;
+import com.drift.foreamlib.local.ctrl.LocalListener;
+
 public class JoinMeetingActivity extends AppCompatActivity {
 
     private static final String TAG = "JoinMeetingActivity";
@@ -44,11 +47,13 @@ public class JoinMeetingActivity extends AppCompatActivity {
 
         mInputRoomId = findViewById(R.id.join_meeting_room_id);
         TextView inputRoomIdError = findViewById(R.id.join_meeting_room_id_waring);
-        mRoomIdWatcher = new TextWatcherHelper(mInputRoomId, inputRoomIdError, ROOM_ID_REGEX, R.string.create_input_room_id_content_warn, ROOM_ID_MAX_LENGTH, R.string.create_input_room_id_length_warn);
+        mRoomIdWatcher = new TextWatcherHelper(mInputRoomId, inputRoomIdError, ROOM_ID_REGEX,
+            R.string.create_input_room_id_content_warn, ROOM_ID_MAX_LENGTH, R.string.create_input_room_id_length_warn);
 
         mInputUserName = findViewById(R.id.join_meeting_user_name);
         TextView inputUserNameError = findViewById(R.id.join_meeting_user_name_waring);
-        mUserNameWatcher = new TextWatcherHelper(mInputUserName, inputUserNameError, USER_NAME_REGEX, R.string.create_input_user_name_content_warn, USER_NAME_MAX_LENGTH, R.string.create_input_user_name_length_warn);
+        mUserNameWatcher = new TextWatcherHelper(mInputUserName, inputUserNameError, USER_NAME_REGEX,
+            R.string.create_input_user_name_content_warn, USER_NAME_MAX_LENGTH, R.string.create_input_user_name_length_warn);
 
         TextView joinMeetingBtn = findViewById(R.id.join_meeting_button);
         joinMeetingBtn.setOnClickListener(v -> {
@@ -82,6 +87,22 @@ public class JoinMeetingActivity extends AppCompatActivity {
      * @param userName 用户名
      */
     private void handleJoinMeeting(String roomId, String userName) {
-        // TODO: 实现进入会议的逻辑
+        
+
+        LocalController localController = new LocalController();
+
+
+        localController.startPushStreamWithURL(camIP, rtspUrl, new LocalListener.OnCommonResListener() {
+            @Override
+            public void onCommonRes(boolean success) {
+                Log.e(TAG, "kc test: bSuccess is" + success);
+                Toast.makeText(LinkLiveActivity.this, R.string.link_send_successfully, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LinkLiveActivity.this, LinkHomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
     }
 }
