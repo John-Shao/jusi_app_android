@@ -84,6 +84,11 @@ public class JoinMeetingActivity extends AppCompatActivity {
         mUserNameWatcher = new TextWatcherHelper(mInputUserName, inputUserNameError, USER_NAME_REGEX,
             R.string.create_input_user_name_content_warn, USER_NAME_MAX_LENGTH, R.string.create_input_user_name_length_warn);
 
+        // 自动填充设备序列号到用户名输入框
+        if (!TextUtils.isEmpty(mSerialNumber)) {
+            mInputUserName.setText(mSerialNumber);
+        }
+
         TextView joinMeetingBtn = findViewById(R.id.join_meeting_button);
         joinMeetingBtn.setOnClickListener(v -> {
             String roomId = mInputRoomId.getText().toString().trim();
