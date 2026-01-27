@@ -151,7 +151,13 @@ public class CameraHomeFragment extends Fragment {
 
         m_videoListRecycleAdapter.setOnRecordClickListener((view, position) -> {
             // 打开加入会议页面
+            CamStatus camStatus = camInfoList.get(position);
             Intent intent = new Intent(getActivity(), JoinMeetingActivity.class);
+
+            intent.putExtra("camIP",camStatus.getCamIP());
+            intent.putExtra("streamRes",camStatus.getmStreamSetting().getStream_res());
+            intent.putExtra("streamBitrate",camStatus.getmStreamSetting().getStream_bitrate());
+
             startActivity(intent);
         });
 
