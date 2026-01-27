@@ -56,6 +56,8 @@ public class LocalController extends com.drift.foreamlib.local.ctrl.LocalListene
     private final static int CMD_GETCAMFOLDERS = 22;
     private final static int CMD_GETCAMFILES = 23;
     private final static int CMD_DELETEFILES = 24;
+    private final static int CMD_START_RTSP = 25;
+    private final static int CMD_STOP_RTSP = 26;
 
 
     private final LinkedList<AsyncTask<?, ?, ?>> mTasks;
@@ -182,6 +184,26 @@ public class LocalController extends com.drift.foreamlib.local.ctrl.LocalListene
         mOnCommonResListener = ls;
         path = String.format(Locale.getDefault(), BossDefine.LOCAL_STOP_STREAM, serverIp);
         LoadXMLTask task = new LoadXMLTask(CMD_STOP_STREAM, this);
+        mTasks.add(task);
+        task.executeOnThreadPool(path);
+    }
+
+    public void startPullStream(String serverIp, String rtspUrl, OnCommonResListener ls) {//
+        String path;
+        mOnCommonResListener = ls;
+        rtspUrl = rtspUrl.replace("&", "***");
+        path = String.format(Locale.getDefault(), BossDefine.LOCAL_START_RTSP, serverIp, rtspUrl);
+        LoadXMLTask task = new LoadXMLTask(CMD_START_RTSP, this);
+        mTasks.add(task);
+        task.executeOnThreadPool(path);
+
+    }
+
+     public void stopPullStream(String serverIp, OnCommonResListener ls) {//
+        String path;
+        mOnCommonResListener = ls;
+        path = String.format(Locale.getDefault(), BossDefine.LOCAL_STOP_RTSP, serverIp);
+        LoadXMLTask task = new LoadXMLTask(CMD_STOP_RTSP, this);
         mTasks.add(task);
         task.executeOnThreadPool(path);
     }
@@ -525,6 +547,8 @@ public class LocalController extends com.drift.foreamlib.local.ctrl.LocalListene
             case CMD_SET_VIDEO_FRAMERATE:
             case CMD_SET_VIDEO_RESOLUTION:
             case CMD_SET_MIC_SENSITIVITY:
+            case CMD_START_RTSP:
+            case CMD_STOP_RTSP:
 
 //                bSuccess = (getCommonResult(rootElement) == BossDefine.RES_SUCCESS);
                 if(retVal.equals("1"))
@@ -715,6 +739,8 @@ public class LocalController extends com.drift.foreamlib.local.ctrl.LocalListene
             case CMD_SET_VIDEO_FRAMERATE:
             case CMD_SET_VIDEO_RESOLUTION:
             case CMD_SET_MIC_SENSITIVITY:
+            case CMD_START_RTSP:
+            case CMD_STOP_RTSP:
 
 //                bSuccess = (getCommonResult(rootElement) == BossDefine.RES_SUCCESS);
                 if(retVal.equals("1"))
