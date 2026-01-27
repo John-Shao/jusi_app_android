@@ -59,6 +59,39 @@ public class LoginApi {
         }
     }
 
+    public static void sendSmsCode(String phone, IRequestCallback<ServerResponse<Void>> callBack) {
+        try {
+            JSONObject content = new JSONObject();
+            content.put("phone", phone);
+
+            JSONObject params = new JSONObject();
+            params.put("event_name", "sendSmsCode");
+            params.put("content", content.toString());
+
+            sendPost(params, Void.class, callBack);
+        } catch (Exception e) {
+            Log.d(TAG, "sendSmsCode failed:", e);
+            callBack.onError(-1, "Content Error");
+        }
+    }
+
+    public static void smsCodeLogin(String phone, String code, IRequestCallback<ServerResponse<LoginInfo>> callBack) {
+        try {
+            JSONObject content = new JSONObject();
+            content.put("phone", phone);
+            content.put("code", code);
+
+            JSONObject params = new JSONObject();
+            params.put("event_name", "smsCodeLogin");
+            params.put("content", content.toString());
+
+            sendPost(params, LoginInfo.class, callBack);
+        } catch (Exception e) {
+            Log.d(TAG, "smsCodeLogin failed:", e);
+            callBack.onError(-1, "Content Error");
+        }
+    }
+
     public static void getRTMAuthentication(String loginToken, String roomType,
                                             IRequestCallback<ServerResponse<RtmInfo>> callBack) {
         JSONObject content = new JSONObject();
