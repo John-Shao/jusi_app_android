@@ -164,7 +164,7 @@
     <string name="class_large">大班课</string>
     <string name="already_apply_link_mic">已经申请连麦</string>
     <string name="revert_apply_link_mic">是否取消连麦申请</string>
-    <string name="network_lost_tips">网络链接已断开，请检查设置</string>
+    <string name="network_lost_tips">网络连接已断开，请检查设置</string>
 
     <string name="common_cancel">取消</string>
 

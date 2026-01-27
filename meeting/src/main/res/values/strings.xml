@@ -164,7 +164,7 @@
     <string name="class_large">Large Class</string>
     <string name="already_apply_link_mic">Already applied for audio link</string>
     <string name="revert_apply_link_mic">Cancel audio link request?</string>
-    <string name="network_lost_tips">Network connection lost, please check settings</string>
+    <string name="network_lost_tips">Network connection lost, please check settings.</string>
 
     <string name="common_cancel">Cancel</string>
 
