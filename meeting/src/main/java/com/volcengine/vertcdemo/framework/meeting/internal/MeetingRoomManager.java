@@ -32,7 +32,8 @@ public class MeetingRoomManager extends AbsMeetingManager implements IMeetingRtm
                 return;
             }
             long durationLocal = System.currentTimeMillis() - mTimeEnter;
-            long tick = Math.max(0, mTimeLimit - (mDurationServer + durationLocal));
+            // 改为正计时：直接计算已经过去的时间
+            long tick = mDurationServer + durationLocal;
             getDataProvider().setTick(tick);
             getUIHandler().postDelayed(mDurationCounting, 1000);
         }

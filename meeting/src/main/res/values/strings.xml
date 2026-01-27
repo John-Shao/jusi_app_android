@@ -80,7 +80,7 @@
     <string name="action_participant">Members</string>
     <string name="action_more">More</string>
     <string name="info_room_id">Room ID: </string>
-    <string name="info_remind_time">Time Remaining: %s</string>
+    <string name="info_remind_time">%s</string>
     <string name="room_id_copied">Room ID copied</string>
     <string name="mute_all_audio">Mute All</string>
     <string name="meeting_close_option_finish">End Meeting</string>

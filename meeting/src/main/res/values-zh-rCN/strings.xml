@@ -80,7 +80,7 @@
     <string name="action_participant">成员</string>
     <string name="action_more">更多</string>
     <string name="info_room_id">房间ID：</string>
-    <string name="info_remind_time">剩余时间：%s</string>
+    <string name="info_remind_time">%s</string>
     <string name="room_id_copied">房间号已复制</string>
     <string name="mute_all_audio">全部静音</string>
     <string name="meeting_close_option_finish">结束会议</string>
