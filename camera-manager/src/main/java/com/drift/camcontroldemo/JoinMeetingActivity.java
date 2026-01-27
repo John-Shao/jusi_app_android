@@ -87,19 +87,6 @@ public class JoinMeetingActivity extends AppCompatActivity {
      * @param userName 用户名
      */
     private void handleJoinMeeting(String roomId, String userName) {
-        /*
-        LocalController localController = new LocalController();
-
-
-        localController.startPushStreamWithURL(camIP, rtspUrl, new LocalListener.OnCommonResListener() {
-            @Override
-            public void onCommonRes(boolean success) {
-                Log.e(TAG, "kc test: bSuccess is" + success);
-                Toast.makeText(LinkLiveActivity.this, R.string.link_send_successfully, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(LinkLiveActivity.this, LinkHomeActivity.class);
-                startActivity(intent);
-            }
-        });
-        */
+        // TODO: 实现进入会议的逻辑
     }
 }

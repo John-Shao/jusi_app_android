@@ -83,10 +83,6 @@
 
         <!-- Camera Manager Activities -->
         <activity
-            android:name="com.drift.camcontroldemo.LinkHomeActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.drift.camcontroldemo.LinkAddCameraActivity"
             android:configChanges="orientation|screenSize"
             android:exported="false" />

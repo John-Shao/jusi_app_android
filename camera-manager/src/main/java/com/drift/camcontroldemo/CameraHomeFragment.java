@@ -62,7 +62,7 @@ public class CameraHomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_link_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_camera_home, container, false);
         initViews(view);
         initData();
         return view;

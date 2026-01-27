@@ -64,8 +64,7 @@ public class LinkLiveActivity extends AppCompatActivity {
                     public void onCommonRes(boolean success) {
                         Log.e(TAG, "kc test: bSuccess is" + success);
                         Toast.makeText(LinkLiveActivity.this, R.string.link_send_successfully, Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LinkLiveActivity.this, LinkHomeActivity.class);
-                        startActivity(intent);
+                        finish();
                     }
                 });
             }
