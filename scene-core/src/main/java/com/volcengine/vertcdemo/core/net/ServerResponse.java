@@ -11,6 +11,7 @@ import com.volcengine.vertcdemo.core.R;
 import com.volcengine.vertcdemo.core.SolutionDataManager;
 import com.volcengine.vertcdemo.core.eventbus.SolutionDemoEventManager;
 import com.volcengine.vertcdemo.core.eventbus.TokenExpiredEvent;
+import com.volcengine.vertcdemo.core.net.http.NetworkException;
 
 import org.json.JSONObject;
 
@@ -46,7 +47,7 @@ public class ServerResponse<T> {
                     && !TextUtils.equals("{}", respObj.toString())) {
                 data = GsonUtils.gson().fromJson(respObj.toString(), clz);
             }
-            if (code == 450) {
+            if (code == NetworkException.CODE_TOKEN_EXPIRED) {
                 SolutionDataManager.ins().clear();
                 SolutionDemoEventManager.post(new TokenExpiredEvent());
             } else if (code == 430) {
@@ -67,7 +68,7 @@ public class ServerResponse<T> {
                     && !TextUtils.equals("{}", respObj.toString())) {
                 data = GsonUtils.gson().fromJson(respObj.toString(), type);
             }
-            if (code == 450) {
+            if (code == NetworkException.CODE_TOKEN_EXPIRED) {
                 SolutionDataManager.ins().clear();
                 SolutionDemoEventManager.post(new TokenExpiredEvent());
             } else if (code == 430) {
@@ -96,4 +97,3 @@ public class ServerResponse<T> {
         return new ServerResponse<>(code, message, data, timestamp);
     }
 }
-
