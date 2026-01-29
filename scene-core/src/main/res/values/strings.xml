@@ -52,8 +52,8 @@
     <string name="server_error_message_room_user_inactive">User is inactive</string>
     <string name="server_error_message_room_disbanded">Room has been disbanded</string>
     <string name="server_error_message_sensitive_words">Input contains sensitive words, please re-enter</string>
-    <string name="server_error_message_verify_code_expired">Verification code expired, please resend</string>
-    <string name="server_error_message_verify_code_invalid">Verification code is incorrect, please resend</string>
+    <string name="server_error_message_verify_code_expired">Verification code expired, please re-get</string>
+    <string name="server_error_message_verify_code_invalid">Verification code is incorrect, please re-enter</string>
     <string name="server_error_message_token_expired">Login has expired, please log in again</string>
     <string name="server_error_message_server_internal_error">System is busy, please try again later</string>
     <string name="server_error_message_mic_number_limit">All microphone slots are full</string>
