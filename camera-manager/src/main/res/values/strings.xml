@@ -66,4 +66,5 @@
     <string name="join_meeting_room_not_exist">Room does not exist</string>
     <string name="join_meeting_check_room_failed">Failed to check room</string>
     <string name="join_meeting_not_login">Please login first</string>
+    <string name="join_meeting_device_sn_hint">Device Serial Number</string>
 </resources>

@@ -45,11 +45,11 @@
             tools:visibility="visible" />
 
         <EditText
-            android:id="@+id/join_meeting_user_name"
+            android:id="@+id/join_meeting_device_sn"
             style="@style/EditTextLg"
             android:layout_width="match_parent"
             android:layout_marginTop="20dp"
-            android:hint="@string/create_input_user_name_hint" />
+            android:hint="@string/join_meeting_device_sn_hint" />
 
         <View
             style="@style/DividerLine"
@@ -57,7 +57,7 @@
             android:background="@color/room_input_divider_bg" />
 
         <TextView
-            android:id="@+id/join_meeting_user_name_waring"
+            android:id="@+id/join_meeting_device_sn_waring"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"

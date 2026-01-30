@@ -47,7 +47,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
     private String mStreamBitrate;
     private EditText mInputRoomId;
     private TextWatcherHelper mRoomIdWatcher;
-    private EditText mInputUserName;
+    private EditText mDeviceSn;
     private TextWatcherHelper mUserNameWatcher;
 
     @Override
@@ -80,20 +80,20 @@ public class JoinMeetingActivity extends AppCompatActivity {
         mRoomIdWatcher = new TextWatcherHelper(mInputRoomId, inputRoomIdError, ROOM_ID_REGEX,
             R.string.create_input_room_id_content_warn, ROOM_ID_MAX_LENGTH, R.string.create_input_room_id_length_warn);
 
-        mInputUserName = findViewById(R.id.join_meeting_user_name);
-        TextView inputUserNameError = findViewById(R.id.join_meeting_user_name_waring);
-        mUserNameWatcher = new TextWatcherHelper(mInputUserName, inputUserNameError, USER_NAME_REGEX,
+        mDeviceSn = findViewById(R.id.join_meeting_device_sn);
+        TextView inputUserNameError = findViewById(R.id.join_meeting_device_sn_waring);
+        mUserNameWatcher = new TextWatcherHelper(mDeviceSn, inputUserNameError, USER_NAME_REGEX,
             R.string.create_input_user_name_content_warn, USER_NAME_MAX_LENGTH, R.string.create_input_user_name_length_warn);
 
         // 自动填充设备序列号到用户名输入框
         if (!TextUtils.isEmpty(mSerialNumber)) {
-            mInputUserName.setText(mSerialNumber);
+            mDeviceSn.setText(mSerialNumber);
         }
 
         // 设置用户名输入框为只读
-        mInputUserName.setFocusable(false);
-        mInputUserName.setFocusableInTouchMode(false);
-        mInputUserName.setClickable(false);
+        mDeviceSn.setFocusable(false);
+        mDeviceSn.setFocusableInTouchMode(false);
+        mDeviceSn.setClickable(false);
 
         TextView joinMeetingBtn = findViewById(R.id.join_meeting_button);
         joinMeetingBtn.setOnClickListener(v -> {
@@ -106,7 +106,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
                 mRoomIdWatcher.showContentError();
                 return;
             }
-            String userName = mInputUserName.getText().toString().trim();
+            String userName = mDeviceSn.getText().toString().trim();
             if (TextUtils.isEmpty(userName)) {
                 SafeToast.show(R.string.create_input_user_name_hint);
                 return;
