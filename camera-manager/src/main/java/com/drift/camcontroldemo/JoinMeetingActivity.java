@@ -115,6 +115,15 @@ public class JoinMeetingActivity extends AppCompatActivity {
                 mUserNameWatcher.showContentError();
                 return;
             }
+            // 检查用户是否已登录
+            String userId = SolutionDataManager.ins().getUserId();
+            if (TextUtils.isEmpty(userId)) {
+                // 跳转到登录页面
+                Intent loginIntent = new Intent();
+                loginIntent.setClassName(getApplicationContext(), "com.volcengine.vertcdemo.login.LoginActivity");
+                startActivity(loginIntent);
+                return;
+            }
             // 先检查房间是否存在
             checkRoomExists(roomId);
             IMEUtils.closeIME(v);
