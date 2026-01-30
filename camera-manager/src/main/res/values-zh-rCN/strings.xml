@@ -41,9 +41,9 @@
     <string name="Link_stop_record_to_setting">正在录像中，请先停止录像</string>
     <string name="Link_add_camera">添加相机</string>
     <string name="Link_add_camera_tip_title">添加相机前,请确保您的手机连接到同一个Wi-Fi 网络，操作步骤如下：</string>
-    <string name="Link_add_camera_tips">1. 在下面的输入框中填入Wi-Fi的网络名称及密码。注意,请确保您手机的 Wi-Fi已开启，如果您使用手机的无线热点来组网请预先开启您的手机热点功能。温馨提示：使用手机热点组网不会消耗您的流量，可以放心使用。\n2.输入完成后,点击确定,会生成一个二维码。将Drift相机设置成扫码模式：GHOST 系列相机可以在视频模式下长按中间键，X3头戴式相机可长按 REC 键启动扫码功能，当听到 “开始扫描”提示音后，将相机镜头对准二维码，保持20cm距离，听到语音提示“扫描成功”后，APP 就能自动发现并添加相机。</string>
+    <string name="Link_add_camera_tips">1. 在下面的输入框中填入Wi-Fi的网络名称及密码。注意,请确保您手机的 Wi-Fi已开启，如果您使用手机的无线热点来组网请预先开启您的手机热点功能。\n2.输入完成后,点击确定,会生成一个二维码。将Jusi相机设置成扫码模式：在视频模式下长按中间键启动扫码功能，当听到 “开始扫描”提示音后，将相机镜头对准二维码，保持20cm距离，听到语音提示“扫描成功”后，APP 就能自动发现并添加相机。</string>
     <string name="Link_add_camera_note_title">注意事项:</string>
-    <string name="Link_add_camera_notes">a.确保您的Drift相机固件是最新版本，并支持一键扫码配置。\nb.确认Wi-Fi网络名称及密码输入无误，部分Drift相机只支持2.4G Wi-Fi,如有疑问请咨询客服。</string>
+    <string name="Link_add_camera_notes">a.确保您的Jusi相机固件是最新版本，并支持一键扫码配置。\nb.确认Wi-Fi网络名称及密码输入无误，部分Jusi相机只支持2.4G Wi-Fi,如有疑问请咨询客服。</string>
     <string name="Link_wifi_name">Wi-Fi名字</string>
     <string name="Link_wifi_password">Wi-Fi密码</string>
     <string name="Link_wifi_enter_password">请输入Wi-Fi密码</string>
