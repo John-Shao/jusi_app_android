@@ -64,4 +64,6 @@
     <string name="create_input_user_name_length_warn">昵称长度不能超过18位</string>
     <string name="join_meeting_cam_ip_empty">设备IP地址为空</string>
     <string name="join_meeting_request_failed">加入会议失败</string>
+    <string name="join_meeting_room_not_exist">房间不存在</string>
+    <string name="join_meeting_check_room_failed">检查房间失败</string>
 </resources>

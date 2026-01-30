@@ -115,9 +115,82 @@ public class JoinMeetingActivity extends AppCompatActivity {
                 mUserNameWatcher.showContentError();
                 return;
             }
-            // 处理进入会议的逻辑
-            handleJoinMeeting(roomId);
+            // 先检查房间是否存在
+            checkRoomExists(roomId);
             IMEUtils.closeIME(v);
+        });
+    }
+
+    /**
+     * 检查房间是否存在
+     * @param roomId 房间ID
+     */
+    private void checkRoomExists(String roomId) {
+        AppExecutors.diskIO().execute(() -> {
+            try {
+                // 构建请求参数
+                JSONObject params = new JSONObject();
+                params.put("room_id", roomId);
+
+                // 创建 OkHttpClient
+                OkHttpClient client = new OkHttpClient();
+
+                // 创建请求体
+                RequestBody requestBody = RequestBody.create(
+                    MediaType.parse("application/json; charset=utf-8"),
+                    params.toString()
+                );
+
+                // 构建请求
+                Request request = new Request.Builder()
+                    .url(BuildConfig.MEET_SERVER_URL + "/meeting/check-room")
+                    .post(requestBody)
+                    .build();
+
+                // 发送请求
+                Response response = client.newCall(request).execute();
+
+                if (response.isSuccessful() && response.body() != null) {
+                    String responseStr = response.body().string();
+                    Log.d(TAG, "Check room response: " + responseStr);
+
+                    JSONObject jsonResponse = new JSONObject(responseStr);
+                    int code = jsonResponse.optInt("code");
+                    boolean exists = jsonResponse.optBoolean("exists", false);
+
+                    if (code == 200) {
+                        if (exists) {
+                            // 房间存在，继续进入会议流程
+                            AppExecutors.mainThread().execute(() -> {
+                                handleJoinMeeting(roomId);
+                            });
+                        } else {
+                            // 房间不存在，显示错误
+                            AppExecutors.mainThread().execute(() -> {
+                                SafeToast.show(R.string.join_meeting_room_not_exist);
+                            });
+                        }
+                    } else {
+                        String message = jsonResponse.optString("message", "Unknown error");
+                        showCheckRoomError("Error code: " + code + ", message: " + message);
+                    }
+                } else {
+                    showCheckRoomError("HTTP error: " + response.code());
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Check room failed", e);
+                showCheckRoomError(e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * 显示检查房间错误信息
+     */
+    private void showCheckRoomError(String message) {
+        AppExecutors.mainThread().execute(() -> {
+            SafeToast.show(R.string.join_meeting_check_room_failed);
+            Log.e(TAG, "Check room error: " + message);
         });
     }
 
