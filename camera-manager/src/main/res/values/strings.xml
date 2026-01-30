@@ -67,4 +67,13 @@
     <string name="join_meeting_check_room_failed">Failed to check room</string>
     <string name="join_meeting_not_login">Please login first</string>
     <string name="join_meeting_device_sn_hint">Device Serial Number</string>
+    <string name="create_meeting">Create Meeting</string>
+    <string name="join_meeting">Join Meeting</string>
+    <string name="create_meeting_room_name_hint">Room name</string>
+    <string name="create_meeting_room_name_default">%s\'s Meeting</string>
+    <string name="create_meeting_room_id_must_6_digits">Room ID must be 6 digits</string>
+    <string name="create_meeting_failed">Failed to create meeting</string>
+    <string name="create_meeting_room_name_empty">Please enter room name</string>
+    <string name="create_meeting_room_name_length_warn">Room name cannot exceed 50 characters</string>
+    <string name="create_meeting_room_name_content_warn">Please enter Chinese, numbers, letters or symbols @_-</string>
 </resources>

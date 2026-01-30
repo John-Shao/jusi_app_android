@@ -8,6 +8,8 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +26,7 @@ import com.drift.foreamlib.local.ctrl.LocalListener;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Random;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -38,17 +41,29 @@ public class JoinMeetingActivity extends AppCompatActivity {
     private static final String TAG = "JoinMeetingActivity";
     private static final String ROOM_ID_REGEX = "^[A-Za-z0-9@_-]+$";
     private static final int ROOM_ID_MAX_LENGTH = 18;
+    private static final int ROOM_ID_LENGTH = 6;
     private static final String USER_NAME_REGEX = "^[\\u4e00-\\u9fa5a-zA-Z0-9@_-]+$";
     private static final int USER_NAME_MAX_LENGTH = 18;
+    private static final String ROOM_NAME_REGEX = "^[\\u4e00-\\u9fa5a-zA-Z0-9@_-\\s]+$";
+    private static final int ROOM_NAME_MAX_LENGTH = 50;
 
     private String mCamIP;
     private String mSerialNumber;
     private String mStreamRes;
     private String mStreamBitrate;
+    private RadioGroup mMeetingModeRadioGroup;
+    private RadioButton mRadioCreateMeeting;
+    private RadioButton mRadioJoinMeeting;
+    private EditText mInputRoomName;
+    private TextWatcherHelper mRoomNameWatcher;
+    private View mRoomNameDivider;
+    private TextView mRoomNameWarning;
     private EditText mInputRoomId;
     private TextWatcherHelper mRoomIdWatcher;
     private EditText mDeviceSn;
     private TextWatcherHelper mUserNameWatcher;
+    private TextView mJoinMeetingBtn;
+    private boolean isCreateMeetingMode = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,26 +110,32 @@ public class JoinMeetingActivity extends AppCompatActivity {
         mDeviceSn.setFocusableInTouchMode(false);
         mDeviceSn.setClickable(false);
 
-        TextView joinMeetingBtn = findViewById(R.id.join_meeting_button);
-        joinMeetingBtn.setOnClickListener(v -> {
-            String roomId = mInputRoomId.getText().toString().trim();
-            if (TextUtils.isEmpty(roomId)) {
-                SafeToast.show(R.string.create_input_room_id_hint);
-                return;
+        // 初始化会议模式选择RadioGroup
+        mMeetingModeRadioGroup = findViewById(R.id.meeting_mode_radio_group);
+        mRadioCreateMeeting = findViewById(R.id.radio_create_meeting);
+        mRadioJoinMeeting = findViewById(R.id.radio_join_meeting);
+
+        // 初始化房间名称输入框
+        mInputRoomName = findViewById(R.id.create_meeting_room_name);
+        mRoomNameDivider = findViewById(R.id.create_meeting_room_name_divider);
+        mRoomNameWarning = findViewById(R.id.create_meeting_room_name_waring);
+        mRoomNameWatcher = new TextWatcherHelper(mInputRoomName, mRoomNameWarning, ROOM_NAME_REGEX,
+            R.string.create_meeting_room_name_content_warn, ROOM_NAME_MAX_LENGTH, R.string.create_meeting_room_name_length_warn);
+
+        // 设置RadioGroup变化监听
+        mMeetingModeRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.radio_create_meeting) {
+                switchMeetingMode(true);
+            } else if (checkedId == R.id.radio_join_meeting) {
+                switchMeetingMode(false);
             }
-            if (mRoomIdWatcher.isContentWarn()) {
-                mRoomIdWatcher.showContentError();
-                return;
-            }
-            String userName = mDeviceSn.getText().toString().trim();
-            if (TextUtils.isEmpty(userName)) {
-                SafeToast.show(R.string.create_input_user_name_hint);
-                return;
-            }
-            if (mUserNameWatcher.isContentWarn()) {
-                mUserNameWatcher.showContentError();
-                return;
-            }
+        });
+
+        // 默认选中"发起会议"，初始化UI
+        switchMeetingMode(true);
+
+        mJoinMeetingBtn = findViewById(R.id.join_meeting_button);
+        mJoinMeetingBtn.setOnClickListener(v -> {
             // 检查用户是否已登录
             String userId = SolutionDataManager.ins().getUserId();
             if (TextUtils.isEmpty(userId)) {
@@ -124,8 +145,50 @@ public class JoinMeetingActivity extends AppCompatActivity {
                 startActivity(loginIntent);
                 return;
             }
-            // 先检查房间是否存在
-            checkRoomExists(roomId);
+
+            // 检查设备序列号
+            String deviceSn = mDeviceSn.getText().toString().trim();
+            if (TextUtils.isEmpty(deviceSn)) {
+                SafeToast.show(R.string.join_meeting_device_sn_hint);
+                return;
+            }
+
+            // 检查camIP
+            if (TextUtils.isEmpty(mCamIP)) {
+                SafeToast.show(R.string.join_meeting_cam_ip_empty);
+                return;
+            }
+
+            String roomId = mInputRoomId.getText().toString().trim();
+            if (TextUtils.isEmpty(roomId)) {
+                SafeToast.show(R.string.create_input_room_id_hint);
+                return;
+            }
+
+            if (isCreateMeetingMode) {
+                // 发起会议模式
+                String roomName = mInputRoomName.getText().toString().trim();
+                if (TextUtils.isEmpty(roomName)) {
+                    SafeToast.show(R.string.create_meeting_room_name_empty);
+                    return;
+                }
+                if (mRoomNameWatcher.isContentWarn()) {
+                    mRoomNameWatcher.showContentError();
+                    return;
+                }
+                // 调用创建会议
+                createMeeting(roomId, roomName);
+            } else {
+                // 加入会议模式
+                // 验证房间ID必须是6位数字
+                if (roomId.length() != ROOM_ID_LENGTH || !roomId.matches("\\d{6}")) {
+                    SafeToast.show(R.string.create_meeting_room_id_must_6_digits);
+                    return;
+                }
+                // 先检查房间是否存在
+                checkRoomExists(roomId);
+            }
+
             IMEUtils.closeIME(v);
         });
     }
@@ -332,6 +395,140 @@ public class JoinMeetingActivity extends AppCompatActivity {
         AppExecutors.mainThread().execute(() -> {
             SafeToast.show(R.string.join_meeting_request_failed);
             Log.e(TAG, "Error: " + message);
+        });
+    }
+
+    /**
+     * 切换会议模式
+     * @param isCreateMode true表示发起会议模式，false表示加入会议模式
+     */
+    private void switchMeetingMode(boolean isCreateMode) {
+        isCreateMeetingMode = isCreateMode;
+        if (isCreateMode) {
+            // 发起会议模式
+            mInputRoomName.setVisibility(View.VISIBLE);
+            mRoomNameDivider.setVisibility(View.VISIBLE);
+
+            // 设置房间ID为只读
+            mInputRoomId.setFocusable(false);
+            mInputRoomId.setFocusableInTouchMode(false);
+            mInputRoomId.setClickable(false);
+
+            // 生成6位房间ID
+            generateRoomId();
+
+            // 设置默认房间名称
+            String userName = SolutionDataManager.ins().getUserName();
+            if (!TextUtils.isEmpty(userName)) {
+                String defaultRoomName = getString(R.string.create_meeting_room_name_default, userName);
+                mInputRoomName.setText(defaultRoomName);
+            }
+
+            mJoinMeetingBtn.setText(R.string.create_meeting);
+        } else {
+            // 加入会议模式
+            mInputRoomName.setVisibility(View.GONE);
+            mRoomNameDivider.setVisibility(View.GONE);
+
+            // 设置房间ID为可编辑
+            mInputRoomId.setFocusable(true);
+            mInputRoomId.setFocusableInTouchMode(true);
+            mInputRoomId.setClickable(true);
+
+            // 清空自动生成的房间ID
+            mInputRoomId.setText("");
+
+            mJoinMeetingBtn.setText(R.string.join_meeting);
+        }
+    }
+
+    /**
+     * 生成6位随机房间ID
+     */
+    private void generateRoomId() {
+        Random random = new Random();
+        int roomId = 100000 + random.nextInt(900000); // 生成100000-999999之间的随机数
+        mInputRoomId.setText(String.valueOf(roomId));
+    }
+
+    /**
+     * 创建会议
+     * @param roomId 房间ID
+     * @param roomName 房间名称
+     */
+    private void createMeeting(String roomId, String roomName) {
+        AppExecutors.diskIO().execute(() -> {
+            try {
+                // 构建请求参数
+                JSONObject params = new JSONObject();
+                params.put("user_id", SolutionDataManager.ins().getUserId());
+                params.put("room_name", roomName);
+                params.put("room_id", roomId);
+                params.put("device_sn", mSerialNumber);
+
+                // 创建 OkHttpClient
+                OkHttpClient client = new OkHttpClient();
+
+                // 创建请求体
+                RequestBody requestBody = RequestBody.create(
+                    MediaType.parse("application/json; charset=utf-8"),
+                    params.toString()
+                );
+
+                // 构建请求
+                Request request = new Request.Builder()
+                    .url(BuildConfig.MEET_SERVER_URL + "/meeting/book")
+                    .post(requestBody)
+                    .build();
+
+                // 发送请求
+                Response response = client.newCall(request).execute();
+
+                if (response.isSuccessful() && response.body() != null) {
+                    String responseStr = response.body().string();
+                    Log.d(TAG, "Create meeting response: " + responseStr);
+
+                    JSONObject jsonResponse = new JSONObject(responseStr);
+                    int code = jsonResponse.optInt("code");
+
+                    if (code == 200) {
+                        JSONObject responseData = jsonResponse.optJSONObject("data");
+                        if (responseData != null) {
+                            String rtmpUrl = responseData.optString("rtmp_url");
+                            String rtspUrl = responseData.optString("rtsp_url");
+
+                            // 在主线程中调用推流和拉流
+                            AppExecutors.mainThread().execute(() -> {
+                                // 调用推流方法
+                                startPushStream(rtmpUrl);
+
+                                // 调用拉流方法
+                                startPullStream(rtspUrl);
+                            });
+                        } else {
+                            showCreateMeetingError("Response data is null");
+                        }
+                    } else {
+                        String message = jsonResponse.optString("message", "Unknown error");
+                        showCreateMeetingError("Error code: " + code + ", message: " + message);
+                    }
+                } else {
+                    showCreateMeetingError("HTTP error: " + response.code());
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Create meeting failed", e);
+                showCreateMeetingError(e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * 显示创建会议错误信息
+     */
+    private void showCreateMeetingError(String message) {
+        AppExecutors.mainThread().execute(() -> {
+            SafeToast.show(R.string.create_meeting_failed);
+            Log.e(TAG, "Create meeting error: " + message);
         });
     }
 }
