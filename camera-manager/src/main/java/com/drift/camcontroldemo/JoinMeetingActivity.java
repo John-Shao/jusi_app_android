@@ -16,6 +16,7 @@ import com.ss.video.rtc.demo.basic_module.utils.AppExecutors;
 import com.ss.video.rtc.demo.basic_module.utils.IMEUtils;
 import com.ss.video.rtc.demo.basic_module.utils.SafeToast;
 import com.drift.util.TextWatcherHelper;
+import com.volcengine.vertcdemo.core.SolutionDataManager;
 
 import com.drift.foreamlib.local.ctrl.LocalController;
 import com.drift.foreamlib.local.ctrl.LocalListener;
@@ -89,6 +90,11 @@ public class JoinMeetingActivity extends AppCompatActivity {
             mInputUserName.setText(mSerialNumber);
         }
 
+        // 设置用户名输入框为只读
+        mInputUserName.setFocusable(false);
+        mInputUserName.setFocusableInTouchMode(false);
+        mInputUserName.setClickable(false);
+
         TextView joinMeetingBtn = findViewById(R.id.join_meeting_button);
         joinMeetingBtn.setOnClickListener(v -> {
             String roomId = mInputRoomId.getText().toString().trim();
@@ -110,7 +116,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
                 return;
             }
             // 处理进入会议的逻辑
-            handleJoinMeeting(roomId, userName);
+            handleJoinMeeting(roomId);
             IMEUtils.closeIME(v);
         });
     }
@@ -118,9 +124,8 @@ public class JoinMeetingActivity extends AppCompatActivity {
     /**
      * 处理进入会议的逻辑
      * @param roomId 房间ID
-     * @param userName 用户名
      */
-    private void handleJoinMeeting(String roomId, String userName) {
+    private void handleJoinMeeting(String roomId) {
         // 检查 camIP 是否为空
         if (TextUtils.isEmpty(mCamIP)) {
             SafeToast.show(R.string.join_meeting_cam_ip_empty);
@@ -128,26 +133,20 @@ public class JoinMeetingActivity extends AppCompatActivity {
         }
 
         // 调用后端接口获取推流和拉流地址
-        requestCameraJoinRoom(roomId, userName);
+        requestCameraJoinRoom(roomId);
     }
 
     /**
      * 请求相机加入房间接口
      */
-    private void requestCameraJoinRoom(String roomId, String userName) {
+    private void requestCameraJoinRoom(String roomId) {
         AppExecutors.diskIO().execute(() -> {
             try {
-                // 构建请求参数
+                // 构建请求参数（扁平化结构）
                 JSONObject params = new JSONObject();
-                params.put("type", "CameraJoinRoom");
-
-                JSONObject data = new JSONObject();
-                data.put("user_id", userName);
-                data.put("room_id", roomId);
-                data.put("device_sn", mSerialNumber); // 使用设备序列号
-                params.put("data", data);
-
-                params.put("timestamp", System.currentTimeMillis());
+                params.put("user_id", SolutionDataManager.ins().getUserId());
+                params.put("room_id", roomId);
+                params.put("device_sn", mSerialNumber); // 使用设备序列号
 
                 // 创建 OkHttpClient
                 OkHttpClient client = new OkHttpClient();
@@ -160,7 +159,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
 
                 // 构建请求
                 Request request = new Request.Builder()
-                    .url(BuildConfig.MEET_SERVER_URL)
+                    .url(BuildConfig.MEET_SERVER_URL + "/camera/join")
                     .post(requestBody)
                     .build();
 
