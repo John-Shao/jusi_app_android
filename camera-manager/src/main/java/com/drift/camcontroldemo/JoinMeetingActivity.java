@@ -159,7 +159,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
         });
 
         // 默认触发加入会议模式
-        mMeetingTypeRadioGroup.check(R.id.radio_join_meeting);
+        mMeetingTypeRadioGroup.check(R.id.radio_create_meeting);
     }
 
     /**
