@@ -17,9 +17,12 @@ public class CameraManager {
     private String currentCamIP;
     // 存储每个相机的会议状态 <camIP, isInMeeting>
     private Map<String, Boolean> cameraInMeetingMap;
+    // 存储每个相机的房间ID <camIP, roomId>
+    private Map<String, String> cameraRoomIdMap;
 
     private CameraManager() {
         cameraInMeetingMap = new HashMap<>();
+        cameraRoomIdMap = new HashMap<>();
     }
 
     public static synchronized CameraManager getInstance() {
@@ -91,6 +94,39 @@ public class CameraManager {
     public void clearCameraInMeeting(String camIP) {
         if (camIP != null) {
             cameraInMeetingMap.remove(camIP);
+        }
+    }
+
+    /**
+     * 设置相机的房间ID
+     * @param camIP 相机IP地址
+     * @param roomId 房间ID
+     */
+    public void setCameraRoomId(String camIP, String roomId) {
+        if (camIP != null && roomId != null) {
+            cameraRoomIdMap.put(camIP, roomId);
+        }
+    }
+
+    /**
+     * 获取相机的房间ID
+     * @param camIP 相机IP地址
+     * @return 房间ID，如果不存在返回null
+     */
+    public String getCameraRoomId(String camIP) {
+        if (camIP != null && cameraRoomIdMap.containsKey(camIP)) {
+            return cameraRoomIdMap.get(camIP);
+        }
+        return null;
+    }
+
+    /**
+     * 清除指定相机的房间ID
+     * @param camIP 相机IP地址
+     */
+    public void clearCameraRoomId(String camIP) {
+        if (camIP != null) {
+            cameraRoomIdMap.remove(camIP);
         }
     }
 }

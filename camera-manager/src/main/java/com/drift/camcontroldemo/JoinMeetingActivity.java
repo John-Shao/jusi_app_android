@@ -308,8 +308,8 @@ public class JoinMeetingActivity extends AppCompatActivity {
                             // 调用推流方法
                             startPushStream(rtmpUrl);
 
-                            // 调用拉流方法
-                            startPullStream(rtspUrl);
+                            // 调用拉流方法，传递roomId
+                            startPullStream(rtspUrl, roomId);
                         });
                     } else {
                         String message = jsonResponse.optString("message", "Unknown error");
@@ -345,8 +345,10 @@ public class JoinMeetingActivity extends AppCompatActivity {
 
     /**
      * 开始拉流
+     * @param rtspUrl 拉流地址
+     * @param roomId 房间ID
      */
-    private void startPullStream(String rtspUrl) {
+    private void startPullStream(String rtspUrl, String roomId) {
         LocalController localController = new LocalController();
         localController.startPullStreamWithURL(mCamIP, rtspUrl,
             new LocalListener.OnCommonResListener() {
@@ -354,8 +356,9 @@ public class JoinMeetingActivity extends AppCompatActivity {
                 public void onCommonRes(boolean success) {
                     Log.d(TAG, "Pull stream result: " + success);
                     if (success) {
-                        // 设置相机会议状态为 true
+                        // 设置相机会议状态为 true，并保存房间ID
                         CameraManager.getInstance().setCameraInMeeting(mCamIP, true);
+                        CameraManager.getInstance().setCameraRoomId(mCamIP, roomId);
                         SafeToast.show("Join meeting successfully");
                         finish();
                     } else {

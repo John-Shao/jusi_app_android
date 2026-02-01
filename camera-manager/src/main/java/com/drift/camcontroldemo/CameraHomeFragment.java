@@ -273,10 +273,16 @@ public class CameraHomeFragment extends Fragment {
                 Boolean ifNeedUpdate = false;
 
                 if (!success) {
-                    // 设备离线，检查是否在会议中
+                    // 设备离线，检查是否在会议中且有房间ID
                     if (CameraManager.getInstance().isCameraInMeeting(serverIp)) {
-                        // 调用后端接口通知相机离开会议
-                        callCameraLeaveApi(serverIp, camStatus.getSerialNumber());
+                        String roomId = CameraManager.getInstance().getCameraRoomId(serverIp);
+                        if (roomId != null) {
+                            // 有房间ID时才调用后端接口通知相机离开会议
+                            callCameraLeaveApi(serverIp, camStatus.getSerialNumber(), roomId);
+                        } else {
+                            // 没有房间ID，直接清除本地会议状态
+                            CameraManager.getInstance().setCameraInMeeting(serverIp, false);
+                        }
                     }
                     camStatus.setOffline(true);
                     m_videoListRecycleAdapter.notifyItemChanged(index);
@@ -431,19 +437,33 @@ public class CameraHomeFragment extends Fragment {
             }
         });
 
-        // 调用后端接口通知相机离开会议
-        callCameraLeaveApi(camIP, serialNumber);
+        // 调用后端接口通知相机离开会议（只有当 room_id 存在时才调用）
+        String roomId = CameraManager.getInstance().getCameraRoomId(camIP);
+        if (roomId != null) {
+            callCameraLeaveApi(camIP, serialNumber, roomId);
+        } else {
+            // 如果没有 room_id，直接更新本地状态
+            CameraManager.getInstance().setCameraInMeeting(camIP, false);
+            int index = camsOnline.indexOf(camIP);
+            if (index >= 0) {
+                m_videoListRecycleAdapter.notifyItemChanged(index);
+            }
+        }
     }
 
     /**
      * 调用后端接口通知相机离开会议
+     * @param camIP 相机IP地址
+     * @param serialNumber 设备序列号
+     * @param roomId 房间ID
      */
-    private void callCameraLeaveApi(String camIP, String serialNumber) {
+    private void callCameraLeaveApi(String camIP, String serialNumber, String roomId) {
         AppExecutors.diskIO().execute(() -> {
             try {
                 // 构建请求参数
                 JSONObject params = new JSONObject();
                 params.put("device_sn", serialNumber);
+                params.put("room_id", roomId);
 
                 // 创建 OkHttpClient
                 OkHttpClient client = new OkHttpClient();
@@ -471,8 +491,9 @@ public class CameraHomeFragment extends Fragment {
                     int code = jsonResponse.optInt("code");
 
                     if (code == 200) {
-                        // 接口调用成功，更新会议状态为 false
+                        // 接口调用成功，更新会议状态为 false 并清除房间ID
                         CameraManager.getInstance().setCameraInMeeting(camIP, false);
+                        CameraManager.getInstance().clearCameraRoomId(camIP);
                         AppExecutors.mainThread().execute(() -> {
                             // 刷新列表显示
                             int index = camsOnline.indexOf(camIP);
