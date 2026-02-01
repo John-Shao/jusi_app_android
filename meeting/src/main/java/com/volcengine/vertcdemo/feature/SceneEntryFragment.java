@@ -40,7 +40,8 @@ public class SceneEntryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.scene_meeting).setOnClickListener(v -> startScene(CreateMeetingActivity.class, RoomType.MEETING));
-        view.findViewById(R.id.scene_class_small).setOnClickListener(v -> startScene(CreateClassSmallActivity.class, RoomType.CLASS_SMALL));
+        // 隐藏小班课场景入口
+        // view.findViewById(R.id.scene_class_small).setOnClickListener(v -> startScene(CreateClassSmallActivity.class, RoomType.CLASS_SMALL));
         // view.findViewById(R.id.scene_class_large).setOnClickListener(v -> startScene(CreateClassLargeActivity.class, RoomType.CLASS_LARGE));
     }
 
