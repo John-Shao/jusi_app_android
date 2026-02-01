@@ -88,6 +88,7 @@
             android:background="@color/trans0"
             android:hint="@string/wifi"
             android:textColor="@color/white"
+            android:textCursorDrawable="@null"
             android:textSize="13sp"/>
 
         <EditText
@@ -100,6 +101,7 @@
             android:background="@color/trans0"
             android:hint="@string/pwd"
             android:textColor="@color/white"
+            android:textCursorDrawable="@null"
             android:textSize="13sp" />
     </RelativeLayout>
 
