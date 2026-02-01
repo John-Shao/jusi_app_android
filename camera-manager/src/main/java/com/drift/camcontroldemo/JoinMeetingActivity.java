@@ -159,8 +159,16 @@ public class JoinMeetingActivity extends AppCompatActivity {
             IMEUtils.closeIME(v);
         });
 
-        // 默认触发加入会议模式
+        // 默认触发发起会议模式
         mMeetingTypeRadioGroup.check(R.id.radio_create_meeting);
+
+        // 手动触发初始化逻辑，因为 check() 方法可能不会触发 listener
+        isCreateMeeting = true;
+        mInputRoomId.setEnabled(false);
+        mInputRoomId.setFocusable(false);
+        mInputRoomId.setFocusableInTouchMode(false);
+        mInputRoomId.setClickable(false);
+        generateRoomId();
     }
 
     /**
