@@ -30,6 +30,24 @@ import com.drift.foreamlib.boss.model.CamStatus;
 import com.drift.foreamlib.local.ctrl.LocalController;
 import com.drift.foreamlib.local.ctrl.LocalListener;
 import com.drift.foreamlib.util.CommonDefine;
+import com.drift.manager.CameraManager;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+
+import com.ss.video.rtc.demo.basic_module.utils.AppExecutors;
+
+import org.json.JSONObject;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -150,16 +168,17 @@ public class CameraHomeFragment extends Fragment {
         m_videoListRecycleAdapter = new LinkCamListAdapter(getActivity(), camInfoList);
 
         m_videoListRecycleAdapter.setOnRecordClickListener((view, position) -> {
-            // 打开加入会议页面
             CamStatus camStatus = camInfoList.get(position);
-            Intent intent = new Intent(getActivity(), JoinMeetingActivity.class);
+            String camIP = camStatus.getCamIP();
 
-            intent.putExtra("camIP",camStatus.getCamIP());
-            intent.putExtra("serialNumber",camStatus.getSerialNumber());
-            intent.putExtra("streamRes",camStatus.getmStreamSetting().getStream_res());
-            intent.putExtra("streamBitrate",camStatus.getmStreamSetting().getStream_bitrate());
-
-            startActivity(intent);
+            // 检查相机是否正在会议中
+            if (CameraManager.getInstance().isCameraInMeeting(camIP)) {
+                // 显示退出会议确认对话框
+                showLeaveMeetingDialog(camStatus);
+            } else {
+                // 打开加入会议页面
+                openJoinMeetingActivity(camStatus);
+            }
         });
 
         m_videoListRecycleAdapter.setOnSettingClickListener((view, pos) -> {
@@ -254,6 +273,11 @@ public class CameraHomeFragment extends Fragment {
                 Boolean ifNeedUpdate = false;
 
                 if (!success) {
+                    // 设备离线，检查是否在会议中
+                    if (CameraManager.getInstance().isCameraInMeeting(serverIp)) {
+                        // 调用后端接口通知相机离开会议
+                        callCameraLeaveApi(serverIp, camStatus.getSerialNumber());
+                    }
                     camStatus.setOffline(true);
                     m_videoListRecycleAdapter.notifyItemChanged(index);
                     return;
@@ -351,5 +375,120 @@ public class CameraHomeFragment extends Fragment {
         else if (value.contains("X3"))
             mCamType = CommonDefine.X3;
         return mCamType;
+    }
+
+    /**
+     * 打开加入会议页面
+     */
+    private void openJoinMeetingActivity(CamStatus camStatus) {
+        Intent intent = new Intent(getActivity(), JoinMeetingActivity.class);
+        intent.putExtra("camIP", camStatus.getCamIP());
+        intent.putExtra("serialNumber", camStatus.getSerialNumber());
+        intent.putExtra("streamRes", camStatus.getmStreamSetting().getStream_res());
+        intent.putExtra("streamBitrate", camStatus.getmStreamSetting().getStream_bitrate());
+        startActivity(intent);
+    }
+
+    /**
+     * 显示退出会议确认对话框
+     */
+    private void showLeaveMeetingDialog(CamStatus camStatus) {
+        new AlertDialog.Builder(getActivity())
+            .setTitle("退出会议")
+            .setMessage("是否要退出会议？")
+            .setPositiveButton("退出", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // 用户确认退出会议
+                    leaveMeeting(camStatus);
+                }
+            })
+            .setNegativeButton("取消", null)
+            .show();
+    }
+
+    /**
+     * 退出会议：停止推流和拉流，调用后端接口
+     */
+    private void leaveMeeting(CamStatus camStatus) {
+        String camIP = camStatus.getCamIP();
+        String serialNumber = camStatus.getSerialNumber();
+
+        // 停止推流
+        LocalController localController = new LocalController();
+        localController.stopPushStream(camIP, new LocalListener.OnCommonResListener() {
+            @Override
+            public void onCommonRes(boolean success) {
+                Log.d(TAG, "Stop push stream result: " + success);
+            }
+        });
+
+        // 停止拉流
+        localController.stopPullStream(camIP, new LocalListener.OnCommonResListener() {
+            @Override
+            public void onCommonRes(boolean success) {
+                Log.d(TAG, "Stop pull stream result: " + success);
+            }
+        });
+
+        // 调用后端接口通知相机离开会议
+        callCameraLeaveApi(camIP, serialNumber);
+    }
+
+    /**
+     * 调用后端接口通知相机离开会议
+     */
+    private void callCameraLeaveApi(String camIP, String serialNumber) {
+        AppExecutors.diskIO().execute(() -> {
+            try {
+                // 构建请求参数
+                JSONObject params = new JSONObject();
+                params.put("device_sn", serialNumber);
+
+                // 创建 OkHttpClient
+                OkHttpClient client = new OkHttpClient();
+
+                // 创建请求体
+                RequestBody requestBody = RequestBody.create(
+                    MediaType.parse("application/json; charset=utf-8"),
+                    params.toString()
+                );
+
+                // 构建请求
+                Request request = new Request.Builder()
+                    .url(BuildConfig.MEET_SERVER_URL + "/meeting/camera-leave")
+                    .post(requestBody)
+                    .build();
+
+                // 发送请求
+                Response response = client.newCall(request).execute();
+
+                if (response.isSuccessful() && response.body() != null) {
+                    String responseStr = response.body().string();
+                    Log.d(TAG, "Camera leave response: " + responseStr);
+
+                    JSONObject jsonResponse = new JSONObject(responseStr);
+                    int code = jsonResponse.optInt("code");
+
+                    if (code == 200) {
+                        // 接口调用成功，更新会议状态为 false
+                        CameraManager.getInstance().setCameraInMeeting(camIP, false);
+                        AppExecutors.mainThread().execute(() -> {
+                            // 刷新列表显示
+                            int index = camsOnline.indexOf(camIP);
+                            if (index >= 0) {
+                                m_videoListRecycleAdapter.notifyItemChanged(index);
+                            }
+                        });
+                    } else {
+                        Log.e(TAG, "Camera leave failed: " + jsonResponse.optString("message"));
+                    }
+                } else {
+                    Log.e(TAG, "Camera leave HTTP error: " + response.code());
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Camera leave request failed", e);
+            }
+        });
     }
 }

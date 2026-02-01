@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.drift.camcontroldemo.R;
 import com.drift.foreamlib.boss.model.CamStatus;
+import com.drift.manager.CameraManager;
 
 import java.util.List;
 
@@ -49,7 +50,13 @@ public class LinkCamListAdapter extends RecyclerView.Adapter<LinkCamListAdapter.
             }
             else
             {
-                holder.ibTakephoto.setImageResource(R.drawable.link_cam_online);
+                // 检查是否在会议中
+                String camIP = cameraStatusNew.getCamIP();
+                if (camIP != null && CameraManager.getInstance().isCameraInMeeting(camIP)) {
+                    holder.ibTakephoto.setImageResource(R.drawable.link_cam_meeting);
+                } else {
+                    holder.ibTakephoto.setImageResource(R.drawable.link_cam_online);
+                }
                 holder.rlMask.setVisibility(View.INVISIBLE);
             }
 
@@ -109,7 +116,13 @@ public class LinkCamListAdapter extends RecyclerView.Adapter<LinkCamListAdapter.
 //            {
 //                holder.ibTakephoto.setVisibility(View.INVISIBLE);
 //            }
-            holder.ibTakephoto.setImageResource(R.drawable.link_cam_online);
+            // 根据会议状态显示不同图标
+            String camIP = cameraStatusNew.getCamIP();
+            if (camIP != null && CameraManager.getInstance().isCameraInMeeting(camIP)) {
+                holder.ibTakephoto.setImageResource(R.drawable.link_cam_meeting);
+            } else {
+                holder.ibTakephoto.setImageResource(R.drawable.link_cam_online);
+            }
         }
 
         if(m_onRecordClickListener!=null)

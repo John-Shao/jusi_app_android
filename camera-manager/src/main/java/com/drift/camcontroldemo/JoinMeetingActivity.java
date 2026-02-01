@@ -21,6 +21,7 @@ import com.volcengine.vertcdemo.core.SolutionDataManager;
 
 import com.drift.foreamlib.local.ctrl.LocalController;
 import com.drift.foreamlib.local.ctrl.LocalListener;
+import com.drift.manager.CameraManager;
 
 import org.json.JSONObject;
 
@@ -344,6 +345,8 @@ public class JoinMeetingActivity extends AppCompatActivity {
                 public void onCommonRes(boolean success) {
                     Log.d(TAG, "Pull stream result: " + success);
                     if (success) {
+                        // 设置相机会议状态为 true
+                        CameraManager.getInstance().setCameraInMeeting(mCamIP, true);
                         SafeToast.show("Join meeting successfully");
                         finish();
                     } else {
