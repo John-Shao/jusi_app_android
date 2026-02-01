@@ -21,58 +21,6 @@
         android:layout_marginRight="42dp"
         android:orientation="vertical">
 
-        <RadioGroup
-            android:id="@+id/meeting_mode_radio_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radio_create_meeting"
-                style="@style/RadioButtonLg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/create_meeting"
-                android:textSize="@dimen/txt_H1_18sp" />
-
-            <RadioButton
-                android:id="@+id/radio_join_meeting"
-                style="@style/RadioButtonLg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/join_meeting" />
-
-        </RadioGroup>
-
-        <EditText
-            android:id="@+id/create_meeting_room_name"
-            style="@style/EditTextLg"
-            android:layout_width="match_parent"
-            android:layout_marginTop="20dp"
-            android:hint="@string/create_meeting_room_name_hint"
-            android:visibility="visible"/>
-
-        <View
-            android:id="@+id/create_meeting_room_name_divider"
-            style="@style/DividerLine"
-            android:layout_marginTop="10dp"
-            android:background="@color/room_input_divider_bg"
-            android:visibility="visible" />
-
-        <TextView
-            android:id="@+id/create_meeting_room_name_waring"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/create_meeting_room_name_length_warn"
-            android:textColor="@color/waring_normal"
-            android:textSize="@dimen/txt_H3_14sp"
-            android:visibility="invisible"
-            tools:visibility="visible" />
-
         <EditText
             android:id="@+id/join_meeting_room_id"
             style="@style/EditTextLg"
