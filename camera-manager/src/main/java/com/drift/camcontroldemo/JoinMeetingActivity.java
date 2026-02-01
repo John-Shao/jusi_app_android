@@ -258,6 +258,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
                 // 构建请求参数
                 JSONObject params = new JSONObject();
                 params.put("room_id", roomId);
+                params.put("room_name", "R" + roomId);
                 params.put("device_sn", mSerialNumber); // 使用设备序列号
                 params.put("action_type", isCreateMeeting ? 0 : 1); // 0:发起会议, 1:加入会议
 
