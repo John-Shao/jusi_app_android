@@ -68,4 +68,6 @@
     <string name="join_meeting_check_room_failed">检查房间失败</string>
     <string name="join_meeting_not_login">请先登录</string>
     <string name="join_meeting_device_sn_hint">设备序列号</string>
+    <string name="create_meeting_generate_room_id_failed">生成房间ID失败</string>
+    <string name="create_meeting_failed">发起会议失败</string>
 </resources>

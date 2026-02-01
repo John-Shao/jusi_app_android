@@ -8,6 +8,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -45,10 +46,13 @@ public class JoinMeetingActivity extends AppCompatActivity {
     private String mSerialNumber;
     private String mStreamRes;
     private String mStreamBitrate;
+    private RadioGroup mMeetingTypeRadioGroup;
     private EditText mInputRoomId;
     private TextWatcherHelper mRoomIdWatcher;
     private EditText mDeviceSn;
     private TextWatcherHelper mUserNameWatcher;
+    private boolean isCreateMeeting = true; // 默认为发起会议
+    private String generatedRoomId = null; // 存储生成的房间ID
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +78,30 @@ public class JoinMeetingActivity extends AppCompatActivity {
         ImageView leftIv = findViewById(R.id.title_bar_left_iv);
         leftIv.setImageResource(R.drawable.ic_back_white);
         leftIv.setOnClickListener(v -> finish());
+
+        // 初始化场景切换按钮
+        mMeetingTypeRadioGroup = findViewById(R.id.meeting_type_radio_group);
+        mMeetingTypeRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            if (checkedId == R.id.radio_create_meeting) {
+                // 发起会议模式
+                isCreateMeeting = true;
+                mInputRoomId.setEnabled(false);
+                mInputRoomId.setFocusable(false);
+                mInputRoomId.setFocusableInTouchMode(false);
+                mInputRoomId.setClickable(false);
+                // 自动生成房间ID
+                generateRoomId();
+            } else {
+                // 加入会议模式
+                isCreateMeeting = false;
+                mInputRoomId.setEnabled(true);
+                mInputRoomId.setFocusable(true);
+                mInputRoomId.setFocusableInTouchMode(true);
+                mInputRoomId.setClickable(true);
+                mInputRoomId.setText("");
+                generatedRoomId = null;
+            }
+        });
 
         mInputRoomId = findViewById(R.id.join_meeting_room_id);
         TextView inputRoomIdError = findViewById(R.id.join_meeting_room_id_waring);
@@ -124,9 +152,82 @@ public class JoinMeetingActivity extends AppCompatActivity {
                 startActivity(loginIntent);
                 return;
             }
-            // 先检查房间是否存在
-            checkRoomExists(roomId);
+
+            // 根据场景类型处理
+            if (isCreateMeeting) {
+                // 发起会议模式，直接进入会议
+                handleJoinMeeting(roomId);
+            } else {
+                // 加入会议模式，先检查房间是否存在
+                checkRoomExists(roomId);
+            }
             IMEUtils.closeIME(v);
+        });
+
+        // 默认触发发起会议模式
+        mMeetingTypeRadioGroup.check(R.id.radio_create_meeting);
+    }
+
+    /**
+     * 生成房间ID
+     */
+    private void generateRoomId() {
+        AppExecutors.diskIO().execute(() -> {
+            try {
+                // 创建 OkHttpClient
+                OkHttpClient client = new OkHttpClient();
+
+                // 创建空请求体
+                RequestBody requestBody = RequestBody.create(
+                    MediaType.parse("application/json; charset=utf-8"),
+                    ""
+                );
+
+                // 构建请求
+                Request request = new Request.Builder()
+                    .url(BuildConfig.MEET_SERVER_URL + "/meeting/generate-room-id")
+                    .post(requestBody)
+                    .build();
+
+                // 发送请求
+                Response response = client.newCall(request).execute();
+
+                if (response.isSuccessful() && response.body() != null) {
+                    String responseStr = response.body().string();
+                    Log.d(TAG, "Generate room id response: " + responseStr);
+
+                    JSONObject jsonResponse = new JSONObject(responseStr);
+                    int code = jsonResponse.optInt("code");
+
+                    if (code == 200) {
+                        String roomId = jsonResponse.optString("room_id");
+                        generatedRoomId = roomId;
+
+                        // 在主线程中更新UI
+                        AppExecutors.mainThread().execute(() -> {
+                            mInputRoomId.setText(roomId);
+                        });
+                    } else {
+                        String message = jsonResponse.optString("message", "Unknown error");
+                        showGenerateRoomIdError("Error code: " + code + ", message: " + message);
+                    }
+                } else {
+                    showGenerateRoomIdError("HTTP error: " + response.code());
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Generate room id failed", e);
+                showGenerateRoomIdError(e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * 显示生成房间ID错误信息
+     */
+    private void showGenerateRoomIdError(String message) {
+        AppExecutors.mainThread().execute(() -> {
+            SafeToast.show(R.string.create_meeting_generate_room_id_failed);
+            Log.e(TAG, "Generate room id error: " + message);
         });
     }
 
@@ -219,16 +320,28 @@ public class JoinMeetingActivity extends AppCompatActivity {
     }
 
     /**
-     * 请求相机加入房间接口
+     * 请求相机加入房间接口（支持发起会议和加入会议两种场景）
      */
     private void requestCameraJoinRoom(String roomId) {
         AppExecutors.diskIO().execute(() -> {
             try {
-                // 构建请求参数（扁平化结构）
+                // 构建请求参数
                 JSONObject params = new JSONObject();
-                params.put("user_id", SolutionDataManager.ins().getUserId());
                 params.put("room_id", roomId);
                 params.put("device_sn", mSerialNumber); // 使用设备序列号
+                params.put("action_type", isCreateMeeting ? 0 : 1); // 0:发起会议, 1:加入会议
+
+                // 如果是发起会议，添加持有者信息
+                if (isCreateMeeting) {
+                    String userId = SolutionDataManager.ins().getUserId();
+                    String userName = SolutionDataManager.ins().getUserName();
+                    if (!TextUtils.isEmpty(userId)) {
+                        params.put("holder_user_id", userId);
+                    }
+                    if (!TextUtils.isEmpty(userName)) {
+                        params.put("holder_user_name", userName);
+                    }
+                }
 
                 // 创建 OkHttpClient
                 OkHttpClient client = new OkHttpClient();
@@ -241,7 +354,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
 
                 // 构建请求
                 Request request = new Request.Builder()
-                    .url(BuildConfig.MEET_SERVER_URL + "/camera/join")
+                    .url(BuildConfig.MEET_SERVER_URL + "/meeting/camera-join")
                     .post(requestBody)
                     .build();
 
@@ -250,28 +363,23 @@ public class JoinMeetingActivity extends AppCompatActivity {
 
                 if (response.isSuccessful() && response.body() != null) {
                     String responseStr = response.body().string();
-                    Log.d(TAG, "Response: " + responseStr);
+                    Log.d(TAG, "Camera join response: " + responseStr);
 
                     JSONObject jsonResponse = new JSONObject(responseStr);
                     int code = jsonResponse.optInt("code");
 
                     if (code == 200) {
-                        JSONObject responseData = jsonResponse.optJSONObject("data");
-                        if (responseData != null) {
-                            String rtmpUrl = responseData.optString("rtmp_url");
-                            String rtspUrl = responseData.optString("rtsp_url");
+                        String rtmpUrl = jsonResponse.optString("rtmp_url");
+                        String rtspUrl = jsonResponse.optString("rtsp_url");
 
-                            // 在主线程中调用推流和拉流
-                            AppExecutors.mainThread().execute(() -> {
-                                // 调用推流方法
-                                startPushStream(rtmpUrl);
+                        // 在主线程中调用推流和拉流
+                        AppExecutors.mainThread().execute(() -> {
+                            // 调用推流方法
+                            startPushStream(rtmpUrl);
 
-                                // 调用拉流方法
-                                startPullStream(rtspUrl);
-                            });
-                        } else {
-                            showError("Response data is null");
-                        }
+                            // 调用拉流方法
+                            startPullStream(rtspUrl);
+                        });
                     } else {
                         String message = jsonResponse.optString("message", "Unknown error");
                         showError("Error code: " + code + ", message: " + message);

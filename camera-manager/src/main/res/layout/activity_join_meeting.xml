@@ -21,6 +21,34 @@
         android:layout_marginRight="42dp"
         android:orientation="vertical">
 
+        <RadioGroup
+            android:id="@+id/meeting_type_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+
+            <RadioButton
+                android:id="@+id/radio_create_meeting"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="发起会议"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/radio_join_meeting"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="加入会议"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </RadioGroup>
+
         <EditText
             android:id="@+id/join_meeting_room_id"
             style="@style/EditTextLg"
