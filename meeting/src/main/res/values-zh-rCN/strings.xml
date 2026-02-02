@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">veRTC Room</string>
+    <string name="app_name">巨思</string>
 
     <string name="meeting_limited_service">本产品仅用于功能体验，单次会议时长不超过30分钟</string>
     <string name="class_limited_service">本产品仅用于功能体验，单次课堂时长不超过30分钟</string>
