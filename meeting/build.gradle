@@ -46,7 +46,7 @@ android {
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
                 String versionStr = project.APP_VERSION_NAME
                 String suffix = versionStr.replace('.', '')
-                outputFileName = "veRTC_Demo${suffix}.apk"
+                outputFileName = "JuSi${suffix}.apk"
                 println('产物地址: ' + outputFile.path)
             }
         }

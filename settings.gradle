@@ -1,5 +1,5 @@
 include ':scene-core'
-rootProject.name = "veRTC_Demo"
+rootProject.name = "JuSi"
 include ':meeting'
 include ':login'
 include ':camera-lib'
