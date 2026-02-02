@@ -1,5 +1,5 @@
 include ':scene-core'
-rootProject.name = "JuSi"
+rootProject.name = "JuSiAI"
 include ':meeting'
 include ':login'
 include ':camera-lib'

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">JuSi</string>
+    <string name="app_name">JuSiAI</string>
 
     <string name="meeting_limited_service">This product is for demo purposes only, single meeting duration does not exceed 30 minutes</string>
     <string name="class_limited_service">This product is for demo purposes only, single class duration does not exceed 30 minutes</string>
