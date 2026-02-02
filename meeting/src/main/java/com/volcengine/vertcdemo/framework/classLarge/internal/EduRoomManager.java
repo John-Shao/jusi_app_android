@@ -28,8 +28,7 @@ public class EduRoomManager extends AbsEduManager implements IEduRtmEventHandler
                 return;
             }
             long durationLocal = System.currentTimeMillis() - mTimeEnter;
-            // 改为正计时：直接计算已经过去的时间
-            long tick = mDurationServer + durationLocal;
+            long tick = Math.max(0, mTimeLimit - (mDurationServer + durationLocal));
             getDataProvider().setTick(tick);
             getUIHandler().postDelayed(mDurationCounting, 1000);
         }
@@ -83,10 +82,9 @@ public class EduRoomManager extends AbsEduManager implements IEduRtmEventHandler
     @Override
     public void onRoomReleased(int reason) {
         getDataProvider().setRoomState(IUIEduDef.RoomState.RELEASED);
-        // 注释掉体验时限提示
-        // if (reason == IMeetingRtmEventHandler.ROOM_RELEASED_TIME_LIMIT) {
-        //     runOnUIThread(() -> SafeToast.show(R.string.tips_time_limit));
-        // }
+        if (reason == IMeetingRtmEventHandler.ROOM_RELEASED_TIME_LIMIT) {
+            runOnUIThread(() -> SafeToast.show(R.string.tips_time_limit));
+        }
     }
 
     @Override
