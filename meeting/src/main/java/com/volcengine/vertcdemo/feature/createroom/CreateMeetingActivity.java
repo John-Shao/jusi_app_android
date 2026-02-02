@@ -51,7 +51,7 @@ public class CreateMeetingActivity extends BaseActivity {
 
     private static final String TAG = "CreateMeetingActivity";
     private static final String ROOM_ID_REGEX = "^[A-Za-z0-9@_-]+$";
-    private static final int ROOM_ID_MAX_LENGTH = 18;
+    private static final int ROOM_ID_MAX_LENGTH = 6;
     private static final String USER_NAME_REGEX = "^[\\u4e00-\\u9fa5a-zA-Z0-9@_-]+$";
     private static final int USER_NAME_MAX_LENGTH = 18;
 
