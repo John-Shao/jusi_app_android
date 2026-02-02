@@ -374,7 +374,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
      */
     private void showError(String message) {
         AppExecutors.mainThread().execute(() -> {
-            SafeToast.show(R.string.join_meeting_request_failed);
+            SafeToast.show(R.string.join_meeting_request_failed + ": " + message);
             Log.e(TAG, "Error: " + message);
         });
     }
