@@ -309,7 +309,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
                             startPushStream(rtmpUrl);
 
                             // 调用拉流方法，传递roomId
-                            startPullStream(rtspUrl, roomId);
+                            // startPullStream(rtspUrl, roomId);
                         });
                     } else {
                         String message = jsonResponse.optString("message", "Unknown error");
