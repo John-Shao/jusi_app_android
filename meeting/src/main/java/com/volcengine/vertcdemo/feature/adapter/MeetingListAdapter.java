@@ -56,19 +56,16 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
 
     class MeetingViewHolder extends RecyclerView.ViewHolder {
         private final TextView tvRoomId;
-        private final TextView tvRoomName;
         private final TextView tvUserCount;
 
         public MeetingViewHolder(@NonNull View itemView) {
             super(itemView);
             tvRoomId = itemView.findViewById(R.id.tv_room_id);
-            tvRoomName = itemView.findViewById(R.id.tv_room_name);
             tvUserCount = itemView.findViewById(R.id.tv_user_count);
         }
 
         public void bind(MeetingInfo meeting) {
             tvRoomId.setText(meeting.roomId);
-            tvRoomName.setText(meeting.roomName);
 
             // 使用字符串资源显示参会者数量
             int stringResId = meeting.userCount == 1
