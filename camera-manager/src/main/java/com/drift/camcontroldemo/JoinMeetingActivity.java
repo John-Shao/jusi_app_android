@@ -305,11 +305,11 @@ public class JoinMeetingActivity extends AppCompatActivity {
 
                         // 在主线程中调用推流和拉流
                         AppExecutors.mainThread().execute(() -> {
+                            // 调用拉流方法，传递roomId
+                            startPullStream(rtspUrl, roomId);
+
                             // 调用推流方法
                             startPushStream(rtmpUrl);
-
-                            // 调用拉流方法，传递roomId
-                            // startPullStream(rtspUrl, roomId);
 
                             // 加入会议后，关闭当前界面
                             finish();

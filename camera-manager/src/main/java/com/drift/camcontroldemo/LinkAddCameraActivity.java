@@ -89,17 +89,6 @@ public class LinkAddCameraActivity extends AppCompatActivity {
         tvWifiName = (TextView) findViewById(R.id.tv_wifi_name);
         tvWifiPassword = (TextView) findViewById(R.id.tv_wifi_password);
         ivQrcodeImage = (ImageView) findViewById(R.id.iv_qrcode_image);
-        ViewTreeObserver vto = ivQrcodeImage.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                ivQrcodeImage.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                int width = ivQrcodeImage.getMeasuredWidth();
-                ViewGroup.LayoutParams params = ivQrcodeImage.getLayoutParams();
-                params.height = width; // 设置为正方形
-                ivQrcodeImage.setLayoutParams(params);
-            }
-        });
         rlConfirm = (RelativeLayout) findViewById(R.id.rl_confirm);
 
         ssid = getConnectedSsid(this);
@@ -127,7 +116,6 @@ public class LinkAddCameraActivity extends AppCompatActivity {
             }
         });
 
-        mForeamCamCtrl = ForeamCamCtrl.getInstance();
         mForeamCamCtrl.setOnReceiveUDPMsgListener(mOnReceiveBoardcastMsgListener);
 //        mForeamCamCtrl.startReceive();
     }
