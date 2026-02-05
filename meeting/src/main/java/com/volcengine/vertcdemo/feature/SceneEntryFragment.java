@@ -66,6 +66,16 @@ public class SceneEntryFragment extends Fragment {
         loadMyMeetings();
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            // Fragment 从隐藏变为可见时刷新会议列表
+            Log.d(TAG, "Fragment visible, refreshing meetings list");
+            loadMyMeetings();
+        }
+    }
+
     private void initMyMeetingsList(View view) {
         rvMyMeetings = view.findViewById(R.id.rv_my_meetings);
         rvMyMeetings.setLayoutManager(new LinearLayoutManager(getContext()));
