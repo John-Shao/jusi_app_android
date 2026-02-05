@@ -169,6 +169,9 @@ public class JoinMeetingActivity extends AppCompatActivity {
         mInputRoomId.setFocusableInTouchMode(false);
         mInputRoomId.setClickable(false);
         generateRoomId();
+
+        // 提示当前设备的分辨率和比特率（仅用于调试）
+        // showDeviceStreamInfo();
     }
 
     /**
@@ -380,5 +383,18 @@ public class JoinMeetingActivity extends AppCompatActivity {
             SafeToast.show(R.string.join_meeting_request_failed + ": " + message);
             Log.e(TAG, "Error: " + message);
         });
+    }
+
+    /**
+     * 提示当前设备的分辨率和比特率
+     */
+    private void showDeviceStreamInfo() {
+        if (TextUtils.isEmpty(mStreamRes) || TextUtils.isEmpty(mStreamBitrate)) {
+            return;
+        }
+
+        String message = String.format("设备分辨率: %s, 比特率: %s Kbps", mStreamRes, mStreamBitrate);
+        SafeToast.show(message);
+        Log.d(TAG, message);
     }
 }

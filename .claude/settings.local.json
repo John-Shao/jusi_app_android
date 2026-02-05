@@ -3,7 +3,9 @@
     "allow": [
       "Bash(.gradlew:*)",
       "Bash(python:*)",
-      "Bash(./gradlew:*)"
+      "Bash(./gradlew:*)",
+      "Bash(gradlew.bat :meeting:compileDebugJavaWithJavac:*)",
+      "Bash(cmd /c gradlew.bat :meeting:compileDebugJavaWithJavac --console=plain)"
     ]
   }
 }
