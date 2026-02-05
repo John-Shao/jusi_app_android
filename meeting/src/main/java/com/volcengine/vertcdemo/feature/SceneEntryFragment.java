@@ -57,7 +57,12 @@ public class SceneEntryFragment extends Fragment {
 
         // 初始化我的会议列表
         initMyMeetingsList(view);
-        // 加载会议列表
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // 每次进入/回到页面时刷新会议列表
         loadMyMeetings();
     }
 
@@ -104,7 +109,7 @@ public class SceneEntryFragment extends Fragment {
         // 点击会议项，进入会议
         Log.d(TAG, "Meeting clicked: " + meetingInfo.roomId);
         // 这里可以实现直接加入会议的逻辑
-        SafeToast.show("Join meeting: " + meetingInfo.roomId);
+        SafeToast.show(getString(R.string.join_meeting_toast, meetingInfo.roomId));
     }
 
     private void startScene(Class<? extends Activity> targetActivity, RoomType roomType) {

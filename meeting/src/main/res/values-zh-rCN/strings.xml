@@ -168,4 +168,11 @@
 
     <string name="common_cancel">取消</string>
 
+    <!-- My Meetings List -->
+    <string name="my_meetings_title">我的会议</string>
+    <string name="meeting_id_label">会议号</string>
+    <string name="participant_count">%d位参会者</string>
+    <string name="participant_count_plural">%d位参会者</string>
+    <string name="join_meeting_toast">加入会议: %s</string>
+
 </resources>

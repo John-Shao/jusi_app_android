@@ -70,8 +70,11 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
             tvRoomId.setText(meeting.roomId);
             tvRoomName.setText(meeting.roomName);
 
-            String userCountText = meeting.userCount + " " +
-                (meeting.userCount == 1 ? "participant" : "participants");
+            // 使用字符串资源显示参会者数量
+            int stringResId = meeting.userCount == 1
+                ? R.string.participant_count
+                : R.string.participant_count_plural;
+            String userCountText = itemView.getContext().getString(stringResId, meeting.userCount);
             tvUserCount.setText(userCountText);
 
             itemView.setOnClickListener(v -> {

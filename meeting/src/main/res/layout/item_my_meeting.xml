@@ -17,7 +17,7 @@
         android:id="@+id/tv_room_id_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Meeting ID"
+        android:text="@string/meeting_id_label"
         android:textColor="#80FFFFFF"
         android:textSize="12sp"
         app:layout_constraintLeft_toLeftOf="parent"

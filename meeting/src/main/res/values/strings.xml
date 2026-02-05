@@ -168,4 +168,11 @@
 
     <string name="common_cancel">Cancel</string>
 
+    <!-- My Meetings List -->
+    <string name="my_meetings_title">My Meetings</string>
+    <string name="meeting_id_label">Meeting ID</string>
+    <string name="participant_count">%d participant</string>
+    <string name="participant_count_plural">%d participants</string>
+    <string name="join_meeting_toast">Join meeting: %s</string>
+
 </resources>
