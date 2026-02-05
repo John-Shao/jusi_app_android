@@ -310,6 +310,9 @@ public class JoinMeetingActivity extends AppCompatActivity {
 
                             // 调用拉流方法，传递roomId
                             // startPullStream(rtspUrl, roomId);
+
+                            // 加入会议后，关闭当前界面
+                            finish();
                         });
                     } else {
                         String message = jsonResponse.optString("message", "Unknown error");
@@ -361,7 +364,6 @@ public class JoinMeetingActivity extends AppCompatActivity {
                         CameraManager.getInstance().setCameraInMeeting(mCamIP, true);
                         CameraManager.getInstance().setCameraRoomId(mCamIP, roomId);
                         SafeToast.show("Join meeting successfully");
-                        finish();
                     } else {
                         SafeToast.show("Failed to start pull stream");
                     }

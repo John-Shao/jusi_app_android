@@ -5,11 +5,11 @@
     <string name="meeting_limited_service">This product is for demo purposes only, single meeting duration does not exceed 30 minutes</string>
     <string name="class_limited_service">This product is for demo purposes only, single class duration does not exceed 30 minutes</string>
     <string name="create_input_room_id_hint">Please enter room ID</string>
-    <string name="create_input_room_id_length_warn">Room ID cannot exceed 18 characters</string>
+    <string name="create_input_room_id_length_warn">Room ID cannot exceed 6 characters</string>
     <string name="create_input_room_id_content_warn">Please enter numbers, letters or symbols @_-</string>
     <string name="create_input_user_name_hint">Please enter nickname</string>
     <string name="create_input_user_name_content_warn">Please enter Chinese, numbers, letters or symbols @_-</string>
-    <string name="create_input_user_name_length_warn">Nickname cannot exceed 18 characters</string>
+    <string name="create_input_user_name_length_warn">Nickname cannot exceed 8 characters</string>
     <string name="create_join_meeting">Join Room</string>
     <string name="error_room_full">Room is full</string>
     <string name="error_user_counts_limit">Room member count has reached limit</string>

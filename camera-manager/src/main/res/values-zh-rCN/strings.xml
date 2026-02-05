@@ -57,11 +57,11 @@
 
     <!-- Meeting room strings -->
     <string name="create_input_room_id_hint">请输入房间ID</string>
-    <string name="create_input_room_id_length_warn">房间ID长度不能超过18位</string>
-    <string name="create_input_room_id_content_warn">请输入会议号（六位数字）</string>
+    <string name="create_input_room_id_length_warn">房间ID长度不能超过6位</string>
+    <string name="create_input_room_id_content_warn">请输入会议号</string>
     <string name="create_input_user_name_hint">请输入昵称</string>
     <string name="create_input_user_name_content_warn">请输入中文、数字、英文字母或符号@_-</string>
-    <string name="create_input_user_name_length_warn">昵称长度不能超过18位</string>
+    <string name="create_input_user_name_length_warn">昵称长度不能超过8位</string>
     <string name="join_meeting_cam_ip_empty">设备IP地址为空</string>
     <string name="join_meeting_request_failed">加入会议失败</string>
     <string name="join_meeting_room_not_exist">房间不存在</string>

@@ -5,11 +5,11 @@
     <string name="meeting_limited_service">本产品仅用于功能体验，单次会议时长不超过30分钟</string>
     <string name="class_limited_service">本产品仅用于功能体验，单次课堂时长不超过30分钟</string>
     <string name="create_input_room_id_hint">请输入房间ID</string>
-    <string name="create_input_room_id_length_warn">房间ID长度不能超过18位</string>
-    <string name="create_input_room_id_content_warn">请输入会议号（六位数字）</string>
+    <string name="create_input_room_id_length_warn">房间ID长度不能超过6位</string>
+    <string name="create_input_room_id_content_warn">请输入会议号</string>
     <string name="create_input_user_name_hint">请输入昵称</string>
     <string name="create_input_user_name_content_warn">请输入中文、数字、英文字母或符号@_-</string>
-    <string name="create_input_user_name_length_warn">昵称长度不能超过18位</string>
+    <string name="create_input_user_name_length_warn">昵称长度不能超过8位</string>
     <string name="create_join_meeting">进入房间</string>
     <string name="error_room_full">房间人数已满</string>
     <string name="error_user_counts_limit">房间成员数量达到上限</string>
