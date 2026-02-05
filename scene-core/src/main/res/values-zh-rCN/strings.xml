@@ -63,7 +63,7 @@
     <string name="server_error_message_link_not_exist">连麦已过期</string>
     <string name="server_error_message_user_inviting">已发出邀请，等待对方应答</string>
     <string name="server_error_message_anchor_interacting">主播正在连线中</string>
-    <string name="server_error_message_anchor_co_hosting">主播正在发起双主播连线</string>
+    <string name="server_error_message_anchor_co_hosting">设备已在会议中</string>
     <string name="server_error_message_anchor_linking_audience">与观众连线中，无法发起主播连线</string>
     <string name="server_error_message_anchor_co_hosting2">主播连线中，无法发起主播连线</string>
     <string name="server_error_message_waiting_anchor_response">正在等待被邀主播的应答</string>

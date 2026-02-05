@@ -63,7 +63,7 @@
     <string name="server_error_message_link_not_exist">Link has expired</string>
     <string name="server_error_message_user_inviting">Invitation sent, waiting for response</string>
     <string name="server_error_message_anchor_interacting">Host is currently in a call</string>
-    <string name="server_error_message_anchor_co_hosting">Host is initiating co-host connection</string>
+    <string name="server_error_message_anchor_co_hosting">Device is already in a meeting</string>
     <string name="server_error_message_anchor_linking_audience">Cannot initiate host connection while connected with audience</string>
     <string name="server_error_message_anchor_co_hosting2">Cannot initiate host connection while in host call</string>
     <string name="server_error_message_waiting_anchor_response">Waiting for invited host\'s response</string>
