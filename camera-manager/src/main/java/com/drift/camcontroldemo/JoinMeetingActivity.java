@@ -65,8 +65,12 @@ public class JoinMeetingActivity extends AppCompatActivity {
         if (intent != null) {
             mCamIP = intent.getStringExtra("camIP");
             mSerialNumber = intent.getStringExtra("serialNumber");
-            mStreamRes = "" + intent.getIntExtra("streamRes", 0);
-            mStreamBitrate = "" + (intent.getIntExtra("streamBitrate", 0) / 8);
+
+            // 分辨率映射：索引对应分辨率值
+            String[] resolutions = {"4K", "4KUHD", "2.7K", "1080P", "720P", "WVGA"};
+            int res = intent.getIntExtra("streamRes", 4);
+            mStreamRes = (res >= 0 && res < resolutions.length) ? resolutions[res] : "720P";
+            mStreamBitrate = "" + intent.getIntExtra("streamBitrate", 2000000);
         }
 
         initViews();
@@ -171,7 +175,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
         generateRoomId();
 
         // 提示当前设备的分辨率和比特率（仅用于调试）
-        // showDeviceStreamInfo();
+        showDeviceStreamInfo();
     }
 
     /**
@@ -336,8 +340,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
      */
     private void startPushStream(String rtmpUrl) {
         LocalController localController = new LocalController();
-        // localController.startPushStreamWithURL(mCamIP, rtmpUrl, mStreamRes, mStreamBitrate,
-        localController.startPushStreamWithURL(mCamIP, rtmpUrl, "720P", "2000000",
+        localController.startPushStreamWithURL(mCamIP, rtmpUrl, mStreamRes, mStreamBitrate,
             new LocalListener.OnCommonResListener() {
                 @Override
                 public void onCommonRes(boolean success) {
