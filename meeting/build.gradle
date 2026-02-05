@@ -22,6 +22,8 @@ android {
         buildConfigField('String', 'URL_USER_AGREEMENT', '"https://www.volcengine.com/docs/6348/128955"')
         buildConfigField('String', 'URL_DISCLAIMER', '"https://www.volcengine.com/docs/6348/68916"')
         buildConfigField('String', 'URL_PERMISSION_LIST', '"https://www.volcengine.com/docs/6348/155009"')
+        // 配置 MEET_SERVER_URL
+        buildConfigField('String', 'MEET_SERVER_URL', "\"${project.MEET_SERVER_URL}\"")
     }
 
     buildTypes {
