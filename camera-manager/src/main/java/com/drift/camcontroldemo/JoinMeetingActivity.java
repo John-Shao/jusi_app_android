@@ -330,7 +330,8 @@ public class JoinMeetingActivity extends AppCompatActivity {
      */
     private void startPushStream(String rtmpUrl) {
         LocalController localController = new LocalController();
-        localController.startPushStreamWithURL(mCamIP, rtmpUrl, mStreamRes, mStreamBitrate,
+        // localController.startPushStreamWithURL(mCamIP, rtmpUrl, mStreamRes, mStreamBitrate,
+        localController.startPushStreamWithURL(mCamIP, rtmpUrl, "720P", "2000000",
             new LocalListener.OnCommonResListener() {
                 @Override
                 public void onCommonRes(boolean success) {
