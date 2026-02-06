@@ -26,9 +26,6 @@ public class CamStatus extends ActivityUtil.JSONObjectHelper implements Serializ
 	//相机状态已经init
 	private boolean isInit;
 
-	//相机是否正在会议中
-	private boolean isInMeeting = false;
-
 	private CameraStatusNew mCameraStatus;
 	private CameraSettingNew mCameraSetting;
 	private VideoSettingNew mVideoSetting;
@@ -153,13 +150,5 @@ public class CamStatus extends ActivityUtil.JSONObjectHelper implements Serializ
 
 	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
-	}
-
-	public boolean isInMeeting() {
-		return isInMeeting;
-	}
-
-	public void setInMeeting(boolean inMeeting) {
-		isInMeeting = inMeeting;
 	}
 }
