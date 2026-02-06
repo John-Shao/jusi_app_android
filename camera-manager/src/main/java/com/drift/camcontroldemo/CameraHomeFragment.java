@@ -318,6 +318,9 @@ public class CameraHomeFragment extends Fragment {
                     camStatus.setmVideoSetting(status.getmVideoSetting());
                     camStatus.setmStreamSetting(status.getmStreamSetting());
                     camStatus.setmCameraStatus(status.getmCameraStatus());
+
+                    // 设备在线时，检查设备是否在会议中
+                    checkDeviceInMeeting(serverIp, camStatus.getSerialNumber());
                 } else {
                     ifNeedUpdate = true;
                     camStatus.setOffline(true);
@@ -509,6 +512,91 @@ public class CameraHomeFragment extends Fragment {
                 }
             } catch (Exception e) {
                 Log.e(TAG, "Camera leave request failed", e);
+            }
+        });
+    }
+
+    /**
+     * 检查设备是否在会议中
+     * @param serverIp 服务器IP地址
+     * @param serialNumber 设备序列号
+     */
+    private void checkDeviceInMeeting(String serverIp, String serialNumber) {
+        AppExecutors.diskIO().execute(() -> {
+            try {
+                // 构建请求参数
+                JSONObject params = new JSONObject();
+                params.put("device_sn", serialNumber);
+
+                // 创建 OkHttpClient
+                OkHttpClient client = new OkHttpClient();
+
+                // 创建请求体
+                RequestBody requestBody = RequestBody.create(
+                    MediaType.parse("application/json; charset=utf-8"),
+                    params.toString()
+                );
+
+                // 构建请求
+                Request request = new Request.Builder()
+                    .url(BuildConfig.MEET_SERVER_URL + "/meeting/get-device-room")
+                    .post(requestBody)
+                    .build();
+
+                // 发送请求
+                Response response = client.newCall(request).execute();
+
+                if (response.isSuccessful() && response.body() != null) {
+                    String responseStr = response.body().string();
+                    Log.d(TAG, "Check device in meeting response: " + responseStr);
+
+                    JSONObject jsonResponse = new JSONObject(responseStr);
+                    int code = jsonResponse.optInt("code");
+
+                    if (code == 200) {
+                        // 设备在会议中
+                        String roomId = jsonResponse.optString("room_id");
+
+                        // 更新相机与房间映射关系
+                        CameraManager.getInstance().setCameraRoomId(serverIp, roomId);
+
+                        // 更新设备的状态
+                        CameraManager.getInstance().setCameraInMeeting(serverIp, true);
+
+                        Log.d(TAG, "Device " + serialNumber + " is in meeting, room: " + roomId);
+
+                        // 刷新列表显示
+                        AppExecutors.mainThread().execute(() -> {
+                            int index = camsOnline.indexOf(serverIp);
+                            if (index >= 0) {
+                                m_videoListRecycleAdapter.notifyItemChanged(index);
+                            }
+                        });
+                    } else if (code == 404) {
+                        // 设备不在会议中
+                        // 删除相机与房间映射关系
+                        CameraManager.getInstance().clearCameraRoomId(serverIp);
+
+                        // 更新设备的状态
+                        CameraManager.getInstance().setCameraInMeeting(serverIp, false);
+
+                        Log.d(TAG, "Device " + serialNumber + " is not in meeting");
+
+                        // 刷新列表显示
+                        AppExecutors.mainThread().execute(() -> {
+                            int index = camsOnline.indexOf(serverIp);
+                            if (index >= 0) {
+                                m_videoListRecycleAdapter.notifyItemChanged(index);
+                            }
+                        });
+                    } else {
+                        Log.e(TAG, "Check device in meeting failed: " + jsonResponse.optString("message"));
+                    }
+                } else {
+                    Log.e(TAG, "Check device in meeting HTTP error: " + response.code());
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Check device in meeting request failed", e);
             }
         });
     }
