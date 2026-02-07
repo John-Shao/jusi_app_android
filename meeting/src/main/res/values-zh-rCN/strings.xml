@@ -28,7 +28,7 @@
     <string name="business_license">营业执照</string>
     <string name="telecom_license">增值电信业务经营许可证</string>
     <string name="net_culture_license">网络文化经营许可证</string>
-    <string name="demo_version_label">JuSiAI版本</string>
+    <string name="demo_version_label">版本</string>
     <string name="sdk_version_label">SDK版本</string>
     <string name="user_name_label">用户名</string>
     <string name="tab_scenes">会议</string>

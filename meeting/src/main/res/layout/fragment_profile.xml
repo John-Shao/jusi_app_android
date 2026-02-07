@@ -16,19 +16,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <ImageView
                 android:id="@+id/profile_user_avatar"
-                style="@style/UserAvatarItemTv"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="40dp"
-                android:gravity="center"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                android:textColor="@color/color_505050"
-                tools:text="B" />
+                android:src="@drawable/default_avatar"
+                android:scaleType="fitXY" />
 
             <include
                 android:id="@+id/profile_user_name"

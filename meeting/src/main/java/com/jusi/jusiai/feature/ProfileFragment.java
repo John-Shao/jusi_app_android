@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class ProfileFragment extends Fragment {
 
-    private TextView mUserAvatar;
+    private ImageView mUserAvatar;
     private View mUserNameLayout;
 
     @Nullable
@@ -126,10 +127,7 @@ public class ProfileFragment extends Fragment {
         userNameLabel.setText(R.string.user_name_label);
         mUserNameLayout.setOnClickListener(v -> startActivity(new Intent(Actions.EDIT_PROFILE)));
         final String userNameStr = SolutionDataManager.ins().getUserName();
-        if (!TextUtils.isEmpty(userNameStr)) {
-            String namePrefix = userNameStr.substring(0, 1);
-            mUserAvatar.setText(namePrefix);
-        }
+        // mUserAvatar is now an ImageView displaying default_avatar, no need to set text
         TextView userNameTv = mUserNameLayout.findViewById(R.id.right_tv);
         if (!TextUtils.isEmpty(userNameStr)) {
             userNameTv.setText(userNameStr);

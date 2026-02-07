@@ -28,7 +28,7 @@
     <string name="business_license">Business License</string>
     <string name="telecom_license">Telecom Business License</string>
     <string name="net_culture_license">Internet Culture Business License</string>
-    <string name="demo_version_label">JuSiAI Version</string>
+    <string name="demo_version_label">Version</string>
     <string name="sdk_version_label">SDK Version</string>
     <string name="user_name_label">Username</string>
     <string name="tab_scenes">Meeting</string>
