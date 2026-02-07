@@ -33,7 +33,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="发起会议"
+                android:text="发起视频"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:buttonTint="@color/white"
@@ -44,7 +44,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="加入会议"
+                android:text="进入房间"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:buttonTint="@color/white" />
@@ -103,7 +103,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="30dp"
-            android:text="进入会议" />
+            android:text="进入房间" />
 
     </LinearLayout>
 

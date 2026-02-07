@@ -50,7 +50,7 @@
     <string name="server_error_message_not_authorized">No permission to perform this operation</string>
     <string name="server_error_message_disconnect_time_out">Disconnected for too long, unable to reconnect</string>
     <string name="server_error_message_room_user_inactive">User is inactive</string>
-    <string name="server_error_message_room_disbanded">Room does not exist or has been disbanded</string>
+    <string name="server_error_message_room_disbanded">Room does not exist</string>
     <string name="server_error_message_sensitive_words">Input contains sensitive words, please re-enter</string>
     <string name="server_error_message_verify_code_expired">Verification code expired, please re-get</string>
     <string name="server_error_message_verify_code_invalid">Verification code is incorrect, please re-enter</string>

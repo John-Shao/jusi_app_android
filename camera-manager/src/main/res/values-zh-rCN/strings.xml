@@ -55,22 +55,22 @@
     <string name="link_send_successfully">发送成功</string>
 
     <!-- Meeting room strings -->
-    <string name="create_input_room_id_hint">请输入房间ID</string>
-    <string name="create_input_room_id_length_warn">房间ID长度不能超过6位</string>
-    <string name="create_input_room_id_content_warn">请输入会议号</string>
+    <string name="create_input_room_id_hint">请输入房间号</string>
+    <string name="create_input_room_id_length_warn">房间号长度不能超过6位</string>
+    <string name="create_input_room_id_content_warn">请输入房间号</string>
     <string name="create_input_user_name_hint">请输入昵称</string>
     <string name="create_input_user_name_content_warn">请输入中文、数字、英文字母或符号@_-</string>
     <string name="create_input_user_name_length_warn">昵称长度不能超过8位</string>
     <string name="join_meeting_cam_ip_empty">设备IP地址为空</string>
-    <string name="join_meeting_request_failed">加入会议失败</string>
+    <string name="join_meeting_request_failed">进入房间失败</string>
     <string name="join_meeting_room_not_exist">房间不存在</string>
     <string name="join_meeting_check_room_failed">检查房间失败</string>
     <string name="join_meeting_not_login">请先登录</string>
     <string name="join_meeting_device_sn_hint">设备序列号</string>
-    <string name="create_meeting_generate_room_id_failed">生成房间ID失败</string>
-    <string name="create_meeting_failed">发起会议失败</string>
+    <string name="create_meeting_generate_room_id_failed">生成房间号失败</string>
+    <string name="create_meeting_failed">发起视频失败</string>
     <string name="join_meeting_push_stream_failed">推流失败</string>
     <string name="join_meeting_pull_stream_failed">拉流失败</string>
-    <string name="join_meeting_success">加入会议成功</string>
+    <string name="join_meeting_success">进入房间成功</string>
     <string name="join_meeting_device_stream_info">分辨率: %1$s, 比特率: %2$s Kbps</string>
 </resources>
