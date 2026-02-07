@@ -9,7 +9,8 @@
       "Bash(find:*)",
       "Bash(gradlew:*)",
       "Bash(.gradlew.bat:*)",
-      "Bash(adb logcat:*)"
+      "Bash(adb logcat:*)",
+      "Bash(ls:*)"
     ]
   }
 }

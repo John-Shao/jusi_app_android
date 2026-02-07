@@ -20,11 +20,12 @@
 
             <ImageView
                 android:id="@+id/iv_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="12dp"
-                android:background="@drawable/link_back_btn" />
+                android:padding="12dp"
+                android:src="@drawable/ic_back_white" />
         </RelativeLayout>
 
         <TextView

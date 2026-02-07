@@ -46,20 +46,14 @@
 <!--            android:visibility="visible" />-->
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rl_back"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        >
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginLeft="12dp"
-            android:background="@drawable/link_back_btn"
-            ></ImageView>
-    </RelativeLayout>
+    <ImageView
+        android:src="@drawable/ic_back_white"
+        android:id="@+id/iv_back"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginLeft="16dp"
+        android:padding="12dp" />
 
 
     <RelativeLayout
@@ -105,7 +99,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="68dp"
-                android:layout_marginRight="60dp" />
+                android:layout_marginRight="60dp"
+                app:bsb_thumb_color="#4081FD"
+                app:bsb_second_track_color="#4081FD" />
 
             <TextView
                 android:id="@+id/tv_zoom_val"
@@ -147,7 +143,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="68dp"
-                android:layout_marginRight="60dp" />
+                android:layout_marginRight="60dp"
+                app:bsb_thumb_color="#4081FD"
+                app:bsb_second_track_color="#4081FD" />
 
             <TextView
                 android:id="@+id/tv_exposure_val"
@@ -188,7 +186,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="68dp"
                 android:layout_marginRight="60dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                app:bsb_thumb_color="#4081FD"
+                app:bsb_second_track_color="#4081FD" />
 
             <TextView
                 android:id="@+id/tv_bitrate_val"
@@ -229,7 +229,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="68dp"
                 android:layout_marginRight="60dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                app:bsb_thumb_color="#4081FD"
+                app:bsb_second_track_color="#4081FD" />
 
             <TextView
                 android:id="@+id/tv_filter_val"

@@ -7,7 +7,7 @@
     tools:ignore="ContentDescription,RtlHardcoded">
 
     <ImageView
-        style="@style/BackButton"
+        android:src="@drawable/ic_back_white"
         android:id="@+id/title_bar_left_iv"
         android:layout_width="@dimen/title_bar_icon_width"
         android:layout_height="@dimen/title_bar_icon_height"
