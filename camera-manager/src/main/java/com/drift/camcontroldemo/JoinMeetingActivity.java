@@ -360,6 +360,16 @@ public class JoinMeetingActivity extends AppCompatActivity {
      */
     private void startPullStream(String rtspUrl, String roomId) {
         LocalController localController = new LocalController();
+        
+        // Mic设置最高敏感度(0-5)
+        localController.setMicSensitivity(camIP, "5",
+        new LocalListener.OnCommonResListener() {
+            @Override
+            public void onCommonRes(boolean success) {
+                Log.d(TAG, "MicSensitivity set success");
+            }
+        });
+
         localController.startPullStreamWithURL(mCamIP, rtspUrl,
             new LocalListener.OnCommonResListener() {
                 @Override
