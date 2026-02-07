@@ -9,49 +9,25 @@
     tools:context="com.jusi.jusiai.feature.createroom.CreateMeetingActivity"
     tools:ignore="ContentDescription">
 
-    <FrameLayout
-        android:id="@+id/create_room_camera_preview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <include
-        android:id="@+id/title_bar_layout"
-        layout="@layout/layout_title_bar" />
-
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="86dp"
-        android:background="#33000000"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="10dp">
-
-        <ImageView
-            android:layout_width="13dp"
-            android:layout_height="13dp"
-            android:gravity="center"
-            android:src="@drawable/ic_limit_notice" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:gravity="center"
-            android:text="@string/meeting_limited_service"
-            android:textColor="@color/gray_11"
-            android:textSize="13sp" />
-
-    </LinearLayout>-->
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="42dp"
-        android:layout_marginRight="42dp"
+        android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/create_room_camera_preview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="42dp"
+            android:layout_marginRight="42dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="60dp"
+            android:orientation="vertical">
 
         <RadioGroup
             android:id="@+id/create_room_role"
@@ -132,7 +108,13 @@
             android:layout_marginTop="30dp"
             android:text="@string/create_join_meeting" />
 
+        </LinearLayout>
+
     </LinearLayout>
+
+    <include
+        android:id="@+id/title_bar_layout"
+        layout="@layout/layout_title_bar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.ss.bytertc.engine.RTCEngine;
 import com.ss.video.rtc.demo.basic_module.acivities.BaseActivity;
@@ -106,6 +107,10 @@ public class CreateMeetingActivity extends BaseActivity {
         MLog.d(TAG, "onGlobalLayoutCompleted");
         View rootView = findViewById(R.id.create_room_root);
         rootView.setOnClickListener(IMEUtils::closeIME);
+
+        TextView titleTv = findViewById(R.id.title_bar_title_tv);
+        titleTv.setText(R.string.scene_meeting);
+        titleTv.setTextColor(ContextCompat.getColor(this, R.color.white));
 
         RadioGroup clientRole = findViewById(R.id.create_room_role);
         RadioButton roleHost = findViewById(R.id.create_room_role_host);

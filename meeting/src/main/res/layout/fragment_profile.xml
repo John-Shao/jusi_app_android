@@ -71,7 +71,8 @@
         android:layout_marginBottom="70dp"
         android:background="@drawable/bg_logout"
         android:gravity="center"
-        android:text="@string/delete_account" />
+        android:text="@string/delete_account"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/profile_exit_login"

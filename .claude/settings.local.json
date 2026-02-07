@@ -6,7 +6,10 @@
       "Bash(./gradlew:*)",
       "Bash(gradlew.bat :meeting:compileDebugJavaWithJavac:*)",
       "Bash(cmd /c gradlew.bat :meeting:compileDebugJavaWithJavac --console=plain)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(gradlew:*)",
+      "Bash(.gradlew.bat:*)",
+      "Bash(adb logcat:*)"
     ]
   }
 }

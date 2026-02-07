@@ -115,8 +115,7 @@ public class LinkCamDetailActivity extends AppCompatActivity implements PlayFrag
     private static final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 0x111;
     private RelativeLayout rlVideoviewContainer;
 //    private VideoView mVideoView;
-    private RelativeLayout rlBack;
-//    private ImageView tvBack;
+    private ImageView ivBack;
     private TextView tvSetting;
     private RelativeLayout rlZoom;
     private TextView tvZoom;
@@ -360,8 +359,8 @@ public class LinkCamDetailActivity extends AppCompatActivity implements PlayFrag
 
         rlVideoviewContainer = (RelativeLayout) findViewById(R.id.rl_videoview_container);
 //        mVideoView = (VideoView) findViewById(R.id.newshoot_surface);
-        rlBack = (RelativeLayout) findViewById(R.id.rl_back);
-        rlBack.setOnClickListener(new View.OnClickListener() {
+        ivBack = (ImageView) findViewById(R.id.iv_back);
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -552,8 +551,8 @@ public class LinkCamDetailActivity extends AppCompatActivity implements PlayFrag
                 .max(10)
                 .progress(1)
                 .trackColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_white))
-                .secondTrackColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_red))
-                .thumbColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_red))
+                .secondTrackColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_blue))
+                .thumbColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_blue))
                 .hideBubble()
                 .touchToSeek()
                 .build();
@@ -581,8 +580,8 @@ public class LinkCamDetailActivity extends AppCompatActivity implements PlayFrag
                 .max(2)
                 .progress(1)
                 .trackColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_white))
-                .secondTrackColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_red))
-                .thumbColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_red))
+                .secondTrackColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_blue))
+                .thumbColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_blue))
                 .hideBubble()
                 .touchToSeek()
                 .build();
@@ -630,8 +629,8 @@ public class LinkCamDetailActivity extends AppCompatActivity implements PlayFrag
                 .max(5)
                 .progress(1)
                 .trackColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_white))
-                .secondTrackColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_red))
-                .thumbColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_red))
+                .secondTrackColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_blue))
+                .thumbColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_blue))
                 .hideBubble()
                 .touchToSeek()
                 .build();
@@ -705,8 +704,8 @@ public class LinkCamDetailActivity extends AppCompatActivity implements PlayFrag
                 .max(2)
                 .progress(1)
                 .trackColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_white))
-                .secondTrackColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_red))
-                .thumbColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_red))
+                .secondTrackColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_blue))
+                .thumbColor(ContextCompat.getColor(getApplicationContext(), R.color.color_link_blue))
                 .hideBubble()
                 .touchToSeek()
                 .build();

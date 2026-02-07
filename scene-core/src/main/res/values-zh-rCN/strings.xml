@@ -46,11 +46,11 @@
     <string name="server_error_message_success">成功</string>
     <string name="server_error_message_invalid_argument">请求数据无法正确解析</string>
     <string name="server_error_message_user_not_found">用户不存在</string>
-    <string name="server_error_message_over_room_limit">房间人数超过限制</string>
+    <string name="server_error_message_over_room_limit">视频人数超过限制</string>
     <string name="server_error_message_not_authorized">没有操作权限</string>
     <string name="server_error_message_disconnect_time_out">断线时间过长，无法重连</string>
     <string name="server_error_message_room_user_inactive">用户不活跃</string>
-    <string name="server_error_message_room_disbanded">房间不存在</string>
+    <string name="server_error_message_room_disbanded">视频ID不存在</string>
     <string name="server_error_message_sensitive_words">输入内容包含敏感词，请重新输入</string>
     <string name="server_error_message_verify_code_expired">验证码过期，请重新获取验证码</string>
     <string name="server_error_message_verify_code_invalid">验证码不正确，请重新输入验证码</string>
@@ -63,7 +63,7 @@
     <string name="server_error_message_link_not_exist">连麦已过期</string>
     <string name="server_error_message_user_inviting">已发出邀请，等待对方应答</string>
     <string name="server_error_message_anchor_interacting">主播正在连线中</string>
-    <string name="server_error_message_anchor_co_hosting">设备已在房间中</string>
+    <string name="server_error_message_anchor_co_hosting">设备已在视频中</string>
     <string name="server_error_message_anchor_linking_audience">与观众连线中，无法发起主播连线</string>
     <string name="server_error_message_anchor_co_hosting2">主播连线中，无法发起主播连线</string>
     <string name="server_error_message_waiting_anchor_response">正在等待被邀主播的应答</string>

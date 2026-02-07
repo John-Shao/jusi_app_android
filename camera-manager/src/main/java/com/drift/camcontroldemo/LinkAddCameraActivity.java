@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.view.ViewTreeObserver;
@@ -40,15 +41,12 @@ public class LinkAddCameraActivity extends AppCompatActivity {
     private static String TAG = "LinkAddCameraActivity";
 
     private RelativeLayout rlNav;
-    private RelativeLayout rlBack;
     private ImageView ivBack;
     private TextView tvTipsTitle;
     private TextView tvTips;
     private TextView tvNoteTitle;
     private TextView tvNotes;
-    private RelativeLayout rlInput;
-    private TextView tvWifiName;
-    private TextView tvWifiPassword;
+    private LinearLayout rlInput;
     private ImageView ivQrcodeImage;
     private RelativeLayout rlConfirm;
 
@@ -66,14 +64,13 @@ public class LinkAddCameraActivity extends AppCompatActivity {
         camsOnline = (ArrayList<String>) getIntent().getSerializableExtra("camsOnline");
 
         rlNav = (RelativeLayout) findViewById(R.id.rl_nav);
-        rlBack = (RelativeLayout) findViewById(R.id.rl_back);
-        rlBack.setOnClickListener(new View.OnClickListener() {
+        ivBack = (ImageView) findViewById(R.id.iv_back);
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-        ivBack = (ImageView) findViewById(R.id.iv_back);
         tvTipsTitle = (TextView) findViewById(R.id.tv_tips_title);
         tvTips = (TextView) findViewById(R.id.tv_tips);
         tvNoteTitle = (TextView) findViewById(R.id.tv_note_title);
@@ -85,19 +82,17 @@ public class LinkAddCameraActivity extends AppCompatActivity {
             tvNotes.setVisibility(View.INVISIBLE);
             tvNoteTitle.setVisibility(View.INVISIBLE);
         }
-        rlInput = (RelativeLayout) findViewById(R.id.rl_input);
-        tvWifiName = (TextView) findViewById(R.id.tv_wifi_name);
-        tvWifiPassword = (TextView) findViewById(R.id.tv_wifi_password);
+        rlInput = (LinearLayout) findViewById(R.id.rl_input);
         ivQrcodeImage = (ImageView) findViewById(R.id.iv_qrcode_image);
         rlConfirm = (RelativeLayout) findViewById(R.id.rl_confirm);
 
         ssid = getConnectedSsid(this);
         //判断是否需要清掉双引号
-        if (ssid.startsWith("\"") && ssid.endsWith("\"")) {
+        if (ssid != null && ssid.startsWith("\"") && ssid.endsWith("\"")) {
 
             ssid = ssid.substring(1, ssid.length() - 1);
         }
-        getEtWifiName().setText(ssid);
+        getEtWifiName().setText(ssid != null ? ssid : "");
 
         mForeamCamCtrl = ForeamCamCtrl.getInstance();
 
@@ -239,7 +234,7 @@ public class LinkAddCameraActivity extends AppCompatActivity {
         public void camIsOnline(String serialNum, String msgValue, String camIP, String ownerId) {
             Log.d(TAG, "收到心跳包，序列号是" + serialNum + " " + msgValue +" " + camIP +" " + ownerId);
             //判断是否已经在相机组里,如果不在线,则添加进在线相机里
-            if(!camsOnline.contains(camIP)){
+            if(camsOnline != null && !camsOnline.contains(camIP)){
                 finish();
             }
         }

@@ -4,15 +4,15 @@
 
     <string name="meeting_limited_service">本产品仅用于功能体验，单次视频时长不超过30分钟</string>
     <string name="class_limited_service">本产品仅用于功能体验，单次课堂时长不超过30分钟</string>
-    <string name="create_input_room_id_hint">请输入房间号</string>
-    <string name="create_input_room_id_length_warn">房间号长度不能超过6位</string>
-    <string name="create_input_room_id_content_warn">请输入房间号</string>
+    <string name="create_input_room_id_hint">请输入视频ID</string>
+    <string name="create_input_room_id_length_warn">视频ID长度不能超过6位</string>
+    <string name="create_input_room_id_content_warn">请输入视频ID</string>
     <string name="create_input_user_name_hint">请输入昵称</string>
     <string name="create_input_user_name_content_warn">请输入中文、数字、英文字母或符号@_-</string>
     <string name="create_input_user_name_length_warn">昵称长度不能超过8位</string>
-    <string name="create_join_meeting">进入房间</string>
-    <string name="error_room_full">房间人数已满</string>
-    <string name="error_user_counts_limit">房间中人数达到上限</string>
+    <string name="create_join_meeting">加入视频</string>
+    <string name="error_room_full">视频人数已满</string>
+    <string name="error_user_counts_limit">视频中人数达到上限</string>
     <string name="request_permission_tips">为了更好的体验，请授予VERTC麦克风和相机权限</string>
     <string name="request_cam_permission_tips">未获得相机权限，是否去设置中授予VERTC该权限</string>
     <string name="request_mic_permission_tips">未获得麦克风权限，是否去设置中授予VERTC该权限</string>
@@ -79,13 +79,13 @@
     <string name="action_share_wb">共享白板</string>
     <string name="action_participant">成员</string>
     <string name="action_more">更多</string>
-    <string name="info_room_id">房间号：</string>
+    <string name="info_room_id">视频ID：</string>
     <string name="info_remind_time">%s</string>
-    <string name="room_id_copied">房间号已复制</string>
+    <string name="room_id_copied">视频ID已复制</string>
     <string name="mute_all_audio">全部静音</string>
     <string name="meeting_close_option_finish">结束视频</string>
     <string name="close_option_broadcaster_leave">暂时离开</string>
-    <string name="meeting_close_option_audience_leave">离开房间</string>
+    <string name="meeting_close_option_audience_leave">离开视频</string>
     <string name="close_option_cancel">取消</string>
     <string name="recording">录制中</string>
     <string name="student_stop_recording_hint">老师才能停止录制</string>
@@ -141,15 +141,15 @@
     <string name="screen_capture_no_media_projection">此手机无法开启屏幕分享</string>
     <string name="screen_capture_hint">正在录制/投射您的屏幕</string>
 
-    <string name="scene_meeting">进入房间</string>
+    <string name="scene_meeting">加入视频</string>
     <string name="create_choose_role_host">我是主持人</string>
     <string name="create_choose_role_attendee">我是参会者</string>
-    <string name="error_host_exist">该房间已有其他主持人</string>
+    <string name="error_host_exist">该视频已有其他主持人</string>
 
     <string name="scene_class_small">发起视频</string>
     <string name="create_choose_role_teacher">我是老师</string>
     <string name="create_choose_role_student">我是学生</string>
-    <string name="error_teacher_exist">该房间已有其他老师</string>
+    <string name="error_teacher_exist">该视频已有其他老师</string>
 
     <string name="scene_class_large">大班课课堂</string>
 
@@ -157,9 +157,9 @@
     <string name="role_participant_desc_meeting">参会者</string>
     <string name="role_host_desc_class">老师</string>
     <string name="role_participant_desc_class">学生</string>
-    <string name="waiting_teacher">等待老师进入房间</string>
-    <string name="edu_close_option_finish">关闭房间</string>
-    <string name="edu_close_option_audience_leave">离开房间</string>
+    <string name="waiting_teacher">等待老师加入视频</string>
+    <string name="edu_close_option_finish">关闭视频</string>
+    <string name="edu_close_option_audience_leave">离开视频</string>
     <string name="class_small">小班课</string>
     <string name="class_large">大班课</string>
     <string name="already_apply_link_mic">已经申请连麦</string>
@@ -170,9 +170,9 @@
 
     <!-- My Meetings List -->
     <string name="my_meetings_title">我的视频</string>
-    <string name="meeting_id_label">房间号</string>
+    <string name="meeting_id_label">视频ID</string>
     <string name="participant_count">%d位参会者</string>
     <string name="participant_count_plural">%d位参会者</string>
-    <string name="join_meeting_toast">进入房间: %s</string>
+    <string name="join_meeting_toast">加入视频: %s</string>
 
 </resources>
