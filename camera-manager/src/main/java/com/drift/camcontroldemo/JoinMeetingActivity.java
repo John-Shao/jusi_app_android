@@ -17,7 +17,7 @@ import com.ss.video.rtc.demo.basic_module.utils.AppExecutors;
 import com.ss.video.rtc.demo.basic_module.utils.IMEUtils;
 import com.ss.video.rtc.demo.basic_module.utils.SafeToast;
 import com.drift.util.TextWatcherHelper;
-import com.volcengine.vertcdemo.core.SolutionDataManager;
+import com.jusi.jusiai.core.SolutionDataManager;
 
 import com.drift.foreamlib.local.ctrl.LocalController;
 import com.drift.foreamlib.local.ctrl.LocalListener;
@@ -153,7 +153,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
             if (TextUtils.isEmpty(userId)) {
                 // 跳转到登录页面
                 Intent loginIntent = new Intent();
-                loginIntent.setClassName(getApplicationContext(), "com.volcengine.vertcdemo.login.LoginActivity");
+                loginIntent.setClassName(getApplicationContext(), "com.jusi.jusiai.login.LoginActivity");
                 startActivity(loginIntent);
                 return;
             }

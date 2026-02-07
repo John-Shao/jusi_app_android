@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.volcengine.vertcdemo.feature.roommain.MeetingUserWindowView
+<com.jusi.jusiai.feature.roommain.MeetingUserWindowView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/user_window"
     android:layout_width="match_parent"

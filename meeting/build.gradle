@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.volcengine.vertcdemo.meeting'
+    namespace 'com.jusi.jusiai.meeting'
     compileSdkVersion project.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.volcengine.vertcdemo.meeting"
+        applicationId "com.jusi.jusiai.meeting"
         minSdkVersion project.minSdkVersion
         targetSdkVersion project.targetSdkVersion
 

@@ -47,7 +47,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.volcengine.vertcdemo.ui.widget.WBPagePanel
+    <com.jusi.jusiai.ui.widget.WBPagePanel
         android:id="@+id/whiteboard_page_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="gone">
 
-        <com.volcengine.vertcdemo.ui.widget.WBPaintPanel
+        <com.jusi.jusiai.ui.widget.WBPaintPanel
             android:id="@+id/whiteboard_paint_panel"
             style="@style/WBPenPanel"
             android:layout_width="280dp"
@@ -85,7 +85,7 @@
 
     </FrameLayout>
 
-    <com.volcengine.vertcdemo.ui.widget.WBToolBar
+    <com.jusi.jusiai.ui.widget.WBToolBar
         android:id="@+id/whiteboard_toolbar"
         style="@style/WBToolBar"
         android:layout_width="wrap_content"

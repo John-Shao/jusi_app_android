@@ -92,7 +92,7 @@
 
         </LinearLayout>
 
-        <com.volcengine.vertcdemo.ui.widget.WBPagePanel
+        <com.jusi.jusiai.ui.widget.WBPagePanel
             android:id="@+id/whiteboard_page_panel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
         app:layout_constraintGuide_percent="0.8" />
 
     <fragment
-        class="com.volcengine.vertcdemo.feature.roommain.fragment.ClassUserFragment"
+        class="com.jusi.jusiai.feature.roommain.fragment.ClassUserFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@android:color/transparent"

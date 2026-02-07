@@ -9,13 +9,13 @@
     android:background="@drawable/activity_background"
     tools:background="#000">
 
-    <com.volcengine.vertcdemo.customview.CommonTitleLayout
+    <com.jusi.jusiai.customview.CommonTitleLayout
         android:id="@+id/title_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.volcengine.vertcdemo.customview.WarningEditText
+    <com.jusi.jusiai.customview.WarningEditText
         android:id="@+id/input_name_et"
         android:layout_width="match_parent"
         android:layout_marginHorizontal="16dp"

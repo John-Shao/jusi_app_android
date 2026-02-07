@@ -13,7 +13,7 @@
         app:layout_constraintBottom_toTopOf="@id/users_page_indicator"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.volcengine.vertcdemo.ui.page.CircleIndicator
+    <com.jusi.jusiai.ui.page.CircleIndicator
         android:id="@+id/users_page_indicator"
         android:layout_width="match_parent"
         android:layout_height="20dp"

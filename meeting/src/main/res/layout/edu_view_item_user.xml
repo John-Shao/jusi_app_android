@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:paddingBottom="5dp">
 
-    <com.volcengine.vertcdemo.feature.roommain.ClassUserWindowView
+    <com.jusi.jusiai.feature.roommain.ClassUserWindowView
         android:id="@+id/user_window"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

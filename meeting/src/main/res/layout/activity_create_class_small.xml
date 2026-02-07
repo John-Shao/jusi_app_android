@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#13171E"
-    tools:context="com.volcengine.vertcdemo.feature.createroom.CreateMeetingActivity"
+    tools:context="com.jusi.jusiai.feature.createroom.CreateMeetingActivity"
     tools:ignore="ContentDescription">
 
     <FrameLayout

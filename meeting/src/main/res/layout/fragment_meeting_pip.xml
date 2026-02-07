@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.volcengine.vertcdemo.feature.roommain.MeetingUserWindowView
+    <com.jusi.jusiai.feature.roommain.MeetingUserWindowView
         android:id="@+id/user_large"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.volcengine.vertcdemo.feature.roommain.MeetingUserWindowView
+    <com.jusi.jusiai.feature.roommain.MeetingUserWindowView
         android:id="@+id/user_small"
         android:layout_width="133dp"
         android:layout_height="200dp"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
-    <com.volcengine.vertcdemo.ui.page.CircleIndicator
+    <com.jusi.jusiai.ui.page.CircleIndicator
         android:id="@+id/users_page_indicator"
         android:layout_width="match_parent"
         android:layout_height="20dp"

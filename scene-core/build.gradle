@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.volcengine.vertcdemo.core'
+    namespace 'com.jusi.jusiai.core'
     compileSdkVersion project.compileSdkVersion
 
     defaultConfig {
