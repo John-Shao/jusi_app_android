@@ -69,4 +69,8 @@
     <string name="join_meeting_device_sn_hint">Device Serial Number</string>
     <string name="create_meeting_generate_room_id_failed">Failed to generate room ID</string>
     <string name="create_meeting_failed">Failed to create meeting</string>
+    <string name="join_meeting_push_stream_failed">Failed to start push stream</string>
+    <string name="join_meeting_pull_stream_failed">Failed to start pull stream</string>
+    <string name="join_meeting_success">Join meeting successfully</string>
+    <string name="join_meeting_device_stream_info">Resolution: %1$s, Bitrate: %2$s Kbps</string>
 </resources>

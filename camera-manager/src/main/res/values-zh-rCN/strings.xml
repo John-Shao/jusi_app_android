@@ -69,4 +69,8 @@
     <string name="join_meeting_device_sn_hint">设备序列号</string>
     <string name="create_meeting_generate_room_id_failed">生成房间ID失败</string>
     <string name="create_meeting_failed">发起会议失败</string>
+    <string name="join_meeting_push_stream_failed">推流失败</string>
+    <string name="join_meeting_pull_stream_failed">拉流失败</string>
+    <string name="join_meeting_success">加入会议成功</string>
+    <string name="join_meeting_device_stream_info">分辨率: %1$s, 比特率: %2$s Kbps</string>
 </resources>

@@ -175,7 +175,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
         generateRoomId();
 
         // 提示当前设备的分辨率和比特率（仅用于调试）
-        showDeviceStreamInfo();
+        // showDeviceStreamInfo();
     }
 
     /**
@@ -346,7 +346,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
                 public void onCommonRes(boolean success) {
                     Log.d(TAG, "Push stream result: " + success);
                     if (!success) {
-                        SafeToast.show("Failed to start push stream");
+                        SafeToast.show(R.string.join_meeting_push_stream_failed);
                     }
                 }
             }
@@ -362,7 +362,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
         LocalController localController = new LocalController();
         
         // Mic设置最高敏感度(0-5)
-        localController.setMicSensitivity(camIP, "5",
+        localController.setMicSensitivity(mCamIP, "5",
         new LocalListener.OnCommonResListener() {
             @Override
             public void onCommonRes(boolean success) {
@@ -379,9 +379,9 @@ public class JoinMeetingActivity extends AppCompatActivity {
                         // 设置相机会议状态为 true，并保存房间ID
                         CameraManager.getInstance().setCameraInMeeting(mCamIP, true);
                         CameraManager.getInstance().setCameraRoomId(mCamIP, roomId);
-                        SafeToast.show("Join meeting successfully");
+                        SafeToast.show(R.string.join_meeting_success);
                     } else {
-                        SafeToast.show("Failed to start pull stream");
+                        SafeToast.show(R.string.join_meeting_pull_stream_failed);
                     }
                 }
             }
@@ -393,7 +393,8 @@ public class JoinMeetingActivity extends AppCompatActivity {
      */
     private void showError(String message) {
         AppExecutors.mainThread().execute(() -> {
-            SafeToast.show(R.string.join_meeting_request_failed + ": " + message);
+            String errorMsg = getString(R.string.join_meeting_request_failed) + ": " + message;
+            SafeToast.show(errorMsg);
             Log.e(TAG, "Error: " + message);
         });
     }
@@ -406,8 +407,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
             return;
         }
 
-        String message = String.format("设备分辨率: %s, 比特率: %s Kbps", mStreamRes, mStreamBitrate);
+        String message = getString(R.string.join_meeting_device_stream_info, mStreamRes, mStreamBitrate);
         SafeToast.show(message);
-        Log.d(TAG, message);
     }
 }
