@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,9 +21,8 @@ public class LinkLiveActivity extends AppCompatActivity {
     private static String TAG = "LinkLiveActivity";
 
     private RelativeLayout rlNav;
-    private RelativeLayout rlBack;
     private ImageView ivBack;
-    private RelativeLayout rlConfirm;
+    private TextView rlConfirm;
 
     private String liveUrl;
     private LocalController localController;
@@ -44,15 +44,14 @@ public class LinkLiveActivity extends AppCompatActivity {
         localController = new LocalController();
 
         rlNav = (RelativeLayout) findViewById(R.id.rl_nav);
-        rlBack = (RelativeLayout) findViewById(R.id.rl_back);
-        rlBack.setOnClickListener(new View.OnClickListener() {
+        ivBack = (ImageView) findViewById(R.id.iv_back);
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-        ivBack = (ImageView) findViewById(R.id.iv_back);
-        rlConfirm = (RelativeLayout) findViewById(R.id.rl_confirm);
+        rlConfirm = (TextView) findViewById(R.id.rl_confirm);
         rlConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

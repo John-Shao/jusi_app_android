@@ -48,7 +48,7 @@ public class LinkAddCameraActivity extends AppCompatActivity {
     private TextView tvNotes;
     private LinearLayout rlInput;
     private ImageView ivQrcodeImage;
-    private RelativeLayout rlConfirm;
+    private TextView rlConfirm;
 
     private ForeamCamCtrl mForeamCamCtrl;
     private String qrCodeString;
@@ -84,7 +84,7 @@ public class LinkAddCameraActivity extends AppCompatActivity {
         }
         rlInput = (LinearLayout) findViewById(R.id.rl_input);
         ivQrcodeImage = (ImageView) findViewById(R.id.iv_qrcode_image);
-        rlConfirm = (RelativeLayout) findViewById(R.id.rl_confirm);
+        rlConfirm = (TextView) findViewById(R.id.rl_confirm);
 
         ssid = getConnectedSsid(this);
         //判断是否需要清掉双引号

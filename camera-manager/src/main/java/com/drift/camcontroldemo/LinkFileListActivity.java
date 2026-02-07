@@ -37,7 +37,6 @@ public class LinkFileListActivity extends AppCompatActivity {
 
     private static String TAG = "LinkFileListActivity";
     private RelativeLayout rlNav;
-    private RelativeLayout rlBack;
     private ImageView ivBack;
     private RecyclerView rvList;
     private Map monMap = new HashMap();
@@ -51,14 +50,13 @@ public class LinkFileListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_link_file_list);
         rlNav = (RelativeLayout) findViewById(R.id.rl_nav);
-        rlBack = (RelativeLayout) findViewById(R.id.rl_back);
-        rlBack.setOnClickListener(new View.OnClickListener() {
+        ivBack = (ImageView) findViewById(R.id.iv_back);
+        ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-        ivBack = (ImageView) findViewById(R.id.iv_back);
         rvList = (RecyclerView) findViewById(R.id.rv_list);
 
         //初始化月份的hash数组

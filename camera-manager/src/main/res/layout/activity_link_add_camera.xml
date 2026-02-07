@@ -154,25 +154,17 @@
     </ScrollView>
 
     <!-- 确认按钮 -->
-    <RelativeLayout
+    <TextView
         android:id="@+id/rl_confirm"
+        style="@style/ButtonLg"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/link_confirm_bg">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/confirm"
-            android:textColor="@color/white"
-            android:textSize="18sp" />
-    </RelativeLayout>
+        android:text="@string/confirm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
