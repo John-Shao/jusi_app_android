@@ -18,10 +18,10 @@ android {
 
         multiDexEnabled true
 
-        buildConfigField('String', 'URL_PRIVACY_AGREEMENT', '"https://www.volcengine.com/docs/6348/68918"')
-        buildConfigField('String', 'URL_USER_AGREEMENT', '"https://www.volcengine.com/docs/6348/128955"')
-        buildConfigField('String', 'URL_DISCLAIMER', '"https://www.volcengine.com/docs/6348/68916"')
-        buildConfigField('String', 'URL_PERMISSION_LIST', '"https://www.volcengine.com/docs/6348/155009"')
+        buildConfigField('String', 'URL_PRIVACY_AGREEMENT', '"https://www.jusiai.com/privacy"')
+        buildConfigField('String', 'URL_USER_AGREEMENT', '"https://www.jusiai.com/terms"')
+        buildConfigField('String', 'URL_DISCLAIMER', '"https://www.jusiai.com/terms"')
+        buildConfigField('String', 'URL_PERMISSION_LIST', '"https://www.jusiai.com/terms"')
         // 配置 MEET_SERVER_URL
         buildConfigField('String', 'MEET_SERVER_URL', "\"${project.MEET_SERVER_URL}\"")
     }
