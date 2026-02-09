@@ -494,12 +494,11 @@
                 android:id="@+id/tv_res_val"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
-                android:layout_marginBottom="12dp"
                 android:text="1080P"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="14sp" />
 
         </RelativeLayout>
 
@@ -540,12 +539,11 @@
                 android:id="@+id/tv_fps_val"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
-                android:layout_marginBottom="12dp"
                 android:text="30 fps"
                 android:textColor="@color/white"
-                android:textSize="10sp" />
+                android:textSize="14sp" />
 
         </RelativeLayout>
 

@@ -967,7 +967,7 @@ private void getCamStatus(String ipAddr)
                     //帧率和分辨率
 //                    tvFpsVal.setText(convertFpsValue(mCamStatus.getmVideoSetting().getVideo_framerate())+"");
                     setResolutionStatus(mCamStatus.getmStreamSetting().getStream_res());
-                    tvFpsVal.setText(mCamStatus.getmStreamSetting().getStream_framerate()+"");
+                    tvFpsVal.setText(mCamStatus.getmStreamSetting().getStream_framerate()+" fps");
                 }
             }
         }
@@ -1094,11 +1094,11 @@ private void getCamStatus(String ipAddr)
         //分辨率和帧率
         if(mCamStatus.getmCameraSettingNew().getHd_record()==1) {
             setResolutionStatus(mCamStatus.getmVideoSetting().getVideo_res());
-            tvFpsVal.setText(mCamStatus.getmVideoSetting().getVideo_framerate()+"");
+            tvFpsVal.setText(mCamStatus.getmVideoSetting().getVideo_framerate()+" fps");
         }
         else {
             setResolutionStatus(mCamStatus.getmStreamSetting().getStream_res());
-            tvFpsVal.setText(mCamStatus.getmStreamSetting().getStream_framerate()+"");
+            tvFpsVal.setText(mCamStatus.getmStreamSetting().getStream_framerate()+" fps");
         }
         //帧率
 //        tvFpsVal.setText(convertFpsValue(mCamStatus.getmVideoSetting().getVideo_framerate())+"");
@@ -1521,7 +1521,7 @@ private void getCamStatus(String ipAddr)
             fps = convertFpsToIndex(fpsValue);
             setStreamFramerate(convertFpsValue(fps));
         }
-        tvFpsVal.setText(convertFpsValue(fps)+"");
+        tvFpsVal.setText(convertFpsValue(fps)+" fps");
     }
 
     private void switchDefaultStreamRes()
@@ -1718,7 +1718,7 @@ private void getCamStatus(String ipAddr)
         }
         mCamStatus.getmStreamSetting().setStream_framerate(fps);
 //        btnFps.setText(convertFpsValue(fps)+"");
-        tvFpsVal.setText(convertFpsValue(fps)+"");
+        tvFpsVal.setText(convertFpsValue(fps)+" fps");
         setStreamFramerate(convertFpsValue(fps));
     }
 
