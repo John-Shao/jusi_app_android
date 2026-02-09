@@ -41,8 +41,6 @@
     <string name="Link_add_camera">Add Camera</string>
     <string name="Link_add_camera_tip_title">Before adding a camera, make sure your phone is connected to the same Wi-Fi network, follow below steps when you are ready.</string>
     <string name="Link_add_camera_tips">1.Fill in the name and password of your Wi-Fi network on the dialog, tapping on OK to generate a QR code. \n2. Set your Drift camera into QR scanning mode by holding down the middle button until the front indicator light turns blue. \n3.Keep 20cm between camera and phone, when you hear scanning successful, leave camera alone and it will automatically finish the remaining process. </string>
-    <string name="Link_add_camera_note_title">Notes:</string>
-    <string name="Link_add_camera_notes">1. Make sure you input the proper Wi-Fi name and password, both are case sensitive. \n 2. Some Drift cameras only support 2.4G Wi-Fi. Should you have any questions, please consult Drift customer support team.</string>
     <string name="Link_wifi_name">Wi-Fi name</string>
     <string name="Link_wifi_password">Wi-Fi password</string>
     <string name="Link_wifi_enter_password">Please enter Wi-Fi password</string>
@@ -73,4 +71,7 @@
     <string name="join_meeting_pull_stream_failed">Failed to start pull stream</string>
     <string name="join_meeting_success">Join meeting successfully</string>
     <string name="join_meeting_device_stream_info">Resolution: %1$s, Bitrate: %2$s Kbps</string>
+    <string name="create_meeting">Create Meeting</string>
+    <string name="join_meeting">Join Meeting</string>
+    <string name="remote_assistance">Remote Call</string>
 </resources>

@@ -12,7 +12,7 @@
         android:layout_width="@dimen/title_bar_icon_width"
         android:layout_height="@dimen/title_bar_icon_height"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/title_bar_icon_margin"
+        android:layout_marginLeft="10dp"
         android:padding="@dimen/title_bar_icon_padding" />
 
     <LinearLayout
@@ -26,7 +26,7 @@
             android:id="@+id/title_bar_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/title_bar_title"
+            android:textColor="@color/white"
             android:textSize="@dimen/txt_H1_18sp" />
 
         <TextView
@@ -46,7 +46,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/title_bar_icon_margin"
-        android:textColor="@color/title_bar_title"
+        android:textColor="@color/white"
         android:textSize="15dp" />
 
     <ImageView

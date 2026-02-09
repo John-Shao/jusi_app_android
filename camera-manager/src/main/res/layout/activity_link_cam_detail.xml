@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPreviewBG"
+    android:background="@drawable/activity_background"
+    android:fitsSystemWindows="false"
     tools:context="com.drift.camcontroldemo.LinkCamDetailActivity">
 
     <RelativeLayout
         android:id="@+id/rl_videoview_container"
         android:layout_width="match_parent"
-        android:layout_height="210dp"
+        android:layout_height="300dp"
         android:background="@color/black">
 
 <!--        <TextureView-->
@@ -52,8 +53,20 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="36dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="10dp"
         android:padding="12dp" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/iv_back"
+        android:layout_alignBottom="@id/iv_back"
+        android:gravity="center"
+        android:text="@string/setting"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
 
 
     <RelativeLayout
@@ -62,7 +75,7 @@
         android:layout_below="@+id/rl_videoview_container"
         android:background="@color/color_link_setting_bg">
 
-        <TextView
+        <!--TextView
             android:id="@+id/tv_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -70,14 +83,13 @@
             android:layout_marginTop="12dp"
             android:text="@string/setting"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp" /-->
 
         <RelativeLayout
             android:id="@+id/rl_zoom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_setting"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="20dp">
 
             <!--            <TextView-->
             <!--                android:id="@+id/tv_zoom"-->

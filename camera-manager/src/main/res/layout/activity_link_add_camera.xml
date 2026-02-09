@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_link_add_camera_bg"
+    android:background="@drawable/activity_background"
+    android:fitsSystemWindows="false"
     tools:context="com.foream.activity.LinkAddCameraActivity">
 
     <!-- 顶部导航栏 -->
@@ -22,7 +23,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="10dp"
             android:padding="12dp"
             android:src="@drawable/ic_back_white" />
 
@@ -77,81 +78,34 @@
             android:background="#86909C" />
     </LinearLayout>
 
-    <!-- 二维码区域 -->
-    <ImageView
-        android:id="@+id/iv_qrcode_image"
+    <!-- 提示说明区域 - 靠下显示 -->
+    <TextView
+        android:id="@+id/tv_tips_title"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/scrollView"
-        app:layout_constraintDimensionRatio="1:1"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/Link_add_camera_tip_title"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toTopOf="@id/tv_tips"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rl_input"
-        android:scaleType="fitCenter"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- 提示和说明区域 - 可滚动 -->
-    <ScrollView
-        android:id="@+id/scrollView"
+    <TextView
+        android:id="@+id/tv_tips"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/Link_add_camera_tips"
+        android:textColor="@color/white"
+        android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@id/rl_confirm"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_qrcode_image">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_tips_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginRight="16dp"
-                android:text="@string/Link_add_camera_tip_title"
-                android:textColor="@color/white"
-                android:textSize="13sp" />
-
-            <TextView
-                android:id="@+id/tv_tips"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginRight="16dp"
-                android:text="@string/Link_add_camera_tips"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/tv_note_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginRight="16dp"
-                android:text="@string/Link_add_camera_note_title"
-                android:textColor="@color/white"
-                android:textSize="13sp"/>
-
-            <TextView
-                android:id="@+id/tv_notes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:text="@string/Link_add_camera_notes"
-                android:textColor="@color/white"
-                android:textSize="12sp" />
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <!-- 确认按钮 -->
     <TextView
@@ -159,12 +113,26 @@
         style="@style/ButtonLg"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/confirm" />
+        android:text="@string/confirm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- 二维码区域 - 在输入框和提示文本之间居中 -->
+    <ImageView
+        android:id="@+id/iv_qrcode_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@id/tv_tips_title"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rl_input" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

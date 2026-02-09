@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -44,8 +45,6 @@ public class LinkAddCameraActivity extends AppCompatActivity {
     private ImageView ivBack;
     private TextView tvTipsTitle;
     private TextView tvTips;
-    private TextView tvNoteTitle;
-    private TextView tvNotes;
     private LinearLayout rlInput;
     private ImageView ivQrcodeImage;
     private TextView rlConfirm;
@@ -60,6 +59,15 @@ public class LinkAddCameraActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // 设置透明状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
+            getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+
         setContentView(R.layout.activity_link_add_camera);
         camsOnline = (ArrayList<String>) getIntent().getSerializableExtra("camsOnline");
 
@@ -73,15 +81,6 @@ public class LinkAddCameraActivity extends AppCompatActivity {
         });
         tvTipsTitle = (TextView) findViewById(R.id.tv_tips_title);
         tvTips = (TextView) findViewById(R.id.tv_tips);
-        tvNoteTitle = (TextView) findViewById(R.id.tv_note_title);
-        tvNotes = (TextView) findViewById(R.id.tv_notes);
-        // 判断是否是中文环境
-        String language = getResources().getConfiguration().locale.getLanguage();
-        if(!language.equals("zh"))
-        {
-            tvNotes.setVisibility(View.INVISIBLE);
-            tvNoteTitle.setVisibility(View.INVISIBLE);
-        }
         rlInput = (LinearLayout) findViewById(R.id.rl_input);
         ivQrcodeImage = (ImageView) findViewById(R.id.iv_qrcode_image);
         rlConfirm = (TextView) findViewById(R.id.rl_confirm);

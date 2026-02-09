@@ -1,11 +1,13 @@
 package com.drift.camcontroldemo;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -58,6 +60,15 @@ public class JoinMeetingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // 设置透明状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
+            getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+
         setContentView(R.layout.activity_join_meeting);
 
         // 从 Intent 中获取 camIP 和 serialNumber
@@ -83,6 +94,9 @@ public class JoinMeetingActivity extends AppCompatActivity {
         ImageView leftIv = findViewById(R.id.title_bar_left_iv);
         leftIv.setImageResource(R.drawable.ic_back_white);
         leftIv.setOnClickListener(v -> finish());
+
+        TextView titleTv = findViewById(R.id.title_bar_title_tv);
+        titleTv.setText(R.string.remote_assistance);
 
         // 初始化场景切换按钮
         mMeetingTypeRadioGroup = findViewById(R.id.meeting_type_radio_group);

@@ -3,8 +3,11 @@
 
 package com.jusi.jusiai.login;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
+import android.view.WindowManager;
 
 import com.ss.video.rtc.demo.basic_module.acivities.BaseActivity;
 import com.jusi.jusiai.common.SolutionToast;
@@ -33,19 +36,30 @@ public class EditProfileActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // 设置透明状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
+            getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+
         mViewBinding = ActivityEditProfileBinding.inflate(getLayoutInflater());
         setContentView(mViewBinding.getRoot());
 
         CommonTitleLayout titleLayout = findViewById(R.id.title_bar_layout);
         titleLayout.setLeftBack(v -> onBackPressed());
         titleLayout.setTitle(R.string.change_user_name);
-        titleLayout.setRightText(R.string.ok, v -> onClickConfirm());
+
+        mViewBinding.profileConfirmBtn.setOnClickListener(v -> onClickConfirm());
 
         mViewBinding.inputNameEt.setRegex(INPUT_REGEX, USER_NAME_MAX_LENGTH, new WarningEditText.Callback() {
             @Override
             public void checkResult(boolean valid) {
                 mUserName = mViewBinding.inputNameEt.getInputText();
                 mConfirmEnable = valid;
+                updateConfirmButtonState();
             }
         });
         mViewBinding.inputNameEt.setHintText(R.string.please_enter_user_nickname);
@@ -54,6 +68,18 @@ public class EditProfileActivity extends BaseActivity {
         mViewBinding.inputNameEt.setInputText(mUserName);
 
         mViewBinding.profileUserNameClear.setOnClickListener(v -> mViewBinding.inputNameEt.setInputText(""));
+
+        updateConfirmButtonState();
+    }
+
+    private void updateConfirmButtonState() {
+        if (mConfirmEnable) {
+            mViewBinding.profileConfirmBtn.setEnabled(true);
+            mViewBinding.profileConfirmBtn.setAlpha(1F);
+        } else {
+            mViewBinding.profileConfirmBtn.setEnabled(false);
+            mViewBinding.profileConfirmBtn.setAlpha(0.3F);
+        }
     }
 
     private void onClickConfirm() {

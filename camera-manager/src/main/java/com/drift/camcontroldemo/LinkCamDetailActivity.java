@@ -116,7 +116,7 @@ public class LinkCamDetailActivity extends AppCompatActivity implements PlayFrag
     private RelativeLayout rlVideoviewContainer;
 //    private VideoView mVideoView;
     private ImageView ivBack;
-    private TextView tvSetting;
+//    private TextView tvSetting;
     private RelativeLayout rlZoom;
     private TextView tvZoom;
     private BubbleSeekBar bsbZoom;
@@ -251,6 +251,16 @@ public class LinkCamDetailActivity extends AppCompatActivity implements PlayFrag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // 设置透明状态栏，让内容延伸到屏幕顶部
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(android.graphics.Color.TRANSPARENT);
+            getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+
         setContentView(R.layout.activity_link_cam_detail);
 
         camIP = getIntent().getExtras().getString(Intents.LINK_CAM_IP);
@@ -366,7 +376,7 @@ public class LinkCamDetailActivity extends AppCompatActivity implements PlayFrag
                 finish();
             }
         });
-        tvSetting = (TextView) findViewById(R.id.tv_setting);
+//        tvSetting = (TextView) findViewById(R.id.tv_setting);
         rlZoom = (RelativeLayout) findViewById(R.id.rl_zoom);
 //        tvZoom = (TextView) findViewById(R.id.tv_zoom);
         bsbZoom = (BubbleSeekBar) findViewById(R.id.bsb_zoom);

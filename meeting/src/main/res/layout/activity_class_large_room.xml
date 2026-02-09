@@ -5,8 +5,8 @@
     android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_background"
-    android:fitsSystemWindows="true"
+    android:background="@drawable/activity_background"
+    android:fitsSystemWindows="false"
     tools:ignore="ContentDescription,RtlHardcoded">
 
     <RelativeLayout
@@ -118,7 +118,7 @@
         android:id="@+id/content_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/main_background"
+        android:background="@drawable/activity_background"
         android:paddingTop="5dp"
         android:scrollbars="none"
         android:visibility="visible"

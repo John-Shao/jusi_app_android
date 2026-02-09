@@ -21,7 +21,8 @@
         <activity
             android:name="com.drift.camcontroldemo.LinkCamDetailActivity"
             android:configChanges="orientation|screenSize"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CamControlDemo.NoActionBar" />
         <activity
             android:name="com.drift.camcontroldemo.LinkAddCameraActivity"
             android:configChanges="orientation|screenSize"
@@ -29,7 +30,8 @@
         <activity
             android:name="com.drift.camcontroldemo.JoinMeetingActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.CamControlDemo.NoActionBar" />
     </application>
 
 </manifest>

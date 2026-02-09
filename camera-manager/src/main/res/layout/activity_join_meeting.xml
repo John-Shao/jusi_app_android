@@ -5,7 +5,8 @@
     android:id="@+id/join_meeting_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#13171E"
+    android:background="@drawable/activity_background"
+    android:fitsSystemWindows="false"
     tools:context="com.drift.camcontroldemo.JoinMeetingActivity"
     tools:ignore="ContentDescription">
 
@@ -33,7 +34,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="发起视频"
+                android:text="@string/create_meeting"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:buttonTint="@color/white"
@@ -44,7 +45,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="加入视频"
+                android:text="@string/join_meeting"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:buttonTint="@color/white" />
@@ -103,7 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="30dp"
-            android:text="加入视频" />
+            android:text="@string/confirm" />
 
     </LinearLayout>
 

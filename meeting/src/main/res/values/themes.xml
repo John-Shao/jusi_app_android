@@ -5,8 +5,10 @@
         <item name="colorPrimaryDark">#FFFFFF</item>
         <item name="colorAccent">#1D2129</item>
         <item name="android:windowBackground">#F1F2F4</item>
-        <item name="android:statusBarColor" tools:targetApi="l">#FFFFFF</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="p">shortEdges</item>
     </style>
 
     <style name="MeetingMainTheme" parent="MeetingTheme">
