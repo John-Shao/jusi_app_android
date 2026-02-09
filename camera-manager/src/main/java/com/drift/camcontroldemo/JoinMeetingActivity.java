@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.ss.video.rtc.demo.basic_module.utils.AppExecutors;
 import com.ss.video.rtc.demo.basic_module.utils.IMEUtils;
@@ -97,6 +98,7 @@ public class JoinMeetingActivity extends AppCompatActivity {
 
         TextView titleTv = findViewById(R.id.title_bar_title_tv);
         titleTv.setText(R.string.remote_assistance);
+        titleTv.setTextColor(ContextCompat.getColor(this, R.color.white));
 
         // 初始化场景切换按钮
         mMeetingTypeRadioGroup = findViewById(R.id.meeting_type_radio_group);
