@@ -12,8 +12,7 @@
         android:id="@+id/rl_nav"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/activity_background">
+        android:layout_marginTop="36dp">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -22,7 +21,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:padding="12dp"
-            android:src="@drawable/ic_back_white" />
+            android:src="@drawable/ic_back_white"
+            android:contentDescription="@string/no_comment" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,7 +31,8 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:text="@string/cam_files"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_H1_18sp" />
     </RelativeLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list"

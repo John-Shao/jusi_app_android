@@ -12,8 +12,7 @@
         android:id="@+id/rl_nav"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="36dp"
-        android:background="@color/black">
+        android:layout_marginTop="36dp">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -22,7 +21,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
             android:padding="12dp"
-            android:src="@drawable/ic_back_white" />
+            android:src="@drawable/ic_back_white"
+            android:contentDescription="@string/no_comment" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -30,50 +30,34 @@
             android:layout_centerInParent="true"
             android:text="@string/link_live"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="@dimen/txt_H1_18sp" />
 
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/rl_input"
         android:layout_width="match_parent"
-        android:layout_height="87dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/rl_nav"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:id="@+id/tv_live_url_title"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginLeft="16dp"
-            android:gravity="center"
-            android:text="@string/link_live_url"
-            android:textColor="@color/white"
-            android:textSize="13sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/et_live_url_value"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="1dp"
-            android:background="#dddddd" />
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="vertical">
 
         <EditText
             android:id="@+id/et_live_url_value"
+            style="@style/EditTextLg"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_below="@+id/tv_live_url_title"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@color/trans0"
             android:hint="@string/link_input_live_url"
-            android:textColor="@color/white"
-            android:textSize="13sp" />
+            android:textColor="@android:color/white"
+            android:textColorHint="#86909C" />
 
-    </RelativeLayout>
+        <View
+            style="@style/DividerLine"
+            android:layout_marginTop="10dp"
+            android:background="#86909C" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/rl_confirm"

@@ -14,10 +14,12 @@
     <application>
         <activity
             android:name="com.drift.camcontroldemo.LinkLiveActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CamControlDemo.NoActionBar" />
         <activity
             android:name="com.drift.camcontroldemo.LinkFileListActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.CamControlDemo.NoActionBar" />
         <activity
             android:name="com.drift.camcontroldemo.LinkCamDetailActivity"
             android:configChanges="orientation|screenSize"
