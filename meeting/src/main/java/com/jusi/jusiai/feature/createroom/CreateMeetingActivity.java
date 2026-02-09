@@ -65,6 +65,8 @@ public class CreateMeetingActivity extends BaseActivity {
     private ImageView mMicSwitch;
     protected RtmInfo mRtmInfo;
     protected UIRtcCore mUIRtcCore;
+    private boolean isJoining = false; // 标记是否正在加入会议，防止重复点击
+    private TextView joinRoomBtn; // 保存按钮引用，方便禁用和启用
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,8 +141,14 @@ public class CreateMeetingActivity extends BaseActivity {
         mUserNameWatcher = new TextWatcherHelper(mInputUserName, inputUserNameError, USER_NAME_REGEX, R.string.create_input_user_name_content_warn, USER_NAME_MAX_LENGTH, R.string.create_input_user_name_length_warn);
         mInputUserName.setText(SolutionDataManager.ins().getUserName());
 
-        TextView joinRoomTv = findViewById(R.id.create_room_join);
-        joinRoomTv.setOnClickListener(v -> {
+        joinRoomBtn = findViewById(R.id.create_room_join);
+        joinRoomBtn.setOnClickListener(v -> {
+            // 防止重复点击
+            if (isJoining) {
+                MLog.d(TAG, "Already joining room, ignore click");
+                return;
+            }
+
             String roomId = mInputRoomId.getText().toString().trim();
             if (TextUtils.isEmpty(roomId)) {
                 SafeToast.show(R.string.create_input_room_id_hint);
@@ -159,6 +167,12 @@ public class CreateMeetingActivity extends BaseActivity {
                 mUserNameWatcher.showContentError();
                 return;
             }
+
+            // 设置标志位并禁用按钮,防止重复点击
+            isJoining = true;
+            joinRoomBtn.setEnabled(false);
+            joinRoomBtn.setAlpha(0.5f);
+
             changeUserName(userName);
             joinRoom(roomId, userName, roleHost.isChecked());
             IMEUtils.closeIME(v);
@@ -278,6 +292,21 @@ public class CreateMeetingActivity extends BaseActivity {
                 } else {
                     SafeToast.show(ErrorTool.getErrorMessageByErrorCode(errorCode, message));
                 }
+                // 恢复按钮状态，允许用户重试
+                restoreButtonState();
+            }
+        });
+    }
+
+    /**
+     * 恢复按钮状态，允许再次点击
+     */
+    private void restoreButtonState() {
+        runOnUiThread(() -> {
+            isJoining = false;
+            if (joinRoomBtn != null) {
+                joinRoomBtn.setEnabled(true);
+                joinRoomBtn.setAlpha(1.0f);
             }
         });
     }

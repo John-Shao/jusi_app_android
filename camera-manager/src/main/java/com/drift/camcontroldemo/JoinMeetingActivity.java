@@ -57,6 +57,8 @@ public class JoinMeetingActivity extends AppCompatActivity {
     private TextWatcherHelper mUserNameWatcher;
     private boolean isCreateMeeting = true; // 默认为发起会议
     private String generatedRoomId = null; // 存储生成的房间ID
+    private boolean isJoining = false; // 标记是否正在加入会议，防止重复点击
+    private TextView joinMeetingBtn; // 保存按钮引用，方便禁用和启用
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,8 +146,14 @@ public class JoinMeetingActivity extends AppCompatActivity {
         mDeviceSn.setFocusableInTouchMode(false);
         mDeviceSn.setClickable(false);
 
-        TextView joinMeetingBtn = findViewById(R.id.join_meeting_button);
+        joinMeetingBtn = findViewById(R.id.join_meeting_button);
         joinMeetingBtn.setOnClickListener(v -> {
+            // 防止重复点击
+            if (isJoining) {
+                Log.d(TAG, "Already joining meeting, ignore click");
+                return;
+            }
+
             String roomId = mInputRoomId.getText().toString().trim();
             if (TextUtils.isEmpty(roomId)) {
                 SafeToast.show(R.string.create_input_room_id_hint);
@@ -173,6 +181,11 @@ public class JoinMeetingActivity extends AppCompatActivity {
                 startActivity(loginIntent);
                 return;
             }
+
+            // 设置标志位并禁用按钮,防止重复点击
+            isJoining = true;
+            joinMeetingBtn.setEnabled(false);
+            joinMeetingBtn.setAlpha(0.5f);
 
             // 直接进入会议，由服务端检查房间状态
             handleJoinMeeting(roomId);
@@ -336,6 +349,8 @@ public class JoinMeetingActivity extends AppCompatActivity {
 
                             // 加入会议后，关闭当前界面
                             finish();
+
+                            // 注意：由于页面已关闭，不需要恢复按钮状态
                         });
                     } else {
                         String message = jsonResponse.optString("message", "Unknown error");
@@ -347,6 +362,19 @@ public class JoinMeetingActivity extends AppCompatActivity {
             } catch (Exception e) {
                 Log.e(TAG, "Request failed", e);
                 showError(e.getMessage());
+            }
+        });
+    }
+
+    /**
+     * 恢复按钮状态，允许再次点击
+     */
+    private void restoreButtonState() {
+        AppExecutors.mainThread().execute(() -> {
+            isJoining = false;
+            if (joinMeetingBtn != null) {
+                joinMeetingBtn.setEnabled(true);
+                joinMeetingBtn.setAlpha(1.0f);
             }
         });
     }
@@ -413,6 +441,8 @@ public class JoinMeetingActivity extends AppCompatActivity {
             SafeToast.show(errorMsg);
             Log.e(TAG, "Error: " + message);
         });
+        // 恢复按钮状态，允许用户重试
+        restoreButtonState();
     }
 
     /**

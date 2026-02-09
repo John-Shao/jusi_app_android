@@ -1929,7 +1929,7 @@ private void getCamStatus(String ipAddr)
 
     private void showResOption()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DarkAlertDialogStyle);
         builder.setTitle(R.string.Link_Live_Res);
         CharSequence[] choicesStr = {"4K","4KUHD", "2.7K", "1080P", "720P", "WVGA"};
         CharSequence[] choicesX3Str = {"1080P", "720P"};
@@ -2053,7 +2053,7 @@ private void getCamStatus(String ipAddr)
 
     private void showFpsOption()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.DarkAlertDialogStyle);
         builder.setTitle(R.string.Link_Live_Fps);
 //        String[]  choicesStr4K =  new String[]{"24", "25"};
 //        String[] choicesStr4KUHD = new String[]{"24", "25", "30"};
