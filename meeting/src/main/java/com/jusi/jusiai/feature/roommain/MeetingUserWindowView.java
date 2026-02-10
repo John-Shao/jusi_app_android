@@ -122,31 +122,24 @@ public class MeetingUserWindowView extends FrameLayout {
     }
 
     private void updateHostTag() {
-        boolean isHost = mUserInfo != null && mUserInfo.isHost;
-        Log.d("lvying", "MeetingUserWindowView updateUserInfo isMe:" + (mUserInfo != null && mUserInfo.isMe)
-                + ",isHost:" + isHost, new Throwable());
-        if (isHost) {
-            mHostTag.setVisibility(View.VISIBLE);
-            mHostTag.setText(mMeetingCore.getRoleDesc().hostDesc());
-        } else {
-            mHostTag.setVisibility(View.GONE);
-        }
+        // 隐藏主持人标签
+        mHostTag.setVisibility(View.GONE);
     }
 
     private void updateAudioStatus() {
-        boolean isMicOn = mUserInfo != null && mUserInfo.isMicOn;
-        mUserMicOff.setVisibility(isMicOn ? View.GONE : View.VISIBLE);
+        // 隐藏麦克风状态图标
+        mUserMicOff.setVisibility(View.GONE);
     }
 
     private void updateAudioSpeakingStatus() {
-        boolean speaking = mUserInfo != null && mUserInfo.isMicOn && mUserInfo.isSpeaking;
-        mTalkingNameHighlight.setVisibility(speaking ? View.VISIBLE : View.INVISIBLE);
-        mTalkingHighlight.setVisibility(speaking ? View.VISIBLE : View.INVISIBLE);
+        // 隐藏说话时的高亮效果
+        mTalkingNameHighlight.setVisibility(View.GONE);
+        mTalkingHighlight.setVisibility(View.GONE);
     }
 
     private void updateShareStatus() {
-        boolean isSharing = mUserInfo != null && mUserInfo.isShareOn;
-        mUserScreenShareOn.setVisibility(isSharing ? View.VISIBLE : View.GONE);
+        // 隐藏屏幕共享图标
+        mUserScreenShareOn.setVisibility(View.GONE);
     }
 
     private void updateVideoRenderer() {

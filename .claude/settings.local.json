@@ -10,7 +10,8 @@
       "Bash(gradlew:*)",
       "Bash(.gradlew.bat:*)",
       "Bash(adb logcat:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(gradlew.bat clean:*)"
     ]
   }
 }
