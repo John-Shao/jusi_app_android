@@ -278,6 +278,12 @@ public class MeetingRoomActivity extends BaseActivity implements View.OnClickLis
         mScreenShareIv.setOnClickListener(this);
         mParticipantIv.setOnClickListener(this);
         mRecordIv.setOnClickListener(this);
+
+        // 隐藏录制按钮的父容器，使其他按钮均匀分布
+        View recordContainer = (View) mRecordIv.getParent();
+        if (recordContainer != null) {
+            recordContainer.setVisibility(View.GONE);
+        }
     }
 
     @Override
