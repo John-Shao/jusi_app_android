@@ -109,7 +109,7 @@ public class MeetingRoomActivity extends BaseActivity implements View.OnClickLis
     private final Runnable mDelayCheck = () -> {
         if (!mUIMeetingRoom.getRtcDataProvider().isNetworkConnected()) {
             mUIMeetingRoom.leaveRoom(false);
-            MeetingRoomActivity.this.finish();
+            navigateToHome();
         }
     };
 
@@ -202,7 +202,7 @@ public class MeetingRoomActivity extends BaseActivity implements View.OnClickLis
             if (IUIRtcDef.KickOutReason.LOGIN_IN_OTHER_DEVICE.equals(kickOutReason)) {
                 MLog.w(TAG, "kicked out, login in other device");
                 mUIMeetingRoom.leaveRoom(false);
-                finish();
+                navigateToHome();
             }
         });
         mUIMeetingRoom.getDataProvider().getUserCount().observe(owner, userCount -> {
@@ -228,7 +228,7 @@ public class MeetingRoomActivity extends BaseActivity implements View.OnClickLis
             if (IUIMeetingDef.RoomState.RELEASED.equals(roomState)) {
                 MLog.w(TAG, "onRoomReleased");
                 mUIMeetingRoom.leaveRoom(false);
-                finish();
+                navigateToHome();
             }
         });
     }
@@ -319,7 +319,7 @@ public class MeetingRoomActivity extends BaseActivity implements View.OnClickLis
     public void attemptLeaveMeeting() {
         if (mUIMeetingRoom.getDataProvider().singleUser()) {
             mUIMeetingRoom.leaveRoom(false);
-            finish();
+            navigateToHome();
             return;
         }
 
@@ -345,22 +345,32 @@ public class MeetingRoomActivity extends BaseActivity implements View.OnClickLis
             hostLeaveTv.setOnClickListener(v -> {
                 dialog.dismiss();
                 mUIMeetingRoom.leaveRoom(false);
-                finish();
+                navigateToHome();
             });
             hostFinishTv.setOnClickListener((v) -> {
                 dialog.dismiss();
                 mUIMeetingRoom.leaveRoom(true);
-                finish();
+                navigateToHome();
             });
         } else {
             participantLeaveTv.setVisibility(View.VISIBLE);
             participantLeaveTv.setOnClickListener((v) -> {
                 dialog.dismiss();
                 mUIMeetingRoom.leaveRoom(false);
-                finish();
+                navigateToHome();
             });
         }
         dialog.show();
+    }
+
+    /**
+     * 导航到首页
+     */
+    private void navigateToHome() {
+        Intent intent = new Intent(this, com.jusi.jusiai.feature.MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
     }
 
 
