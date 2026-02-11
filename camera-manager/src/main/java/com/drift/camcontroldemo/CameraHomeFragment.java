@@ -129,17 +129,29 @@ public class CameraHomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Log.d(TAG, "onResume - setting up UDP listener");
         if (mForeamCamCtrl != null) {
-            mForeamCamCtrl.startReceive();
+            // Always set the listener when resuming
             mForeamCamCtrl.setOnReceiveUDPMsgListener(mOnReceiveBoardcastMsgListener);
+            // Only start receive if not already running (initData already started it)
+            // startReceive() will check if already running
+            mForeamCamCtrl.startReceive();
         }
         initTimer();
+
+        // Force refresh the device list UI
+        if (m_videoListRecycleAdapter != null) {
+            m_videoListRecycleAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        Log.d(TAG, "onPause - clearing UDP listener");
         if (mForeamCamCtrl != null) {
+            // Only clear listener, don't stop receive since ForeamCamCtrl is a singleton
+            // and may be used by other components
             mForeamCamCtrl.setOnReceiveUDPMsgListener(null);
         }
         freeTimer();

@@ -62,8 +62,9 @@ public class ForeamCamCtrl {
     public void startReceive() {
         if (mTask != null) {
             if (mTask.isRunning) {
-                stopReceive();
-                //throw new NullPointerException("Last UDP server is still running.Please call stopReceive()!");
+                // Already running, no need to start again
+                Log.e(TAG, "startReceive - already running, skipping");
+                return;
             }
         }
         mTask = new ReceivePacketsTask();
