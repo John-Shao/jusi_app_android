@@ -43,10 +43,14 @@ public class CreateClassSmallActivity extends CreateMeetingActivity {
     public void joinRoom(String roomId, String userName, boolean isHost) {
         if (!mUIRtcCore.getRtcDataProvider().isNetworkConnected()) {
             SafeToast.show(R.string.network_lost_tips);
+            // 恢复按钮状态，允许用户重试
+            restoreButtonState();
             return;
         }
         UIClassSmallRoom uiClassSmallCore = UIRoomMgr.createClassSmallRoom(this, mRtmInfo, roomId);
         if (uiClassSmallCore == null) {
+            // 恢复按钮状态，允许用户重试
+            restoreButtonState();
             return;
         }
         uiClassSmallCore.joinRoom(userName, isHost, new IRequestCallback<MeetingTokenInfo>() {
@@ -69,6 +73,8 @@ public class CreateClassSmallActivity extends CreateMeetingActivity {
                 } else {
                     SafeToast.show(ErrorTool.getErrorMessageByErrorCode(errorCode, message));
                 }
+                // 恢复按钮状态，允许用户重试
+                restoreButtonState();
             }
         });
     }

@@ -265,6 +265,8 @@ public class CreateMeetingActivity extends BaseActivity {
     public void joinRoom(String roomId, String userName, boolean isHost) {
         if (!mUIRtcCore.getRtcDataProvider().isNetworkConnected()) {
             SafeToast.show(R.string.network_lost_tips);
+            // 恢复按钮状态，允许用户重试
+            restoreButtonState();
             return;
         }
         UIMeetingRoom roomControlService = UIRoomMgr.createMeetingRoom(this, mRtmInfo, roomId);
