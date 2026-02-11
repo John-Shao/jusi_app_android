@@ -22,7 +22,7 @@
     <string name="item_lowlight">低照度</string>
     <string name="item_water">Water</string>
     <string name="led">指示灯</string>
-    <string name="cam_files">文件</string>
+    <string name="cam_files">文件管理</string>
     <string name="title_hint">提示</string>
     <string name="yes">是</string>
     <string name="no">否</string>
@@ -41,16 +41,16 @@
     <string name="Link_stop_record_to_setting">正在录像中，请先停止录像</string>
     <string name="Link_add_camera">添加设备</string>
     <string name="Link_add_camera_tip_title">在添加设备前，请确保您手机的 Wi-Fi已开启，如果您使用手机热点，请预先开启手机热点，操作步骤如下：</string>
-    <string name="Link_add_camera_tips">1. 在上面的输入框中填入Wi-Fi/手机热点的网络名称和密码，点击确定，APP会生成巨思设备的联网二维码。\n2.开启巨思设备，长按中间键启动扫码功能，当听到 "开始扫描"提示音后，将相机镜头对准二维码，保持20cm距离，听到语音提示"扫描成功"后，APP会自动发现并添加设备。</string>
-    <string name="Link_wifi_name">Wi-Fi名字</string>
+    <string name="Link_add_camera_tips">1. 在上面的输入框中填入Wi-Fi/手机热点的网络名称和密码，点击确定，APP会生成巨思设备的联网二维码。\n2. 开启巨思设备，长按中间键启动扫码功能，当听到 "开始扫描"提示音后，将相机镜头对准二维码，保持20cm距离，听到语音提示"扫描成功"后，APP会自动发现并添加设备。</string>
+    <string name="Link_wifi_name">Wi-Fi名称</string>
     <string name="Link_wifi_password">Wi-Fi密码</string>
     <string name="Link_wifi_enter_password">请输入Wi-Fi密码</string>
     <string name="link_remote_record">相机录制</string>
     <string name="link_local_record">手机录制</string>
     <string name="link_downloads">下载列表</string>
-    <string name="link_live">直播</string>
+    <string name="link_live">开启直播</string>
     <string name="link_live_url">直播地址:</string>
-    <string name="link_input_live_url">输入直播地址</string>
+    <string name="link_input_live_url">RTMP地址</string>
     <string name="link_send_successfully">发送成功</string>
 
     <!-- Meeting room strings -->
