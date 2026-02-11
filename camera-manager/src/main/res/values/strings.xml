@@ -5,6 +5,7 @@
     <string name="about">About</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
+    <string name="generate_qrcode">Generate QR Code</string>
     <string name="Control_Zoom">Zoom</string>
     <string name="Control_Exposure">Expo</string>
     <string name="Control_bitrate">BitRate</string>

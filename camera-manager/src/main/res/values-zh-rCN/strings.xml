@@ -5,6 +5,7 @@
     <string name="about">关于</string>
     <string name="cancel">取消</string>
     <string name="confirm">确认</string>
+    <string name="generate_qrcode">生成二维码</string>
     <string name="Control_Zoom">变焦</string>
     <string name="Control_Exposure">曝光</string>
     <string name="Control_bitrate">码率</string>
