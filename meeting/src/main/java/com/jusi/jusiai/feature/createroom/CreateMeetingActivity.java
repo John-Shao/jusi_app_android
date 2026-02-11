@@ -303,7 +303,7 @@ public class CreateMeetingActivity extends BaseActivity {
     /**
      * 恢复按钮状态，允许再次点击
      */
-    private void restoreButtonState() {
+    protected void restoreButtonState() {
         runOnUiThread(() -> {
             isJoining = false;
             if (joinRoomBtn != null) {
