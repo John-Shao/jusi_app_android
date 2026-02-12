@@ -67,7 +67,7 @@
                     android:layout_height="50dp"
                     android:background="@drawable/bg_create_room_btn"
                     android:padding="12dp"
-                    android:src="@drawable/ic_switch_camera_light"
+                    android:src="@drawable/ic_switch_camera_night"
                     android:contentDescription="@string/flip_camera" />
 
             </LinearLayout>
