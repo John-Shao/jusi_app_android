@@ -116,10 +116,48 @@ public class SceneEntryFragment extends Fragment {
     }
 
     private void onMeetingClick(MeetingInfo meetingInfo) {
-        // 点击会议项，进入会议
+        // 点击会议项，拉起 CreateMeetingActivity 并自动填入房间号
         Log.d(TAG, "Meeting clicked: " + meetingInfo.roomId);
-        // 这里可以实现直接加入会议的逻辑
-        SafeToast.show(getString(R.string.join_meeting_toast, meetingInfo.roomId));
+
+        // 获取 RTM 认证信息
+        LoginApi.getRTMAuthentication(SolutionDataManager.ins().getToken(), RoomType.MEETING.getSense(),
+                new IRequestCallback<ServerResponse<RtmInfo>>() {
+                    @Override
+                    public void onSuccess(ServerResponse<RtmInfo> response) {
+                        Activity activity = getActivity();
+                        if (activity == null || activity.isFinishing()) {
+                            return;
+                        }
+                        RtmInfo data = response == null ? null : response.getData();
+                        if (data == null || !data.isValid()) {
+                            onError(-1, "");
+                        } else {
+                            // 启动 CreateMeetingActivity 并传递房间号
+                            Intent intent = new Intent(activity, CreateMeetingActivity.class);
+                            intent.putExtra(RtmInfo.KEY_RTM, data);
+                            intent.putExtra("roomId", meetingInfo.roomId);
+                            startActivity(intent);
+                        }
+                    }
+
+                    @Override
+                    public void onError(int errorCode, String message) {
+                        Activity activity = getActivity();
+                        if (activity == null || activity.isFinishing()) {
+                            return;
+                        }
+                        if (errorCode == NetworkException.CODE_TOKEN_EXPIRED) {
+                            SolutionDataManager.ins().clear();
+                            requestLogin();
+                        } else {
+                            if (errorCode == NetworkException.CODE_ERROR) {
+                                SafeToast.show(R.string.network_lost_tips);
+                            } else {
+                                SafeToast.show(R.string.request_rtm_fail);
+                            }
+                        }
+                    }
+                });
     }
 
     private void startScene(Class<? extends Activity> targetActivity, RoomType roomType) {

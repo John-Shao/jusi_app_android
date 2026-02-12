@@ -137,6 +137,15 @@ public class CreateMeetingActivity extends BaseActivity {
         TextView inputRoomIdError = findViewById(R.id.create_room_id_waring);
         mRoomIdWatcher = new TextWatcherHelper(mInputRoomId, inputRoomIdError, ROOM_ID_REGEX, R.string.create_input_room_id_content_warn, ROOM_ID_MAX_LENGTH, R.string.create_input_room_id_length_warn);
 
+        // 检查是否有传入的房间号（从会议列表点击进入时）
+        Intent intent = getIntent();
+        if (intent != null) {
+            String roomId = intent.getStringExtra("roomId");
+            if (!TextUtils.isEmpty(roomId)) {
+                mInputRoomId.setText(roomId);
+            }
+        }
+
         mInputUserName = findViewById(R.id.create_room_user_name);
         TextView inputUserNameError = findViewById(R.id.create_room_user_name_waring);
         mUserNameWatcher = new TextWatcherHelper(mInputUserName, inputUserNameError, USER_NAME_REGEX, R.string.create_input_user_name_content_warn, USER_NAME_MAX_LENGTH, R.string.create_input_user_name_length_warn);
