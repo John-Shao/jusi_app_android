@@ -61,7 +61,44 @@ public class MeetingUserPipFragment extends AbsMeetingFragment implements IUIRtc
         // 添加RTC监听器，监听远程视频流可用事件
         getUIRoom().getUIRtcCore().addHandler(this);
         getDataProvider().addHandler(mDataObserver);
+
+        // 监听本地摄像头状态，控制小窗口的显示和隐藏
+        getUIRoom().getRtcDataProvider().camState().observe(getViewLifecycleOwner(), isCameraOpen -> {
+            updateSmallWindowVisibility();
+        });
+
         bindPipUser();
+    }
+
+    /**
+     * 更新小窗口的显示状态
+     * 只有在两人对话场景下：
+     * - 当本地用户关闭摄像头时，隐藏小窗口（不遮挡画面）
+     * - 当本地用户打开摄像头时，显示小窗口
+     * 如果只有一个人或超过两个人，隐藏小窗口
+     */
+    private void updateSmallWindowVisibility() {
+        if (mSmallWindowLayout == null) {
+            return;
+        }
+
+        // 获取当前用户数量
+        List<MeetingUserInfo> userList = getDataProvider().getUsers();
+        int userCount = userList != null ? userList.size() : 0;
+
+        // 只有在两人对话场景下才根据摄像头状态显示小窗口
+        if (userCount == 2) {
+            // 获取本地摄像头状态
+            boolean isCameraOpen = getUIRoom().getRtcDataProvider().isCamOpen();
+            // 如果摄像头关闭，隐藏小窗口；如果摄像头打开，显示小窗口
+            mSmallWindowLayout.setVisibility(isCameraOpen ? View.VISIBLE : View.GONE);
+            MLog.d(TAG, "updateSmallWindowVisibility: userCount=" + userCount + ", local camera is " + (isCameraOpen ? "open" : "closed") +
+                    ", small window visibility: " + (isCameraOpen ? "VISIBLE" : "GONE"));
+        } else {
+            // 非两人对话场景，隐藏小窗口
+            mSmallWindowLayout.setVisibility(View.GONE);
+            MLog.d(TAG, "updateSmallWindowVisibility: userCount=" + userCount + ", hiding small window");
+        }
     }
 
     /**
@@ -115,12 +152,15 @@ public class MeetingUserPipFragment extends AbsMeetingFragment implements IUIRtc
                 case MotionEvent.ACTION_UP:
                 case MotionEvent.ACTION_CANCEL:
                     // 如果没有拖动，则执行点击操作（交换大小窗口）
+                    // 禁用画中画位置切换功能（后续可能需要恢复）
+                    /*
                     if (!mIsDragging) {
                         if (mSmallUserInfo != null) {
                             mSwitchedWindow = true;
                         }
                         bindPipUser(mSmallUserInfo, mLargeUserInfo);
                     }
+                    */
                     mIsDragging = false;
                     return true;
 
@@ -193,7 +233,8 @@ public class MeetingUserPipFragment extends AbsMeetingFragment implements IUIRtc
         if (mSmallUserInfo == null) {
             mSmallWindowLayout.setVisibility(View.INVISIBLE);
         } else {
-            mSmallWindowLayout.setVisibility(View.VISIBLE);
+            // 不在这里设置可见性，让 updateSmallWindowVisibility() 统一处理
+            // mSmallWindowLayout.setVisibility(View.VISIBLE);
             if (!mSmallUserInfo.isMe) {
                 subVideoStreamUserIds.add(mSmallUserInfo.userId);
             }
@@ -205,6 +246,9 @@ public class MeetingUserPipFragment extends AbsMeetingFragment implements IUIRtc
         // 然后绑定窗口，此时视频流订阅已经完成
         mLargeWindowLayout.bind(getUIRoom(), mLargeUserInfo);
         mSmallWindowLayout.bind(getUIRoom(), mSmallUserInfo);
+
+        // 更新小窗口的显示状态
+        updateSmallWindowVisibility();
     }
 
     private final IUIMeetingDef.IUserDataObserver mDataObserver = new IUIMeetingDef.IUserDataObserver() {
