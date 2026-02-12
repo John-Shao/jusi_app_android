@@ -403,10 +403,11 @@ public class JoinMeetingActivity extends AppCompatActivity {
      * @param roomId 房间ID
      */
     private void startPullStream(String rtspUrl, String roomId) {
-        LocalController localController = new LocalController();
-        
+        // 为 setMicSensitivity 创建独立的 LocalController 实例
+        LocalController micController = new LocalController();
+
         // Mic设置最高敏感度(0-5)
-        localController.setMicSensitivity(mCamIP, "5",
+        micController.setMicSensitivity(mCamIP, "5",
         new LocalListener.OnCommonResListener() {
             @Override
             public void onCommonRes(boolean success) {
@@ -414,7 +415,9 @@ public class JoinMeetingActivity extends AppCompatActivity {
             }
         });
 
-        localController.startPullStreamWithURL(mCamIP, rtspUrl,
+        // 为 startPullStreamWithURL 创建独立的 LocalController 实例
+        LocalController pullController = new LocalController();
+        pullController.startPullStreamWithURL(mCamIP, rtspUrl,
             new LocalListener.OnCommonResListener() {
                 @Override
                 public void onCommonRes(boolean success) {
