@@ -221,6 +221,16 @@ public class MeetingUserManager extends AbsMeetingManager implements IMeetingRtm
     @Override
     public void onRemoteUserJoin(@NonNull MeetingUserInfo user, int userCount) {
         MLog.d(TAG, "onUserJoin userId: " + user.userId);
+
+        // 修复：如果服务器返回的user.roomId为空，用当前房间的roomId填充
+        if (TextUtils.isEmpty(user.roomId)) {
+            IUIMeetingDef.RoomInfo roomInfo = getDataProvider().getRoomInfo().getValue();
+            if (roomInfo != null && !TextUtils.isEmpty(roomInfo.mRoomId)) {
+                user.roomId = roomInfo.mRoomId;
+                MLog.d(TAG, "fixed empty roomId for user " + user.userId + ", using: " + user.roomId);
+            }
+        }
+
         int foundIndex = mUsersList.indexOf(user);
         if (foundIndex != -1) {
             userLeave(user, foundIndex);

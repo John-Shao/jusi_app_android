@@ -15,7 +15,10 @@
       "Bash(git checkout:*)",
       "Bash(Select-Object -First 50)",
       "Bash(cmd /c \"gradlew.bat :meeting:compileDebugJavaWithJavac\")",
-      "Bash(./gradlew.bat clean build:*)"
+      "Bash(./gradlew.bat clean build:*)",
+      "Bash(git add:*)",
+      "Bash(git restore:*)",
+      "Bash(cmd /c \"cd /d d:\\\\workspace\\\\Meeting\\\\jusi_app_android && gradlew.bat clean assembleDebug\")"
     ]
   }
 }

@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jusi.jusiai.common.MLog;
+import com.jusi.jusiai.core.IUIRtcDef;
 import com.jusi.jusiai.feature.roommain.AbsMeetingFragment;
 import com.jusi.jusiai.feature.roommain.MeetingUserAdapter;
 import com.jusi.jusiai.framework.meeting.MeetingUserObserverTransfer;
@@ -24,7 +25,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-public class MeetingUserPageFragment extends AbsMeetingFragment {
+public class MeetingUserPageFragment extends AbsMeetingFragment implements IUIRtcDef.IRtcListener {
 
     private static final String TAG = "PagerUserFragment";
 
@@ -98,6 +99,9 @@ public class MeetingUserPageFragment extends AbsMeetingFragment {
         mPageIndicator = view.findViewById(R.id.users_page_indicator);
         updateLayout();
         getDataProvider().addHandler(mTransfer);
+
+        // 添加RTC监听器，监听远程视频流可用事件
+        getUIRoom().getUIRtcCore().addHandler(this);
     }
 
     @Override
@@ -105,6 +109,7 @@ public class MeetingUserPageFragment extends AbsMeetingFragment {
         super.onDestroyView();
         MLog.d(TAG, "onDestroyView");
         getDataProvider().removeHandler(mTransfer);
+        getUIRoom().getUIRtcCore().removeHandler(this);
         mLayoutMode = null;
         mPageNum = 0;
     }
@@ -129,6 +134,30 @@ public class MeetingUserPageFragment extends AbsMeetingFragment {
 
         mRecyclerView.setLayoutManager(pageLayoutManager);
         mPageLayoutManager = pageLayoutManager;
+    }
+
+    // 实现 IRtcListener 接口，监听远程视频流可用事件
+    @Override
+    public void onUserVideoStreamAvailable(String userId, boolean available) {
+        MLog.d(TAG, "onUserVideoStreamAvailable, userId: " + userId + ", available: " + available);
+
+        // 当远程用户视频流变为可用时，通知adapter刷新对应用户的视图
+        if (available && mUserAdapter != null && isAdded()) {
+            // 必须在主线程更新UI
+            if (mRecyclerView != null) {
+                mRecyclerView.post(() -> {
+                    List<MeetingUserInfo> userList = getDataProvider().getUsers();
+                    for (int i = 0; i < userList.size(); i++) {
+                        MeetingUserInfo userInfo = userList.get(i);
+                        if (userId.equals(userInfo.userId)) {
+                            MLog.d(TAG, "notify adapter to rebind item at position: " + i);
+                            mUserAdapter.notifyItemChanged(i);
+                            break;
+                        }
+                    }
+                });
+            }
+        }
     }
 
     private void updateScrollIndicator() {
