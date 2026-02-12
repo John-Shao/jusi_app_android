@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.jusi.jusiai.common.MLog;
+import com.jusi.jusiai.core.IUIRtcDef;
 import com.jusi.jusiai.core.SolutionDataManager;
 import com.jusi.jusiai.feature.roommain.AbsMeetingFragment;
 import com.jusi.jusiai.feature.roommain.MeetingUserWindowView;
@@ -22,7 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class MeetingUserPipFragment extends AbsMeetingFragment {
+public class MeetingUserPipFragment extends AbsMeetingFragment implements IUIRtcDef.IRtcListener {
 
     private static final String TAG = "UserPipFragment";
 
@@ -57,6 +58,8 @@ public class MeetingUserPipFragment extends AbsMeetingFragment {
         // 设置小窗口的触摸监听，实现拖动功能
         setupSmallWindowDraggable();
 
+        // 添加RTC监听器，监听远程视频流可用事件
+        getUIRoom().getUIRtcCore().addHandler(this);
         getDataProvider().addHandler(mDataObserver);
         bindPipUser();
     }
@@ -130,7 +133,26 @@ public class MeetingUserPipFragment extends AbsMeetingFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        getUIRoom().getUIRtcCore().removeHandler(this);
         getDataProvider().removeHandler(mDataObserver);
+    }
+
+    // 实现 IRtcListener 接口，监听远程视频流可用事件
+    @Override
+    public void onUserVideoStreamAvailable(String userId, boolean available) {
+        MLog.d(TAG, "onUserVideoStreamAvailable, userId: " + userId + ", available: " + available);
+
+        // 当远程用户视频流变为可用时，检查是否是当前显示的用户，如果是则重新绑定渲染器
+        if (available) {
+            if (mLargeUserInfo != null && userId.equals(mLargeUserInfo.userId)) {
+                MLog.d(TAG, "rebind large window for userId: " + userId);
+                mLargeWindowLayout.bind(getUIRoom(), mLargeUserInfo);
+            }
+            if (mSmallUserInfo != null && userId.equals(mSmallUserInfo.userId)) {
+                MLog.d(TAG, "rebind small window for userId: " + userId);
+                mSmallWindowLayout.bind(getUIRoom(), mSmallUserInfo);
+            }
+        }
     }
 
     private void bindPipUser() {
@@ -167,7 +189,6 @@ public class MeetingUserPipFragment extends AbsMeetingFragment {
                 subVideoStreamUserIds.add(mLargeUserInfo.userId);
             }
         }
-        mLargeWindowLayout.bind(getUIRoom(), mLargeUserInfo);
 
         if (mSmallUserInfo == null) {
             mSmallWindowLayout.setVisibility(View.INVISIBLE);
@@ -177,7 +198,12 @@ public class MeetingUserPipFragment extends AbsMeetingFragment {
                 subVideoStreamUserIds.add(mSmallUserInfo.userId);
             }
         }
+
+        // 先订阅视频流，确保视频流可用后再绑定窗口
         getUIRoom().subscribeVideoStream(subVideoStreamUserIds);
+
+        // 然后绑定窗口，此时视频流订阅已经完成
+        mLargeWindowLayout.bind(getUIRoom(), mLargeUserInfo);
         mSmallWindowLayout.bind(getUIRoom(), mSmallUserInfo);
     }
 

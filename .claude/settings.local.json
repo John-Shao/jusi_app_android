@@ -11,7 +11,9 @@
       "Bash(.gradlew.bat:*)",
       "Bash(adb logcat:*)",
       "Bash(ls:*)",
-      "Bash(gradlew.bat clean:*)"
+      "Bash(gradlew.bat clean:*)",
+      "Bash(Select-Object -First 100)",
+      "Bash(cmd /c \"gradlew.bat :meeting:compileDebugJavaWithJavac\")"
     ]
   }
 }
