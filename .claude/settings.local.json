@@ -12,7 +12,8 @@
       "Bash(adb logcat:*)",
       "Bash(ls:*)",
       "Bash(gradlew.bat clean:*)",
-      "Bash(Select-Object -First 100)",
+      "Bash(git checkout:*)",
+      "Bash(Select-Object -First 50)",
       "Bash(cmd /c \"gradlew.bat :meeting:compileDebugJavaWithJavac\")"
     ]
   }
