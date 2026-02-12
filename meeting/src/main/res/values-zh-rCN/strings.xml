@@ -17,6 +17,9 @@
     <string name="request_cam_permission_tips">未获得相机权限，是否去设置中授予VERTC该权限</string>
     <string name="request_mic_permission_tips">未获得麦克风权限，是否去设置中授予VERTC该权限</string>
     <string name="request_permission_go_setting">去设置</string>
+    <string name="microphone_switch">麦克风开关</string>
+    <string name="camera_switch">摄像头开关</string>
+    <string name="flip_camera">切换摄像头</string>
 
     <string name="connecting">正在连接</string>
     <string name="request_rtm_fail">获取RTM配置参数出错, 重新连接中</string>

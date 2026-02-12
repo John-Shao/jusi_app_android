@@ -57,12 +57,18 @@ public class CreateMeetingActivity extends BaseActivity {
     private static final int USER_NAME_MAX_LENGTH = 18;
 
     private FrameLayout mCameraPreviewContainer;
+    private FrameLayout mVideoRendererContainer;
     private EditText mInputRoomId;
     private TextWatcherHelper mRoomIdWatcher;
     private EditText mInputUserName;
     private TextWatcherHelper mUserNameWatcher;
     private ImageView mCameraSwitch;
     private ImageView mMicSwitch;
+    private ImageView mPreviewMicSwitch;
+    private ImageView mPreviewCameraSwitch;
+    private ImageView mPreviewCameraFlip;
+    private View mPreviewControlButtons;
+    private boolean mIsFrontCamera = true;
     protected RtmInfo mRtmInfo;
     protected UIRtcCore mUIRtcCore;
 
@@ -71,6 +77,7 @@ public class CreateMeetingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(getResLayoutId());
         mCameraPreviewContainer = findViewById(R.id.create_room_camera_preview);
+        mVideoRendererContainer = findViewById(R.id.video_renderer_container);
         initRtsInfo();
         SolutionDemoEventManager.register(this);
     }
@@ -166,6 +173,18 @@ public class CreateMeetingActivity extends BaseActivity {
         mMicSwitch = findViewById(R.id.create_room_mic);
         mMicSwitch.setOnClickListener(v -> mUIRtcCore.openMic(!mMicSwitch.isSelected()));
 
+        // 初始化预览区域的控制按钮
+        mPreviewMicSwitch = findViewById(R.id.preview_mic_switch);
+        mPreviewCameraSwitch = findViewById(R.id.preview_camera_switch);
+        mPreviewCameraFlip = findViewById(R.id.preview_camera_flip);
+        mPreviewControlButtons = findViewById(R.id.preview_control_buttons);
+
+        // 确保按钮始终在最上层并且可见
+        if (mPreviewControlButtons != null) {
+            mPreviewControlButtons.setVisibility(View.VISIBLE);
+            mPreviewControlButtons.bringToFront();
+        }
+
         initRTC();
     }
 
@@ -176,15 +195,41 @@ public class CreateMeetingActivity extends BaseActivity {
         mUIRtcCore.getRtcDataProvider().micState().observe(this, openMic -> {
             MLog.d(TAG, "microphone opened: " + openMic);
             mMicSwitch.setSelected(openMic);
+            // 同步更新预览区域的麦克风按钮状态
+            if (mPreviewMicSwitch != null) {
+                mPreviewMicSwitch.setSelected(openMic);
+                mPreviewMicSwitch.setImageResource(openMic ? R.drawable.ic_mic_on_night : R.drawable.ic_mic_off_red);
+            }
         });
         mUIRtcCore.getRtcDataProvider().camState().observe(this, openCam -> {
             MLog.d(TAG, "camera opened: " + openCam);
             mCameraSwitch.setSelected(openCam);
+            // 同步更新预览区域的摄像头按钮状态
+            if (mPreviewCameraSwitch != null) {
+                mPreviewCameraSwitch.setSelected(openCam);
+                mPreviewCameraSwitch.setImageResource(openCam ? R.drawable.ic_camera_on_night : R.drawable.ic_camera_off_red);
+            }
+            // 同步前后摄像头切换按钮的可用状态
+            if (mPreviewCameraFlip != null) {
+                mPreviewCameraFlip.setEnabled(openCam);
+                mPreviewCameraFlip.setAlpha(openCam ? 1.0f : 0.5f);
+            }
             if (openCam) {
-                mUIRtcCore.switchCamera(true);
-                mUIRtcCore.setupLocalVideoRenderer(mCameraPreviewContainer);
+                mUIRtcCore.switchCamera(mIsFrontCamera);
+                mUIRtcCore.setupLocalVideoRenderer(mVideoRendererContainer);
             } else {
-                mUIRtcCore.removeVideoRenderer(mCameraPreviewContainer);
+                mUIRtcCore.removeVideoRenderer(mVideoRendererContainer);
+            }
+
+            // 确保按钮容器始终可见，不受摄像头状态影响
+            // 使用 post 延迟执行，确保在视图更新完成后执行
+            if (mPreviewControlButtons != null) {
+                mPreviewControlButtons.post(() -> {
+                    mPreviewControlButtons.setVisibility(View.VISIBLE);
+                    mPreviewControlButtons.bringToFront();
+                    mPreviewControlButtons.requestLayout();
+                    mCameraPreviewContainer.invalidate();
+                });
             }
         });
         mUIRtcCore.getRtcDataProvider().getRtmKickOutReason().observe(this, kickOutReason -> {
@@ -199,6 +244,30 @@ public class CreateMeetingActivity extends BaseActivity {
                 finish();
             }
         });
+
+        // 设置预览区域控制按钮的点击事件
+        if (mPreviewMicSwitch != null) {
+            mPreviewMicSwitch.setOnClickListener(v -> {
+                boolean currentState = mPreviewMicSwitch.isSelected();
+                mUIRtcCore.openMic(!currentState);
+            });
+        }
+
+        if (mPreviewCameraSwitch != null) {
+            mPreviewCameraSwitch.setOnClickListener(v -> {
+                boolean currentState = mPreviewCameraSwitch.isSelected();
+                mUIRtcCore.openCam(!currentState);
+            });
+        }
+
+        if (mPreviewCameraFlip != null) {
+            mPreviewCameraFlip.setOnClickListener(v -> {
+                if (mUIRtcCore.getRtcDataProvider().isCamOpen()) {
+                    mIsFrontCamera = !mIsFrontCamera;
+                    mUIRtcCore.switchCamera(mIsFrontCamera);
+                }
+            });
+        }
     }
 
     private void configLocalRenderer() {
@@ -207,9 +276,17 @@ public class CreateMeetingActivity extends BaseActivity {
         }
         if (mUIRtcCore.getRtcDataProvider().isCamOpen()) {
             mUIRtcCore.switchCamera(true);
-            mUIRtcCore.setupLocalVideoRenderer(mCameraPreviewContainer);
+            mUIRtcCore.setupLocalVideoRenderer(mVideoRendererContainer);
         } else {
-            mUIRtcCore.removeVideoRenderer(mCameraPreviewContainer);
+            mUIRtcCore.removeVideoRenderer(mVideoRendererContainer);
+        }
+
+        // 确保按钮容器在渲染器配置后仍然可见
+        if (mPreviewControlButtons != null) {
+            mPreviewControlButtons.post(() -> {
+                mPreviewControlButtons.setVisibility(View.VISIBLE);
+                mPreviewControlButtons.bringToFront();
+            });
         }
     }
 

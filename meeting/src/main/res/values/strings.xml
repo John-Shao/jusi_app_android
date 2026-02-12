@@ -17,6 +17,9 @@
     <string name="request_cam_permission_tips">Camera permission not granted, go to settings to grant VERTC this permission?</string>
     <string name="request_mic_permission_tips">Microphone permission not granted, go to settings to grant VERTC this permission?</string>
     <string name="request_permission_go_setting">Go to Settings</string>
+    <string name="microphone_switch">Microphone Switch</string>
+    <string name="camera_switch">Camera Switch</string>
+    <string name="flip_camera">Flip Camera</string>
 
     <string name="connecting">Connecting</string>
     <string name="request_rtm_fail">Error getting RTM configuration, reconnecting</string>
