@@ -406,8 +406,8 @@ public class JoinMeetingActivity extends AppCompatActivity {
         // 为 setMicSensitivity 创建独立的 LocalController 实例
         LocalController micController = new LocalController();
 
-        // Mic设置最高敏感度(0-5)
-        micController.setMicSensitivity(mCamIP, "5",
+        // 设置合适的Mic敏感度(0-5，不要使用5，有杂音，降噪后音量反而变小)
+        micController.setMicSensitivity(mCamIP, "4",
         new LocalListener.OnCommonResListener() {
             @Override
             public void onCommonRes(boolean success) {
